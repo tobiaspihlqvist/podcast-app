@@ -21,5 +21,10 @@ namespace Podcast
         {
 
         }
+
+        private void lblFeedFrequency_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }
