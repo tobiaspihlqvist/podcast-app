@@ -28,7 +28,7 @@ namespace Podcast.Business_logic_layer
 
         public virtual ListViewItem ToListViewItem()
         {
-            return new ListViewItem(CategoryList);
+            return new ListViewItem();
         }
     }
 }

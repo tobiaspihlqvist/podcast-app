@@ -6,7 +6,22 @@ using System.Threading.Tasks;
 
 namespace Podcast.Business_logic_layer
 {
-    class Feed
+    public class Feed
     {
+        public List<Feed> ListOfFeeds { get; set; }
+        public string Title { get; set; }
+        public string Category { get; set; }
+        public int UpdateFrequency { get; set; }
+        public string FeedUrl { get; set; }
+
+        public Feed(string _title, string _category, int _frequency, string _url)
+        {
+            Title = _title;
+            Category = _category;
+            UpdateFrequency = _frequency;
+            FeedUrl = _url;
+        }
+
+        
     }
 }

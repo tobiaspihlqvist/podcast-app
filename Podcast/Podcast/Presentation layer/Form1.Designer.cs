@@ -40,9 +40,9 @@
             this.lblFeedUrl = new System.Windows.Forms.Label();
             this.lblFeedFrequency = new System.Windows.Forms.Label();
             this.lblFeedCategory = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.cbUpdate = new System.Windows.Forms.ComboBox();
+            this.cbCategory = new System.Windows.Forms.ComboBox();
+            this.tbUrl = new System.Windows.Forms.TextBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
             this.lblChangeFeed = new System.Windows.Forms.Label();
             this.btnUpdateFeed = new System.Windows.Forms.Button();
@@ -80,6 +80,7 @@
             // clName
             // 
             this.clName.Text = "Name";
+            this.clName.Width = 119;
             // 
             // clFrequency
             // 
@@ -89,6 +90,7 @@
             // clCategory
             // 
             this.clCategory.Text = "Category";
+            this.clCategory.Width = 153;
             // 
             // lvCategory
             // 
@@ -152,28 +154,34 @@
             this.lblFeedCategory.TabIndex = 9;
             this.lblFeedCategory.Text = "Category";
             // 
-            // comboBox1
+            // cbUpdate
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(281, 243);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(92, 21);
-            this.comboBox1.TabIndex = 10;
+            this.cbUpdate.FormattingEnabled = true;
+            this.cbUpdate.Items.AddRange(new object[] {
+            "10 min",
+            "20 min",
+            "30 min"});
+            this.cbUpdate.Location = new System.Drawing.Point(281, 243);
+            this.cbUpdate.Name = "cbUpdate";
+            this.cbUpdate.Size = new System.Drawing.Size(92, 21);
+            this.cbUpdate.TabIndex = 10;
             // 
-            // comboBox2
+            // cbCategory
             // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Location = new System.Drawing.Point(281, 270);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(76, 21);
-            this.comboBox2.TabIndex = 11;
+            this.cbCategory.FormattingEnabled = true;
+            this.cbCategory.Items.AddRange(new object[] {
+            "Lifestyle"});
+            this.cbCategory.Location = new System.Drawing.Point(281, 270);
+            this.cbCategory.Name = "cbCategory";
+            this.cbCategory.Size = new System.Drawing.Size(92, 21);
+            this.cbCategory.TabIndex = 11;
             // 
-            // textBox2
+            // tbUrl
             // 
-            this.textBox2.Location = new System.Drawing.Point(281, 217);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(87, 20);
-            this.textBox2.TabIndex = 12;
+            this.tbUrl.Location = new System.Drawing.Point(281, 217);
+            this.tbUrl.Name = "tbUrl";
+            this.tbUrl.Size = new System.Drawing.Size(87, 20);
+            this.tbUrl.TabIndex = 12;
             // 
             // comboBox3
             // 
@@ -209,6 +217,7 @@
             this.btnAddNewFeed.TabIndex = 16;
             this.btnAddNewFeed.Text = "Add new";
             this.btnAddNewFeed.UseVisualStyleBackColor = true;
+            this.btnAddNewFeed.Click += new System.EventHandler(this.btnAddNewFeed_Click);
             // 
             // btnDeleteFeed
             // 
@@ -276,9 +285,9 @@
             this.Controls.Add(this.btnUpdateFeed);
             this.Controls.Add(this.lblChangeFeed);
             this.Controls.Add(this.comboBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.comboBox2);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.tbUrl);
+            this.Controls.Add(this.cbCategory);
+            this.Controls.Add(this.cbUpdate);
             this.Controls.Add(this.lblFeedCategory);
             this.Controls.Add(this.lblFeedFrequency);
             this.Controls.Add(this.lblFeedUrl);
@@ -310,9 +319,9 @@
         private System.Windows.Forms.Label lblFeedUrl;
         private System.Windows.Forms.Label lblFeedFrequency;
         private System.Windows.Forms.Label lblFeedCategory;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.ComboBox cbUpdate;
+        private System.Windows.Forms.ComboBox cbCategory;
+        private System.Windows.Forms.TextBox tbUrl;
         private System.Windows.Forms.ComboBox comboBox3;
         private System.Windows.Forms.Label lblChangeFeed;
         private System.Windows.Forms.Button btnUpdateFeed;
