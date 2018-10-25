@@ -68,7 +68,7 @@ namespace Podcast
         
         private void UpdateCategory()
         {
-
+             
         }
 
         private void btnAddCategory_Click(object sender, EventArgs e) // lägga till nya kategorier, behövs validering
