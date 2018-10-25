@@ -40,7 +40,7 @@
             this.lblFeedUrl = new System.Windows.Forms.Label();
             this.lblFeedFrequency = new System.Windows.Forms.Label();
             this.lblFeedCategory = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.cmbUpdate = new System.Windows.Forms.ComboBox();
             this.cmbFeedCategory = new System.Windows.Forms.ComboBox();
             this.txtInputURL = new System.Windows.Forms.TextBox();
             this.comboBox3 = new System.Windows.Forms.ComboBox();
@@ -58,10 +58,9 @@
             // lblFeed
             // 
             this.lblFeed.AutoSize = true;
-            this.lblFeed.Location = new System.Drawing.Point(17, 16);
-            this.lblFeed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFeed.Location = new System.Drawing.Point(13, 13);
             this.lblFeed.Name = "lblFeed";
-            this.lblFeed.Size = new System.Drawing.Size(98, 17);
+            this.lblFeed.Size = new System.Drawing.Size(75, 13);
             this.lblFeed.TabIndex = 0;
             this.lblFeed.Text = "Podcast feeds";
             // 
@@ -71,10 +70,9 @@
             this.clName,
             this.clFrequency,
             this.clCategory});
-            this.lvFeed.Location = new System.Drawing.Point(21, 37);
-            this.lvFeed.Margin = new System.Windows.Forms.Padding(4);
+            this.lvFeed.Location = new System.Drawing.Point(16, 30);
             this.lvFeed.Name = "lvFeed";
-            this.lvFeed.Size = new System.Drawing.Size(548, 190);
+            this.lvFeed.Size = new System.Drawing.Size(412, 155);
             this.lvFeed.TabIndex = 1;
             this.lvFeed.UseCompatibleStateImageBehavior = false;
             this.lvFeed.View = System.Windows.Forms.View.Details;
@@ -96,152 +94,121 @@
             // 
             // lvCategory
             // 
-            this.lvCategory.Location = new System.Drawing.Point(715, 37);
-            this.lvCategory.Margin = new System.Windows.Forms.Padding(4);
+            this.lvCategory.Location = new System.Drawing.Point(536, 30);
             this.lvCategory.Name = "lvCategory";
-            this.lvCategory.Size = new System.Drawing.Size(292, 190);
+            this.lvCategory.Size = new System.Drawing.Size(220, 155);
             this.lvCategory.TabIndex = 2;
             this.lvCategory.UseCompatibleStateImageBehavior = false;
             this.lvCategory.View = System.Windows.Forms.View.List;
             // 
             // lvEpisodes
             // 
-            this.lvEpisodes.Location = new System.Drawing.Point(16, 415);
-            this.lvEpisodes.Margin = new System.Windows.Forms.Padding(4);
+            this.lvEpisodes.Location = new System.Drawing.Point(12, 337);
             this.lvEpisodes.Name = "lvEpisodes";
-            this.lvEpisodes.Size = new System.Drawing.Size(400, 123);
+            this.lvEpisodes.Size = new System.Drawing.Size(301, 101);
             this.lvEpisodes.TabIndex = 3;
             this.lvEpisodes.UseCompatibleStateImageBehavior = false;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 384);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(10, 312);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 17);
+            this.label1.Size = new System.Drawing.Size(50, 13);
             this.label1.TabIndex = 4;
             this.label1.Text = "Episodes";
             // 
             // lblCategories
             // 
             this.lblCategories.AutoSize = true;
-            this.lblCategories.Location = new System.Drawing.Point(711, 16);
-            this.lblCategories.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblCategories.Location = new System.Drawing.Point(533, 13);
             this.lblCategories.Name = "lblCategories";
-            this.lblCategories.Size = new System.Drawing.Size(76, 17);
+            this.lblCategories.Size = new System.Drawing.Size(57, 13);
             this.lblCategories.TabIndex = 5;
             this.lblCategories.Text = "Categories";
             // 
             // lblFeedUrl
             // 
             this.lblFeedUrl.AutoSize = true;
-            this.lblFeedUrl.Location = new System.Drawing.Point(308, 276);
-            this.lblFeedUrl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFeedUrl.Location = new System.Drawing.Point(231, 224);
             this.lblFeedUrl.Name = "lblFeedUrl";
-            this.lblFeedUrl.Size = new System.Drawing.Size(36, 17);
+            this.lblFeedUrl.Size = new System.Drawing.Size(29, 13);
             this.lblFeedUrl.TabIndex = 7;
             this.lblFeedUrl.Text = "URL";
             // 
             // lblFeedFrequency
             // 
             this.lblFeedFrequency.AutoSize = true;
-            this.lblFeedFrequency.Location = new System.Drawing.Point(220, 309);
-            this.lblFeedFrequency.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFeedFrequency.Location = new System.Drawing.Point(165, 251);
             this.lblFeedFrequency.Name = "lblFeedFrequency";
-            this.lblFeedFrequency.Size = new System.Drawing.Size(125, 17);
+            this.lblFeedFrequency.Size = new System.Drawing.Size(95, 13);
             this.lblFeedFrequency.TabIndex = 8;
             this.lblFeedFrequency.Text = "Update Frequency";
             // 
             // lblFeedCategory
             // 
             this.lblFeedCategory.AutoSize = true;
-            this.lblFeedCategory.Location = new System.Drawing.Point(281, 342);
-            this.lblFeedCategory.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblFeedCategory.Location = new System.Drawing.Point(211, 278);
             this.lblFeedCategory.Name = "lblFeedCategory";
-            this.lblFeedCategory.Size = new System.Drawing.Size(65, 17);
+            this.lblFeedCategory.Size = new System.Drawing.Size(49, 13);
             this.lblFeedCategory.TabIndex = 9;
             this.lblFeedCategory.Text = "Category";
             // 
-            // cbUpdate
+            // cmbUpdate
             // 
-            this.cbUpdate.FormattingEnabled = true;
-            this.cbUpdate.Items.AddRange(new object[] {
-            "10 min",
-            "20 min",
-            "30 min"});
-            this.cbUpdate.Location = new System.Drawing.Point(281, 243);
-            this.cbUpdate.Name = "cbUpdate";
-            this.cbUpdate.Size = new System.Drawing.Size(92, 21);
-            this.cbUpdate.TabIndex = 10;
+            this.cmbUpdate.Location = new System.Drawing.Point(281, 248);
+            this.cmbUpdate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbUpdate.Name = "cmbUpdate";
+            this.cmbUpdate.Size = new System.Drawing.Size(92, 21);
+            this.cmbUpdate.TabIndex = 24;
             // 
             // cmbFeedCategory
             // 
-            this.cbCategory.FormattingEnabled = true;
-            this.cbCategory.Items.AddRange(new object[] {
-            "Lifestyle"});
-            this.cbCategory.Location = new System.Drawing.Point(281, 270);
-            this.cbCategory.Name = "cbCategory";
-            this.cbCategory.Size = new System.Drawing.Size(92, 21);
-            this.cbCategory.TabIndex = 11;
-            this.cmbFeedCategory.AllowDrop = true;
-            this.cmbFeedCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFeedCategory.FormattingEnabled = true;
-            this.cmbFeedCategory.Location = new System.Drawing.Point(375, 332);
-            this.cmbFeedCategory.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbFeedCategory.Location = new System.Drawing.Point(281, 275);
+            this.cmbFeedCategory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cmbFeedCategory.Name = "cmbFeedCategory";
-            this.cmbFeedCategory.Size = new System.Drawing.Size(121, 24);
-            this.cmbFeedCategory.TabIndex = 11;
+            this.cmbFeedCategory.Size = new System.Drawing.Size(92, 21);
+            this.cmbFeedCategory.TabIndex = 23;
             // 
             // txtInputURL
-            // tbUrl
             // 
-            this.txtInputURL.Location = new System.Drawing.Point(375, 267);
-            this.txtInputURL.Margin = new System.Windows.Forms.Padding(4);
+            this.txtInputURL.Location = new System.Drawing.Point(281, 221);
             this.txtInputURL.Name = "txtInputURL";
-            this.txtInputURL.Size = new System.Drawing.Size(121, 22);
+            this.txtInputURL.Size = new System.Drawing.Size(66, 20);
             this.txtInputURL.TabIndex = 12;
-            this.tbUrl.Location = new System.Drawing.Point(281, 217);
-            this.tbUrl.Name = "tbUrl";
-            this.tbUrl.Size = new System.Drawing.Size(87, 20);
-            this.tbUrl.TabIndex = 12;
             // 
             // comboBox3
             // 
             this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(21, 262);
-            this.comboBox3.Margin = new System.Windows.Forms.Padding(4);
+            this.comboBox3.Location = new System.Drawing.Point(16, 213);
             this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(133, 24);
+            this.comboBox3.Size = new System.Drawing.Size(101, 21);
             this.comboBox3.TabIndex = 13;
             // 
             // lblChangeFeed
             // 
             this.lblChangeFeed.AutoSize = true;
-            this.lblChangeFeed.Location = new System.Drawing.Point(21, 242);
-            this.lblChangeFeed.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblChangeFeed.Location = new System.Drawing.Point(16, 197);
             this.lblChangeFeed.Name = "lblChangeFeed";
-            this.lblChangeFeed.Size = new System.Drawing.Size(168, 17);
+            this.lblChangeFeed.Size = new System.Drawing.Size(128, 13);
             this.lblChangeFeed.TabIndex = 14;
             this.lblChangeFeed.Text = "Change selected podcast";
             // 
             // btnUpdateFeed
             // 
-            this.btnUpdateFeed.Location = new System.Drawing.Point(21, 297);
-            this.btnUpdateFeed.Margin = new System.Windows.Forms.Padding(4);
+            this.btnUpdateFeed.Location = new System.Drawing.Point(16, 241);
             this.btnUpdateFeed.Name = "btnUpdateFeed";
-            this.btnUpdateFeed.Size = new System.Drawing.Size(100, 28);
+            this.btnUpdateFeed.Size = new System.Drawing.Size(75, 23);
             this.btnUpdateFeed.TabIndex = 15;
             this.btnUpdateFeed.Text = "Update";
             this.btnUpdateFeed.UseVisualStyleBackColor = true;
             // 
             // btnAddNewFeed
             // 
-            this.btnAddNewFeed.Location = new System.Drawing.Point(375, 372);
-            this.btnAddNewFeed.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAddNewFeed.Location = new System.Drawing.Point(281, 302);
             this.btnAddNewFeed.Name = "btnAddNewFeed";
-            this.btnAddNewFeed.Size = new System.Drawing.Size(100, 28);
+            this.btnAddNewFeed.Size = new System.Drawing.Size(75, 23);
             this.btnAddNewFeed.TabIndex = 16;
             this.btnAddNewFeed.Text = "Add new";
             this.btnAddNewFeed.UseVisualStyleBackColor = true;
@@ -249,38 +216,34 @@
             // 
             // btnDeleteFeed
             // 
-            this.btnDeleteFeed.Location = new System.Drawing.Point(21, 332);
-            this.btnDeleteFeed.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDeleteFeed.Location = new System.Drawing.Point(16, 270);
             this.btnDeleteFeed.Name = "btnDeleteFeed";
-            this.btnDeleteFeed.Size = new System.Drawing.Size(100, 28);
+            this.btnDeleteFeed.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteFeed.TabIndex = 17;
             this.btnDeleteFeed.Text = "Delete";
             this.btnDeleteFeed.UseVisualStyleBackColor = true;
             // 
             // txtInputCategory
             // 
-            this.txtInputCategory.Location = new System.Drawing.Point(715, 242);
-            this.txtInputCategory.Margin = new System.Windows.Forms.Padding(4);
+            this.txtInputCategory.Location = new System.Drawing.Point(536, 197);
             this.txtInputCategory.Name = "txtInputCategory";
-            this.txtInputCategory.Size = new System.Drawing.Size(160, 22);
+            this.txtInputCategory.Size = new System.Drawing.Size(121, 20);
             this.txtInputCategory.TabIndex = 18;
             // 
             // cmbCategories
             // 
             this.cmbCategories.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbCategories.FormattingEnabled = true;
-            this.cmbCategories.Location = new System.Drawing.Point(715, 278);
-            this.cmbCategories.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbCategories.Location = new System.Drawing.Point(536, 226);
             this.cmbCategories.Name = "cmbCategories";
-            this.cmbCategories.Size = new System.Drawing.Size(160, 24);
+            this.cmbCategories.Size = new System.Drawing.Size(121, 21);
             this.cmbCategories.TabIndex = 19;
             // 
             // btnAddCategory
             // 
-            this.btnAddCategory.Location = new System.Drawing.Point(884, 240);
-            this.btnAddCategory.Margin = new System.Windows.Forms.Padding(4);
+            this.btnAddCategory.Location = new System.Drawing.Point(663, 195);
             this.btnAddCategory.Name = "btnAddCategory";
-            this.btnAddCategory.Size = new System.Drawing.Size(161, 28);
+            this.btnAddCategory.Size = new System.Drawing.Size(121, 23);
             this.btnAddCategory.TabIndex = 20;
             this.btnAddCategory.Text = "Add category";
             this.btnAddCategory.UseVisualStyleBackColor = true;
@@ -288,29 +251,27 @@
             // 
             // btnDeleteCategory
             // 
-            this.btnDeleteCategory.Location = new System.Drawing.Point(884, 311);
-            this.btnDeleteCategory.Margin = new System.Windows.Forms.Padding(4);
+            this.btnDeleteCategory.Location = new System.Drawing.Point(663, 253);
             this.btnDeleteCategory.Name = "btnDeleteCategory";
-            this.btnDeleteCategory.Size = new System.Drawing.Size(161, 28);
+            this.btnDeleteCategory.Size = new System.Drawing.Size(121, 23);
             this.btnDeleteCategory.TabIndex = 21;
             this.btnDeleteCategory.Text = "Delete category";
             this.btnDeleteCategory.UseVisualStyleBackColor = true;
             // 
             // btnChangeCategory
             // 
-            this.btnChangeCategory.Location = new System.Drawing.Point(884, 276);
-            this.btnChangeCategory.Margin = new System.Windows.Forms.Padding(4);
+            this.btnChangeCategory.Location = new System.Drawing.Point(663, 224);
             this.btnChangeCategory.Name = "btnChangeCategory";
-            this.btnChangeCategory.Size = new System.Drawing.Size(161, 28);
+            this.btnChangeCategory.Size = new System.Drawing.Size(121, 23);
             this.btnChangeCategory.TabIndex = 22;
             this.btnChangeCategory.Text = "Change category";
             this.btnChangeCategory.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1067, 554);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btnChangeCategory);
             this.Controls.Add(this.btnDeleteCategory);
             this.Controls.Add(this.btnAddCategory);
@@ -323,7 +284,7 @@
             this.Controls.Add(this.comboBox3);
             this.Controls.Add(this.txtInputURL);
             this.Controls.Add(this.cmbFeedCategory);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.cmbUpdate);
             this.Controls.Add(this.lblFeedCategory);
             this.Controls.Add(this.lblFeedFrequency);
             this.Controls.Add(this.lblFeedUrl);
@@ -333,7 +294,6 @@
             this.Controls.Add(this.lvCategory);
             this.Controls.Add(this.lvFeed);
             this.Controls.Add(this.lblFeed);
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -356,7 +316,7 @@
         private System.Windows.Forms.Label lblFeedUrl;
         private System.Windows.Forms.Label lblFeedFrequency;
         private System.Windows.Forms.Label lblFeedCategory;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cmbUpdate;
         private System.Windows.Forms.ComboBox cmbFeedCategory;
         private System.Windows.Forms.TextBox txtInputURL;
         private System.Windows.Forms.ComboBox comboBox3;

@@ -12,7 +12,6 @@ using System.Xml;
 using System.ServiceModel.Syndication;
 using System.ServiceModel.Description;
 using System.ServiceModel;
-using Podcast.Business_logic_layer;
 
 namespace Podcast
 {
@@ -79,17 +78,17 @@ namespace Podcast
 
         private void btnAddNewFeed_Click(object sender, EventArgs e)
         {
-            string podUrl = tbUrl.Text;
+            string podUrl = txtInputURL.Text;
 
             XmlReader reader = XmlReader.Create(podUrl);
             SyndicationFeed sFeed = SyndicationFeed.Load(reader);
 
             
             string podTitle = sFeed.Title.Text;
-            string podCat = cbCategory.Text;
-            string podUpdateFrequency = cbUpdate.Text;
+            string podCat = cmbCategories.SelectedItem.ToString();
+            string podUpdateFrequency = cmbUpdate.Text;
             string[] words = podUpdateFrequency.Split(' ');
-            int minutes = int.Parse(words[0]);
+           int minutes = int.Parse(words[0]);
 
             var listOfPods = new FeedList();
             var pod = new Feed { Title = podTitle, Category = podCat, FeedUrl = podUrl, UpdateFrequency = minutes };
@@ -97,6 +96,7 @@ namespace Podcast
             FeedList.AddFeed(listOfPods, pod);
 
             PrintFeeds();
+            }
         private void FillCategoryComboBox() // för att fylla kategori comboboxarna
         {
             cmbFeedCategory.Items.Clear();
@@ -119,17 +119,19 @@ namespace Podcast
         {
             string inputName = txtInputCategory.Text;
 
-            Category newCat = new Category
+            if (Validation.OnlyLetters(inputName))
             {
-                Name = inputName
-            };
-            categories.Add(newCat);
+                Category newCat = new Category
+                {
+                    Name = inputName
+                };
+                categories.Add(newCat);
 
-            txtInputCategory.Clear();
+                txtInputCategory.Clear();
 
-            UpdateList();
-            FillCategoryComboBox(); // för att lägga till nya värdet
-
+                UpdateList();
+                FillCategoryComboBox(); // för att lägga till nya värdet
+            }
         }
     }
 }
