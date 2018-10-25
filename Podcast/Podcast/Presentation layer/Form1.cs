@@ -8,6 +8,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.ServiceModel.Syndication;
+using System.ServiceModel.Description;
+using System.ServiceModel;
+using Podcast.Business_logic_layer;
 
 namespace Podcast
 {
@@ -53,6 +58,45 @@ namespace Podcast
             }
         }
 
+        public void PrintFeeds()
+        {
+            var list = FeedList.ReturnList();
+            foreach (var feed in list)
+            {
+                string[] row =
+                {
+                    feed.Title,
+                    feed.UpdateFrequency.ToString() + "Minutes",
+                    feed.Category
+                };
+
+                ListViewItem item = new ListViewItem(row);
+
+                lvFeed.Items.Add(item);
+
+            }
+        }
+
+        private void btnAddNewFeed_Click(object sender, EventArgs e)
+        {
+            string podUrl = tbUrl.Text;
+
+            XmlReader reader = XmlReader.Create(podUrl);
+            SyndicationFeed sFeed = SyndicationFeed.Load(reader);
+
+            
+            string podTitle = sFeed.Title.Text;
+            string podCat = cbCategory.Text;
+            string podUpdateFrequency = cbUpdate.Text;
+            string[] words = podUpdateFrequency.Split(' ');
+            int minutes = int.Parse(words[0]);
+
+            var listOfPods = new FeedList();
+            var pod = new Feed { Title = podTitle, Category = podCat, FeedUrl = podUrl, UpdateFrequency = minutes };
+
+            FeedList.AddFeed(listOfPods, pod);
+
+            PrintFeeds();
         private void FillCategoryComboBox() // för att fylla kategori comboboxarna
         {
             cmbFeedCategory.Items.Clear();

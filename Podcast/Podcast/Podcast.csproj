@@ -35,6 +35,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -51,6 +52,7 @@
     <Compile Include="Business logic layer\Episode.cs" />
     <Compile Include="Business logic layer\Exception.cs" />
     <Compile Include="Business logic layer\Feed.cs" />
+    <Compile Include="Business logic layer\FeedList.cs" />
     <Compile Include="Business logic layer\IListable.cs" />
     <Compile Include="Business logic layer\Validation.cs" />
     <Compile Include="Presentation layer\Form1.cs">

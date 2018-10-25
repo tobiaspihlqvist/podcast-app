@@ -82,6 +82,7 @@
             // clName
             // 
             this.clName.Text = "Name";
+            this.clName.Width = 119;
             // 
             // clFrequency
             // 
@@ -91,6 +92,7 @@
             // clCategory
             // 
             this.clCategory.Text = "Category";
+            this.clCategory.Width = 153;
             // 
             // lvCategory
             // 
@@ -161,17 +163,27 @@
             this.lblFeedCategory.TabIndex = 9;
             this.lblFeedCategory.Text = "Category";
             // 
-            // comboBox1
+            // cbUpdate
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(375, 299);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(4);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
-            this.comboBox1.TabIndex = 10;
+            this.cbUpdate.FormattingEnabled = true;
+            this.cbUpdate.Items.AddRange(new object[] {
+            "10 min",
+            "20 min",
+            "30 min"});
+            this.cbUpdate.Location = new System.Drawing.Point(281, 243);
+            this.cbUpdate.Name = "cbUpdate";
+            this.cbUpdate.Size = new System.Drawing.Size(92, 21);
+            this.cbUpdate.TabIndex = 10;
             // 
             // cmbFeedCategory
             // 
+            this.cbCategory.FormattingEnabled = true;
+            this.cbCategory.Items.AddRange(new object[] {
+            "Lifestyle"});
+            this.cbCategory.Location = new System.Drawing.Point(281, 270);
+            this.cbCategory.Name = "cbCategory";
+            this.cbCategory.Size = new System.Drawing.Size(92, 21);
+            this.cbCategory.TabIndex = 11;
             this.cmbFeedCategory.AllowDrop = true;
             this.cmbFeedCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFeedCategory.FormattingEnabled = true;
@@ -182,12 +194,17 @@
             this.cmbFeedCategory.TabIndex = 11;
             // 
             // txtInputURL
+            // tbUrl
             // 
             this.txtInputURL.Location = new System.Drawing.Point(375, 267);
             this.txtInputURL.Margin = new System.Windows.Forms.Padding(4);
             this.txtInputURL.Name = "txtInputURL";
             this.txtInputURL.Size = new System.Drawing.Size(121, 22);
             this.txtInputURL.TabIndex = 12;
+            this.tbUrl.Location = new System.Drawing.Point(281, 217);
+            this.tbUrl.Name = "tbUrl";
+            this.tbUrl.Size = new System.Drawing.Size(87, 20);
+            this.tbUrl.TabIndex = 12;
             // 
             // comboBox3
             // 
@@ -228,6 +245,7 @@
             this.btnAddNewFeed.TabIndex = 16;
             this.btnAddNewFeed.Text = "Add new";
             this.btnAddNewFeed.UseVisualStyleBackColor = true;
+            this.btnAddNewFeed.Click += new System.EventHandler(this.btnAddNewFeed_Click);
             // 
             // btnDeleteFeed
             // 
