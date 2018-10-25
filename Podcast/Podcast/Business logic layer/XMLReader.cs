@@ -6,8 +6,12 @@ using System.Threading.Tasks;
 
 namespace Podcast.Business_logic_layer
 {
-    class Episode
+    public class XMLReader
     {
-       
+        
+        public XMLReader()
+        {
+
+        }
     }
 }

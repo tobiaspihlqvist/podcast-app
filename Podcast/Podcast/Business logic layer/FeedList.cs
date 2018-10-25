@@ -11,7 +11,13 @@ namespace Podcast.Business_logic_layer
     {
         public static FeedList ListOfFeeds { get; set; }
 
-        
+        public static Feed getFeed (string _url)
+        {
+            var selectedFeed = ListOfFeeds.Where((f) => f.FeedUrl.Equals(_url));
+            return selectedFeed as Feed;
+        }
+
+
 
 
         public static void AddFeed(FeedList fL, Feed f)

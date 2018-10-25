@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Podcast.Business_logic_layer
+namespace ClassLibrary2
 {
-    class Episode
+    public class Class1
     {
-       
     }
 }

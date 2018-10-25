@@ -55,6 +55,7 @@
     <Compile Include="Business logic layer\FeedList.cs" />
     <Compile Include="Business logic layer\IListable.cs" />
     <Compile Include="Business logic layer\Validation.cs" />
+    <Compile Include="Business logic layer\XMLReader.cs" />
     <Compile Include="Presentation layer\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +91,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data Access Layer\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Logic\Logic.csproj">
+      <Project>{4451cd39-42b3-4201-856d-f891d8479e19}</Project>
+      <Name>Logic</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
