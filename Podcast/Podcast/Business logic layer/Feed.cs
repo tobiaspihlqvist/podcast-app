@@ -14,7 +14,9 @@ namespace Podcast.Business_logic_layer
         public int UpdateFrequency { get; set; }
         public string FeedUrl { get; set; }
 
-        public Feed(string _title, string _category, int _frequency, string _url)
+        public Feed() { }
+
+        public Feed (string _title, string _category, int _frequency, string _url)
         {
             Title = _title;
             Category = _category;

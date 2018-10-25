@@ -35,6 +35,25 @@ namespace Podcast
             
         }
 
+        public void PrintFeeds()
+        {
+            var list = FeedList.ReturnList();
+            foreach (var feed in list)
+            {
+                string[] row =
+                {
+                    feed.Title,
+                    feed.UpdateFrequency.ToString() + "Minutes",
+                    feed.Category
+                };
+
+                ListViewItem item = new ListViewItem(row);
+
+                lvFeed.Items.Add(item);
+
+            }
+        }
+
         private void btnAddNewFeed_Click(object sender, EventArgs e)
         {
             string podUrl = tbUrl.Text;
@@ -47,12 +66,14 @@ namespace Podcast
             string podCat = cbCategory.Text;
             string podUpdateFrequency = cbUpdate.Text;
             string[] words = podUpdateFrequency.Split(' ');
-            int minutes = int.Parse(words[1]);
+            int minutes = int.Parse(words[0]);
 
-           
+            var listOfPods = new FeedList();
+            var pod = new Feed { Title = podTitle, Category = podCat, FeedUrl = podUrl, UpdateFrequency = minutes };
 
-            Feed newFeed = new Feed(podTitle, podCat, minutes, podUrl);
-            FeedList.AddFeed(newFeed);
+            FeedList.AddFeed(listOfPods, pod);
+
+            PrintFeeds();
         }
     }
 }
