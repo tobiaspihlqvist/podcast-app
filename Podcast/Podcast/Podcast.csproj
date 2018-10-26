@@ -51,9 +51,12 @@
     <Compile Include="Business logic layer\CustomList.cs" />
     <Compile Include="Business logic layer\Episode.cs" />
     <Compile Include="Business logic layer\Exception.cs" />
+    <Compile Include="Business logic layer\Feed.cs" />
+    <Compile Include="Business logic layer\FeedList.cs" />
     <Compile Include="Business logic layer\IListable.cs" />
     <Compile Include="Business logic layer\Validation.cs" />
     <Compile Include="Business logic layer\XMLReader.cs" />
+    <Compile Include="Data Access Layer\Serializer.cs" />
     <Compile Include="Presentation layer\Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,9 +90,7 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Data Access Layer\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Logic\Logic.csproj">
       <Project>{4451cd39-42b3-4201-856d-f891d8479e19}</Project>

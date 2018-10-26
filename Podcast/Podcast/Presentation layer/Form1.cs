@@ -19,7 +19,8 @@ namespace Podcast
     public partial class Form1 : Form
     {
         private List<Category> categories { get; set; }
-        Logik logik = new Logik();
+
+        Feed feed = new Feed();
  
 
         public Form1()
@@ -69,7 +70,7 @@ namespace Podcast
             string[] words = podUpdateFrequency.Split(' ');
             int minutes = int.Parse(words[0]);
 
-            logik.AddToFeed(podUrl, minutes, podCat);
+            feed.AddFeed(podUrl, minutes, podCat);
 
             var listView = logik.GetListView();
 
