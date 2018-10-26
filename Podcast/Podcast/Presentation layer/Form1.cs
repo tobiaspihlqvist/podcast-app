@@ -12,12 +12,14 @@ using System.Xml;
 using System.ServiceModel.Syndication;
 using System.ServiceModel.Description;
 using System.ServiceModel;
+using Logic;
 
 namespace Podcast
 {
     public partial class Form1 : Form
     {
         private List<Category> categories { get; set; }
+        Logik logik = new Logik();
  
 
         public Form1()
@@ -88,7 +90,7 @@ namespace Podcast
             string podCat = cmbCategories.SelectedItem.ToString();
             string podUpdateFrequency = cmbUpdate.Text;
             string[] words = podUpdateFrequency.Split(' ');
-           int minutes = int.Parse(words[0]);
+            int minutes = int.Parse(words[0]);
 
             var listOfPods = new FeedList();
             var pod = new Feed { Title = podTitle, Category = podCat, FeedUrl = podUrl, UpdateFrequency = minutes };
@@ -96,6 +98,7 @@ namespace Podcast
             FeedList.AddFeed(listOfPods, pod);
 
             PrintFeeds();
+            logik.AddToFeed(podUrl, minutes, podCat);
             }
         private void FillCategoryComboBox() // för att fylla kategori comboboxarna
         {
