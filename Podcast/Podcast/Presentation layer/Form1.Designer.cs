@@ -156,8 +156,10 @@
             // 
             // cmbUpdate
             // 
+            this.cmbUpdate.Items.AddRange(new object[] {
+            "60 min"});
             this.cmbUpdate.Location = new System.Drawing.Point(281, 248);
-            this.cmbUpdate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.cmbUpdate.Name = "cmbUpdate";
             this.cmbUpdate.Size = new System.Drawing.Size(92, 21);
             this.cmbUpdate.TabIndex = 24;
@@ -165,7 +167,7 @@
             // cmbFeedCategory
             // 
             this.cmbFeedCategory.Location = new System.Drawing.Point(281, 275);
-            this.cmbFeedCategory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbFeedCategory.Margin = new System.Windows.Forms.Padding(2);
             this.cmbFeedCategory.Name = "cmbFeedCategory";
             this.cmbFeedCategory.Size = new System.Drawing.Size(92, 21);
             this.cmbFeedCategory.TabIndex = 23;

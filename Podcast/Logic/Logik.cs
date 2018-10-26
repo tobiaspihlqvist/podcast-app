@@ -24,7 +24,25 @@ namespace Logic
             feed.AddPodToFeed(category, updateFreq, podUrl);
         }
 
-        
+        public List<ListViewItem> GetListView()
+        {
+            var list = feed.GetList();
+            var listViewList = new List<ListViewItem>();
+            foreach (var feed in list)
+            {
+                string[] row =
+                {
+                    feed.Title,
+                    feed.UpdateFrequency.ToString() + "Minutes",
+                    feed.Category
+                };
+
+                ListViewItem item = new ListViewItem(row);
+                listViewList.Add(item);
+            }
+
+            return listViewList;
+        }
 
         
     }
