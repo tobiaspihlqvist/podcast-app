@@ -10,13 +10,21 @@ namespace Podcast.Business_logic_layer
     public class FeedList : List<Feed>
     {
         public FeedList ListOfFeeds = new FeedList();
+        Data_Access_Layer.Serializer serializer = new Data_Access_Layer.Serializer();
 
         public void AddToList(Feed newFeed)
         {
             ListOfFeeds.Add(newFeed);
+            serializer.SerializeXml(ListOfFeeds);
         }
 
-        public
+        public void LoadFromXml()
+        {
+            var listFromXml = serializer.GetListFromXml();
+            ListOfFeeds = listFromXml;
+        }
+
+        
 
         public ListViewItem GetListItems()
         {

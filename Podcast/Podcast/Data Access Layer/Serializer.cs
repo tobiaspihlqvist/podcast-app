@@ -22,15 +22,16 @@ namespace Podcast.Data_Access_Layer
             }
         }
 
-        public void DeSerialize()
+        public FeedList GetListFromXml()
         {
             FeedList listOfFeeds;
             var serializer = new XmlSerializer(typeof(FeedList));
             using (var reader = new StreamReader("feeds.xml"))
             {
                 listOfFeeds = serializer.Deserialize(reader) as FeedList;
+                return listOfFeeds;
             }
-            
+           
         }
 
 
