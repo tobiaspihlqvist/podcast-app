@@ -266,6 +266,7 @@
             this.btnChangeCategory.TabIndex = 22;
             this.btnChangeCategory.Text = "Change category";
             this.btnChangeCategory.UseVisualStyleBackColor = true;
+            this.btnChangeCategory.Click += new System.EventHandler(this.btnChangeCategory_Click);
             // 
             // Form1
             // 

@@ -112,7 +112,23 @@ namespace Podcast
         
         private void UpdateCategory()
         {
-              
+          string chosenCat=  cmbCategories.SelectedItem.ToString();
+            var match = categories.Any(p => p.Name == chosenCat); // linq ska användas
+            string inputName = txtInputCategory.Text;
+
+            if (match != null)
+            {
+         //       userList.Where(usr => usr.Age > 30)
+        //   .Select(usr => { usr.Name = usr.Name + "dedalyAlive"; return usr; })
+        //   .ToList();
+                UpdateList();
+                FillCategoryComboBox();
+            }
+            else
+            {
+                MessageBox.Show("finns ej");
+            }
+            //Do stuff
         }
 
         private void btnAddCategory_Click(object sender, EventArgs e) // lägga till nya kategorier, behövs validering
@@ -132,6 +148,11 @@ namespace Podcast
                 UpdateList();
                 FillCategoryComboBox(); // för att lägga till nya värdet
             }
+        }
+
+        private void btnChangeCategory_Click(object sender, EventArgs e)
+        {
+            UpdateCategory();
         }
     }
 }
