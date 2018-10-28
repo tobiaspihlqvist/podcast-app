@@ -53,6 +53,8 @@
             this.btnAddCategory = new System.Windows.Forms.Button();
             this.btnDeleteCategory = new System.Windows.Forms.Button();
             this.btnChangeCategory = new System.Windows.Forms.Button();
+            this.tbTitle = new System.Windows.Forms.TextBox();
+            this.lblName = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblFeed
@@ -156,8 +158,10 @@
             // 
             // cmbUpdate
             // 
+            this.cmbUpdate.Items.AddRange(new object[] {
+            "60 min"});
             this.cmbUpdate.Location = new System.Drawing.Point(281, 248);
-            this.cmbUpdate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.cmbUpdate.Name = "cmbUpdate";
             this.cmbUpdate.Size = new System.Drawing.Size(92, 21);
             this.cmbUpdate.TabIndex = 24;
@@ -165,7 +169,7 @@
             // cmbFeedCategory
             // 
             this.cmbFeedCategory.Location = new System.Drawing.Point(281, 275);
-            this.cmbFeedCategory.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmbFeedCategory.Margin = new System.Windows.Forms.Padding(2);
             this.cmbFeedCategory.Name = "cmbFeedCategory";
             this.cmbFeedCategory.Size = new System.Drawing.Size(92, 21);
             this.cmbFeedCategory.TabIndex = 23;
@@ -174,7 +178,7 @@
             // 
             this.txtInputURL.Location = new System.Drawing.Point(281, 221);
             this.txtInputURL.Name = "txtInputURL";
-            this.txtInputURL.Size = new System.Drawing.Size(66, 20);
+            this.txtInputURL.Size = new System.Drawing.Size(92, 20);
             this.txtInputURL.TabIndex = 12;
             // 
             // comboBox3
@@ -268,11 +272,29 @@
             this.btnChangeCategory.UseVisualStyleBackColor = true;
             this.btnChangeCategory.Click += new System.EventHandler(this.btnChangeCategory_Click);
             // 
+            // tbTitle
+            // 
+            this.tbTitle.Location = new System.Drawing.Point(281, 194);
+            this.tbTitle.Name = "tbTitle";
+            this.tbTitle.Size = new System.Drawing.Size(92, 20);
+            this.tbTitle.TabIndex = 25;
+            // 
+            // lblName
+            // 
+            this.lblName.AutoSize = true;
+            this.lblName.Location = new System.Drawing.Point(225, 200);
+            this.lblName.Name = "lblName";
+            this.lblName.Size = new System.Drawing.Size(35, 13);
+            this.lblName.TabIndex = 26;
+            this.lblName.Text = "Name";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblName);
+            this.Controls.Add(this.tbTitle);
             this.Controls.Add(this.btnChangeCategory);
             this.Controls.Add(this.btnDeleteCategory);
             this.Controls.Add(this.btnAddCategory);
@@ -330,6 +352,8 @@
         private System.Windows.Forms.Button btnAddCategory;
         private System.Windows.Forms.Button btnDeleteCategory;
         private System.Windows.Forms.Button btnChangeCategory;
+        private System.Windows.Forms.TextBox tbTitle;
+        private System.Windows.Forms.Label lblName;
     }
 }
 

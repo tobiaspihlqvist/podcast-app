@@ -9,34 +9,51 @@ namespace Podcast.Business_logic_layer
 {
     public class FeedList : List<Feed>
     {
-        public static FeedList ListOfFeeds { get; set; }
+        FeedList ListOfFeeds { get; set; }
+        Data_Access_Layer.Serializer serializer = new Data_Access_Layer.Serializer();
+        public List<ListViewItem> ListViewList = new List<ListViewItem>();
 
-        public static Feed getFeed (string _url)
+        public void AddToList(Feed newFeed)
         {
-            var selectedFeed = ListOfFeeds.Where((f) => f.FeedUrl.Equals(_url));
-            return selectedFeed as Feed;
+            var list = new FeedList();
+            ListOfFeeds = list;
+            ListOfFeeds.Add(newFeed);
+            serializer.SerializeXml(ListOfFeeds);
         }
 
-
-
-
-        public static void AddFeed(FeedList fL, Feed f)
-        {
-            ListOfFeeds = fL;
-
-            fL.Add(f);
-        }
-
-        public static FeedList ReturnList ()
+        public FeedList GetList()
         {
             return ListOfFeeds;
         }
 
+        public void LoadFromXml()
+        {
+            var listFromXml = serializer.GetListFromXml();
+            ListOfFeeds = listFromXml;
+            PrepareListView();
+        }
+
+        public void PrepareListView()
+        {
+            var list = ListOfFeeds;
+            foreach(var feed in list)
+            {
+                string[] row =
+                {
+                    feed.FeedUrl,
+                    feed.UpdateFrequency.ToString() + "Minutes",
+                    feed.Category
+                };
+                ListViewItem item = new ListViewItem(row);
+                ListViewList.Add(item);
+            }
+        }
+
         
 
-
-
+        public List<ListViewItem> GetListItems()
+        {
+            return ListViewList;
+        }
     }
-
-   
 }

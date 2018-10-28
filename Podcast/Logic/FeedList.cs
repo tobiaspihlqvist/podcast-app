@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataLayer
+namespace Logic
 {
-    public class Data
+    class FeedList
     {
     }
 }

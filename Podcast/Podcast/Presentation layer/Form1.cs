@@ -13,11 +13,18 @@ using System.ServiceModel.Syndication;
 using System.ServiceModel.Description;
 using System.ServiceModel;
 
+using Podcast.Data_Access_Layer;
+
 namespace Podcast
 {
     public partial class Form1 : Form
     {
         private List<Category> categories { get; set; }
+
+        Feed feed = new Feed();
+        FeedList fl = new FeedList();
+        
+        private List<ListViewItem> LvList { get; set; }
  
 
         public Form1()
@@ -27,6 +34,7 @@ namespace Podcast
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             categories = new List<Category> {
                 new Category{
                     Name = "Comedy"
@@ -57,46 +65,28 @@ namespace Podcast
             }
         }
 
-        public void PrintFeeds()
-        {
-            var list = FeedList.ReturnList();
-            foreach (var feed in list)
-            {
-                string[] row =
-                {
-                    feed.Title,
-                    feed.UpdateFrequency.ToString() + "Minutes",
-                    feed.Category
-                };
-
-                ListViewItem item = new ListViewItem(row);
-
-                lvFeed.Items.Add(item);
-
-            }
-        }
+        
 
         private void btnAddNewFeed_Click(object sender, EventArgs e)
         {
+            string podName = tbTitle.Text;
             string podUrl = txtInputURL.Text;
-
-            XmlReader reader = XmlReader.Create(podUrl);
-            SyndicationFeed sFeed = SyndicationFeed.Load(reader);
-
-            
-            string podTitle = sFeed.Title.Text;
             string podCat = cmbCategories.SelectedItem.ToString();
             string podUpdateFrequency = cmbUpdate.Text;
             string[] words = podUpdateFrequency.Split(' ');
-           int minutes = int.Parse(words[0]);
+            int minutes = int.Parse(words[0]);
 
-            var listOfPods = new FeedList();
-            var pod = new Feed { Title = podTitle, Category = podCat, FeedUrl = podUrl, UpdateFrequency = minutes };
+            feed.AddFeed(podName, podUrl, minutes, podCat);
+            fl.LoadFromXml();
+            LvList = fl.GetListItems();
+            
 
-            FeedList.AddFeed(listOfPods, pod);
+                foreach (var lvItem in LvList)
+                {
+                    lvFeed.Items.Add(lvItem);
+                }
+        }
 
-            PrintFeeds();
-            }
         private void FillCategoryComboBox() // för att fylla kategori comboboxarna
         {
             cmbFeedCategory.Items.Clear();
