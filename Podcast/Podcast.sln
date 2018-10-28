@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.28010.2041
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Podcast", "Podcast\Podcast.csproj", "{A542468E-C210-4E18-B428-D11D55DB352E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Logic", "Logic\Logic.csproj", "{4451CD39-42B3-4201-856D-F891D8479E19}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,10 +15,6 @@ Global
 		{A542468E-C210-4E18-B428-D11D55DB352E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A542468E-C210-4E18-B428-D11D55DB352E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A542468E-C210-4E18-B428-D11D55DB352E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4451CD39-42B3-4201-856D-F891D8479E19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4451CD39-42B3-4201-856D-F891D8479E19}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4451CD39-42B3-4201-856D-F891D8479E19}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4451CD39-42B3-4201-856D-F891D8479E19}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -12,7 +12,8 @@ using System.Xml;
 using System.ServiceModel.Syndication;
 using System.ServiceModel.Description;
 using System.ServiceModel;
-using Logic;
+
+using Podcast.Data_Access_Layer;
 
 namespace Podcast
 {
@@ -21,6 +22,9 @@ namespace Podcast
         private List<Category> categories { get; set; }
 
         Feed feed = new Feed();
+        FeedList fl = new FeedList();
+        
+        private List<ListViewItem> LvList { get; set; }
  
 
         public Form1()
@@ -30,6 +34,7 @@ namespace Podcast
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             categories = new List<Category> {
                 new Category{
                     Name = "Comedy"
@@ -64,17 +69,19 @@ namespace Podcast
 
         private void btnAddNewFeed_Click(object sender, EventArgs e)
         {
+            string podName = tbTitle.Text;
             string podUrl = txtInputURL.Text;
             string podCat = cmbCategories.SelectedItem.ToString();
             string podUpdateFrequency = cmbUpdate.Text;
             string[] words = podUpdateFrequency.Split(' ');
             int minutes = int.Parse(words[0]);
 
-            feed.AddFeed(podUrl, minutes, podCat);
+            feed.AddFeed(podName, podUrl, minutes, podCat);
+            fl.LoadFromXml();
+            LvList = fl.GetListItems();
+            
 
-            var listView = logik.GetListView();
-
-                foreach (var lvItem in listView)
+                foreach (var lvItem in LvList)
                 {
                     lvFeed.Items.Add(lvItem);
                 }
