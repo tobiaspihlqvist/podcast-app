@@ -12,7 +12,6 @@ using System.Xml;
 using System.ServiceModel.Syndication;
 using System.ServiceModel.Description;
 using System.ServiceModel;
-
 using Podcast.Data_Access_Layer;
 
 namespace Podcast
@@ -22,7 +21,6 @@ namespace Podcast
         private List<Category> categories { get; set; }
 
         Feed feed = new Feed();
-        
 
         Category category = new Category();
         private List<ListViewItem> LvList { get; set; }
