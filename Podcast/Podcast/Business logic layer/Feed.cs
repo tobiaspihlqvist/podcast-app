@@ -43,6 +43,11 @@ namespace Podcast.Business_logic_layer
             }
         }
 
+        public List<Feed> GetList()
+        {
+            return FeedList;
+        }
+
         public List<ListViewItem> PrepareListView()
         {
             var list = FeedList;

@@ -43,7 +43,7 @@
             this.cmbUpdate = new System.Windows.Forms.ComboBox();
             this.cmbFeedCategory = new System.Windows.Forms.ComboBox();
             this.txtInputURL = new System.Windows.Forms.TextBox();
-            this.comboBox3 = new System.Windows.Forms.ComboBox();
+            this.cmbPodcast = new System.Windows.Forms.ComboBox();
             this.lblChangeFeed = new System.Windows.Forms.Label();
             this.btnUpdateFeed = new System.Windows.Forms.Button();
             this.btnAddNewFeed = new System.Windows.Forms.Button();
@@ -182,14 +182,14 @@
             this.txtInputURL.Size = new System.Drawing.Size(92, 20);
             this.txtInputURL.TabIndex = 12;
             // 
-            // comboBox3
+            // cmbPodcast
             // 
-            this.comboBox3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.comboBox3.FormattingEnabled = true;
-            this.comboBox3.Location = new System.Drawing.Point(16, 213);
-            this.comboBox3.Name = "comboBox3";
-            this.comboBox3.Size = new System.Drawing.Size(101, 21);
-            this.comboBox3.TabIndex = 13;
+            this.cmbPodcast.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPodcast.FormattingEnabled = true;
+            this.cmbPodcast.Location = new System.Drawing.Point(16, 213);
+            this.cmbPodcast.Name = "cmbPodcast";
+            this.cmbPodcast.Size = new System.Drawing.Size(101, 21);
+            this.cmbPodcast.TabIndex = 13;
             // 
             // lblChangeFeed
             // 
@@ -305,7 +305,7 @@
             this.Controls.Add(this.btnAddNewFeed);
             this.Controls.Add(this.btnUpdateFeed);
             this.Controls.Add(this.lblChangeFeed);
-            this.Controls.Add(this.comboBox3);
+            this.Controls.Add(this.cmbPodcast);
             this.Controls.Add(this.txtInputURL);
             this.Controls.Add(this.cmbFeedCategory);
             this.Controls.Add(this.cmbUpdate);
@@ -343,7 +343,7 @@
         private System.Windows.Forms.ComboBox cmbUpdate;
         private System.Windows.Forms.ComboBox cmbFeedCategory;
         private System.Windows.Forms.TextBox txtInputURL;
-        private System.Windows.Forms.ComboBox comboBox3;
+        private System.Windows.Forms.ComboBox cmbPodcast;
         private System.Windows.Forms.Label lblChangeFeed;
         private System.Windows.Forms.Button btnUpdateFeed;
         private System.Windows.Forms.Button btnAddNewFeed;

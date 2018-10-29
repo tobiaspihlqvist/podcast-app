@@ -52,6 +52,8 @@ namespace Podcast
             FillCategoryComboBox();
             feed.LoadXml("fList");
             UpdateFeeds();
+            FillPodCombobox();
+
             
             
             
@@ -87,6 +89,17 @@ namespace Podcast
             {
                 lvFeed.Items.Add(lvItem);
             }
+        }
+
+        private void FillPodCombobox ()
+        {
+            cmbPodcast.Items.Clear();
+            var list = feed.GetList();
+            foreach(var feed in list)
+            {
+                cmbPodcast.Items.Add(feed.Title);
+            }
+            cmbPodcast.SelectedIndex = 0;
         }
 
         
