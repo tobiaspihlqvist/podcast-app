@@ -55,6 +55,7 @@
             this.btnChangeCategory = new System.Windows.Forms.Button();
             this.tbTitle = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
+            this.Episodes = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // lblFeed
@@ -68,31 +69,33 @@
             // 
             // lvFeed
             // 
+            this.lvFeed.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.lvFeed.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.clName,
             this.clFrequency,
             this.clCategory});
-            this.lvFeed.Location = new System.Drawing.Point(16, 30);
+            this.lvFeed.Location = new System.Drawing.Point(19, 29);
             this.lvFeed.Name = "lvFeed";
             this.lvFeed.Size = new System.Drawing.Size(412, 155);
             this.lvFeed.TabIndex = 1;
             this.lvFeed.UseCompatibleStateImageBehavior = false;
             this.lvFeed.View = System.Windows.Forms.View.Details;
+            this.lvFeed.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvFeed_ItemSelectionChanged);
             // 
             // clName
             // 
             this.clName.Text = "Name";
-            this.clName.Width = 119;
+            this.clName.Width = 210;
             // 
             // clFrequency
             // 
             this.clFrequency.Text = "Update frequency";
-            this.clFrequency.Width = 130;
+            this.clFrequency.Width = 118;
             // 
             // clCategory
             // 
             this.clCategory.Text = "Category";
-            this.clCategory.Width = 153;
+            this.clCategory.Width = 155;
             // 
             // lvCategory
             // 
@@ -105,11 +108,14 @@
             // 
             // lvEpisodes
             // 
+            this.lvEpisodes.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.Episodes});
             this.lvEpisodes.Location = new System.Drawing.Point(12, 337);
             this.lvEpisodes.Name = "lvEpisodes";
             this.lvEpisodes.Size = new System.Drawing.Size(301, 101);
             this.lvEpisodes.TabIndex = 3;
             this.lvEpisodes.UseCompatibleStateImageBehavior = false;
+            this.lvEpisodes.View = System.Windows.Forms.View.Details;
             // 
             // label1
             // 
@@ -290,6 +296,11 @@
             this.lblName.TabIndex = 26;
             this.lblName.Text = "Name";
             // 
+            // Episodes
+            // 
+            this.Episodes.Text = "Episodes";
+            this.Episodes.Width = 294;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -356,6 +367,7 @@
         private System.Windows.Forms.Button btnChangeCategory;
         private System.Windows.Forms.TextBox tbTitle;
         private System.Windows.Forms.Label lblName;
+        private System.Windows.Forms.ColumnHeader Episodes;
     }
 }
 

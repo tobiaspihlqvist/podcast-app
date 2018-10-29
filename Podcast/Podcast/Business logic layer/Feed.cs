@@ -57,13 +57,20 @@ namespace Podcast.Business_logic_layer
                 string[] row =
                 {
                     feed.Title,
-                    feed.UpdateFrequency.ToString() + "Minutes",
+                    feed.UpdateFrequency.ToString() + " Minutes",
                     feed.Category
                 };
                 ListViewItem item = new ListViewItem(row);
                 lvList.Add(item);
             }
             return lvList;
+        }
+
+        public string GetRssLink(string title)
+        {
+            Feed selectedFeed = FeedList.Find((f) => f.Title == title);
+            string url = selectedFeed.FeedUrl;
+            return url;
         }
     }
 }

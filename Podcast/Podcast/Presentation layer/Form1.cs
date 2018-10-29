@@ -35,6 +35,7 @@ namespace Podcast
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             categories = category.categories;
             category.AddInitialCategories();
             UpdateList();
@@ -154,5 +155,24 @@ namespace Podcast
             UpdateList();
             FillCategoryComboBox();
         }
+
+        private void lvFeed_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            string selectedItem = lvFeed.SelectedItems[0].Text;
+            
+            var feedUrl = feed.GetRssLink(selectedItem);
+
+            XmlReader reader = XmlReader.Create(feedUrl);
+            SyndicationFeed sFeed = SyndicationFeed.Load(reader);
+
+            foreach (SyndicationItem si in sFeed.Items)
+            {
+                lvEpisodes.Items.Add(si.Title.Text);
+                lvEpisodes.Items.Add(si.Summary.Text);
+                lvEpisodes.Items.Add("--------------");
+            }
+        }
+
+
     }
 }
