@@ -53,30 +53,12 @@ namespace Podcast
             feed.LoadXml("fList");
             UpdateFeeds();
             FillPodCombobox();
-
-            
-            
-            
-            
+    
         }
 
 
 
-        //public void PrepareListView(List<Feed> feeds)
-        //{
-
-        //    foreach (var feed in feeds)
-        //    {
-        //        string[] row =
-        //        {
-        //            feed.Title,
-        //            feed.UpdateFrequency.ToString() + "Minutes",
-        //            feed.Category
-        //        };
-        //        ListViewItem item = new ListViewItem(row);
-        //        LvList.Add(item);
-        //    }
-        //}
+        
 
         private void UpdateFeeds()
         {

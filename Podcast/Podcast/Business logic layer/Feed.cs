@@ -48,7 +48,7 @@ namespace Podcast.Business_logic_layer
             return FeedList;
         }
 
-        public List<ListViewItem> PrepareListView()
+        public List<ListViewItem> ToListViewItem()
         {
             var list = FeedList;
             var lvList = new List<ListViewItem>();
