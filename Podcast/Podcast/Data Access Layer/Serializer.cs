@@ -11,28 +11,35 @@ namespace Podcast.Data_Access_Layer
 {
     public class Serializer
     {
-        public void SerializeXml(FeedList list)
+        
+        
+        public void SerializeXml<T>(T obj, string fileName)
         {
-            var feedList = list;
+            
 
-            var serializer = new XmlSerializer(typeof(FeedList));
-            using (var writer = new StreamWriter("feeds.xml"))
+            var serializer = new XmlSerializer(typeof(T));
+            using (var writer = new StreamWriter(fileName+".xml"))
             {
-                serializer.Serialize(writer, feedList);
+                serializer.Serialize(writer, obj);
             }
         }
 
-        public FeedList GetListFromXml()
+        public T GetListFromXml<T>(string fileName)
         {
-            FeedList listOfFeeds;
-            var serializer = new XmlSerializer(typeof(FeedList));
-            using (var reader = new StreamReader("feeds.xml"))
-            {
-                listOfFeeds = serializer.Deserialize(reader) as FeedList;
-                return listOfFeeds;
-            }
-           
+            T deserializedList;    
+                var serializer = new XmlSerializer(typeof(T));
+                using (var reader = new StreamReader(fileName+".xml"))
+                {
+                    deserializedList = (T)serializer.Deserialize(reader);
+
+                }
+            
+                return deserializedList;
+            
         }
+
+        
+        
 
 
     }

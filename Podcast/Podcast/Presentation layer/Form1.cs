@@ -21,10 +21,10 @@ namespace Podcast
     {
         private List<Category> categories { get; set; }
 
-        Feed feed = new Feed();
-        FeedList fl = new FeedList();
-        
-        private List<ListViewItem> LvList { get; set; }
+        private Feed feed = new Feed();
+        private List<Feed> feedList { get; set; }
+
+        private List<ListViewItem> LvList = new List<ListViewItem>();
  
 
         public Form1()
@@ -50,6 +50,11 @@ namespace Podcast
 
             UpdateList();
             FillCategoryComboBox();
+            feed.LoadXml("fList");
+            UpdateFeeds();
+            
+            
+            
             
         }
 
@@ -65,6 +70,35 @@ namespace Podcast
             }
         }
 
+        //public void PrepareListView(List<Feed> feeds)
+        //{
+
+        //    foreach (var feed in feeds)
+        //    {
+        //        string[] row =
+        //        {
+        //            feed.Title,
+        //            feed.UpdateFrequency.ToString() + "Minutes",
+        //            feed.Category
+        //        };
+        //        ListViewItem item = new ListViewItem(row);
+        //        LvList.Add(item);
+        //    }
+        //}
+
+        private void UpdateFeeds()
+        {
+            
+            lvFeed.Items.Clear();
+            LvList = feed.PrepareListView();
+            
+            
+            foreach (var lvItem in LvList)
+            {
+                lvFeed.Items.Add(lvItem);
+            }
+        }
+
         
 
         private void btnAddNewFeed_Click(object sender, EventArgs e)
@@ -77,14 +111,7 @@ namespace Podcast
             int minutes = int.Parse(words[0]);
 
             feed.AddFeed(podName, podUrl, minutes, podCat);
-            fl.LoadFromXml();
-            LvList = fl.GetListItems();
-            
-
-                foreach (var lvItem in LvList)
-                {
-                    lvFeed.Items.Add(lvItem);
-                }
+            UpdateFeeds();
         }
 
         private void FillCategoryComboBox() // för att fylla kategori comboboxarna
