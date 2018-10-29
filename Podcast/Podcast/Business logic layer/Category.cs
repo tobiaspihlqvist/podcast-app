@@ -10,7 +10,53 @@ namespace Podcast.Business_logic_layer
     public class Category : IListable
     {
         public string Name { get; set; }
-        public  CustomList<Category> CategoryList { get; set; }
+        public List<Category> categories = new List<Category>();
+
+       
+            
+        
+
+        public void AddInitialCategories()
+        {
+            categories.Add(new Category
+            {
+                Name = "business"
+            });
+            categories.Add(new Category
+            {
+                Name = "Lifestyle"
+            });
+            return;
+        }
+
+        public void AddCategory(string input)
+        {
+            Category newCat = new Category
+            {
+                Name = input
+            };
+            categories.Add(newCat);
+            return;
+        }
+
+        public void DeleteCategory(string input)
+        {
+            var catToRemove = categories.Single(p => p.Name == input);
+                categories.Remove(catToRemove);
+        }
+
+
+
+        public void UpdateCategory(string chosenCat, string inputName)
+        {
+            if (Validation.OnlyLetters(inputName))
+            {
+                categories.Where(p => p.Name == chosenCat)
+                .Select(p => { p.Name = p.Name.Replace(chosenCat, inputName); return p; })
+                .ToList();
+            }
+        }
+         
 
         protected virtual List<string> PrepareListViewItem()
         {
@@ -22,7 +68,7 @@ namespace Podcast.Business_logic_layer
             return new ListViewItem(PrepareListViewItem().ToArray());
         }
 
-
+     
     }
 }
 

@@ -18,12 +18,13 @@ using Podcast.Data_Access_Layer;
 namespace Podcast
 {
     public partial class Form1 : Form
-    {
+    {   
         private List<Category> categories { get; set; }
 
         Feed feed = new Feed();
         FeedList fl = new FeedList();
-        
+
+        Category category = new Category();
         private List<ListViewItem> LvList { get; set; }
  
 
@@ -34,20 +35,8 @@ namespace Podcast
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
-            categories = new List<Category> {
-                new Category{
-                    Name = "Comedy"
-                },
-                new Category{
-                    Name = "Lifestyle"
-                },
-                new Category
-                {
-                    Name = "Business"
-                }
-            };
-
+             categories = category.categories;
+            category.AddInitialCategories();
             UpdateList();
             FillCategoryComboBox();
             
@@ -90,33 +79,23 @@ namespace Podcast
             cmbCategories.SelectedIndex = 0;
         } //finns det något sätt att göra den här mer generell??
 
-        private void UpdateCategory() //lambda och linq, ska egentligen vara i kategoriklassen??
-        {
-            string chosenCat = cmbCategories.SelectedItem.ToString();
-            string inputName = txtInputCategory.Text;
-
-            if (Validation.OnlyLetters(inputName))
-            {
-                categories.Where(p => p.Name == chosenCat)
-                .Select(p => { p.Name = p.Name.Replace(chosenCat, inputName); return p; })
-                .ToList();
-
-                UpdateList();
-                FillCategoryComboBox();
-            }
-        }
+       
+        
 
         private void UpdateList()
         {
+            var list = categories;
             lvCategory.Items.Clear();
 
-            foreach (var cat in categories)
+            foreach (var item in list)
             {
                 lvCategory.Items.Add(
-                    cat.ToListViewItem()
+                    item.ToListViewItem()
                 );
             }
         }
+
+
 
         private void btnAddCategory_Click(object sender, EventArgs e) // lägga till nya kategorier, behövs validering
         {
@@ -124,11 +103,7 @@ namespace Podcast
 
             if (Validation.OnlyLetters(inputName))
             {
-                Category newCat = new Category
-                {
-                    Name = inputName
-                };
-                categories.Add(newCat);
+                category.AddCategory(inputName);
 
                 txtInputCategory.Clear();
 
@@ -139,7 +114,22 @@ namespace Podcast
 
         private void btnChangeCategory_Click(object sender, EventArgs e)
         {
-            UpdateCategory();
+            string chosenCat = cmbCategories.SelectedItem.ToString();
+            string inputName = txtInputCategory.Text;
+
+            category.UpdateCategory(chosenCat, inputName);
+
+            txtInputCategory.Clear();
+            UpdateList();
+            FillCategoryComboBox();
+        }
+
+        private void btnDeleteCategory_Click(object sender, EventArgs e)
+        {
+            string chosenCat = cmbCategories.SelectedItem.ToString();
+            category.DeleteCategory(chosenCat);
+            UpdateList();
+            FillCategoryComboBox();
         }
     }
 }
