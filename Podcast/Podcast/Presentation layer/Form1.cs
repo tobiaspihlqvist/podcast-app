@@ -38,7 +38,7 @@ namespace Podcast
             categories = new List<Category> {
                 new Category{
                     Name = "Comedy"
-        },
+                },
                 new Category{
                     Name = "Lifestyle"
                 },
@@ -53,17 +53,7 @@ namespace Podcast
             
         }
 
-        private void UpdateList()
-        {
-            lvCategory.Items.Clear();
 
-            foreach (var cat in categories)
-            {
-                lvCategory.Items.Add(
-                    cat.ToListViewItem()
-                );
-            }
-        }
 
         
 
@@ -99,26 +89,33 @@ namespace Podcast
             cmbFeedCategory.SelectedIndex = 0;
             cmbCategories.SelectedIndex = 0;
         } //finns det något sätt att göra den här mer generell??
-        
-        private void UpdateCategory()
+
+        private void UpdateCategory() //lambda och linq, ska egentligen vara i kategoriklassen??
         {
-          string chosenCat=  cmbCategories.SelectedItem.ToString();
-            var match = categories.Any(p => p.Name == chosenCat); // linq ska användas
+            string chosenCat = cmbCategories.SelectedItem.ToString();
             string inputName = txtInputCategory.Text;
 
-            if (match != null)
+            if (Validation.OnlyLetters(inputName))
             {
-         //       userList.Where(usr => usr.Age > 30)
-        //   .Select(usr => { usr.Name = usr.Name + "dedalyAlive"; return usr; })
-        //   .ToList();
+                categories.Where(p => p.Name == chosenCat)
+                .Select(p => { p.Name = p.Name.Replace(chosenCat, inputName); return p; })
+                .ToList();
+
                 UpdateList();
                 FillCategoryComboBox();
             }
-            else
+        }
+
+        private void UpdateList()
+        {
+            lvCategory.Items.Clear();
+
+            foreach (var cat in categories)
             {
-                MessageBox.Show("finns ej");
+                lvCategory.Items.Add(
+                    cat.ToListViewItem()
+                );
             }
-            //Do stuff
         }
 
         private void btnAddCategory_Click(object sender, EventArgs e) // lägga till nya kategorier, behövs validering

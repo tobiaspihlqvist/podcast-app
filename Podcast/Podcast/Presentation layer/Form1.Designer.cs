@@ -168,6 +168,7 @@
             // 
             // cmbFeedCategory
             // 
+            this.cmbFeedCategory.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbFeedCategory.Location = new System.Drawing.Point(281, 275);
             this.cmbFeedCategory.Margin = new System.Windows.Forms.Padding(2);
             this.cmbFeedCategory.Name = "cmbFeedCategory";
