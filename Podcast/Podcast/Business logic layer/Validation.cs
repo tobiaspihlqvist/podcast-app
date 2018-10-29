@@ -27,5 +27,20 @@ namespace Podcast.Business_logic_layer
                 return true;
             }
         }
+        
+
+        static public bool CatIsSame(string input, string comparison)
+        {
+            if (input.Equals(comparison))
+            {
+                MessageBox.Show("You cannot add the same category twice!");
+
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }

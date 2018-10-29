@@ -53,6 +53,7 @@
     <Compile Include="Business logic layer\Exception.cs" />
     <Compile Include="Business logic layer\Feed.cs" />
     <Compile Include="Business logic layer\IListable.cs" />
+    <Compile Include="Business logic layer\Iserializable.cs" />
     <Compile Include="Business logic layer\Validation.cs" />
     <Compile Include="Business logic layer\XMLReader.cs" />
     <Compile Include="Data Access Layer\Serializer.cs" />

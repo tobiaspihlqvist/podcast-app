@@ -17,14 +17,14 @@ using Podcast.Data_Access_Layer;
 namespace Podcast
 {
     public partial class Form1 : Form
-    {   
+    {
         private List<Category> categories { get; set; }
 
         Feed feed = new Feed();
 
         Category category = new Category();
         private List<ListViewItem> LvList { get; set; }
- 
+
 
         public Form1()
         {
@@ -33,7 +33,7 @@ namespace Podcast
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
             categories = category.categories;
             category.AddInitialCategories();
             UpdateList();
@@ -41,11 +41,13 @@ namespace Podcast
             feed.LoadXml("fList");
             UpdateFeeds();
             FillPodCombobox();
+
+        //    category.LoadXml("CList"); //hmmm
         }
 
 
 
-        
+
 
         private void btnAddNewFeed_Click(object sender, EventArgs e)
         {
@@ -58,9 +60,9 @@ namespace Podcast
 
             feed.AddFeed(podName, podUrl, minutes, podCat);
             UpdateFeeds();
-            
 
-                
+
+
         }
 
         private void UpdateFeeds()
@@ -90,8 +92,8 @@ namespace Podcast
             cmbCategories.SelectedIndex = 0;
         } //finns det något sätt att göra den här mer generell??
 
-       
-        
+
+
 
         private void UpdateList()
         {
@@ -106,24 +108,46 @@ namespace Podcast
             }
         }
 
-        private void FillPodCombobox()
+       private void FillPodCombobox()
         {
             cmbPodcast.Items.Clear();
             var list = feed.GetList();
             foreach (var feed in list)
             {
                 cmbPodcast.Items.Add(feed.Title);
+                    if( cmbPodcast.Items.Count >= 0)
+                    {
+                        cmbPodcast.SelectedIndex = 0;
+                    }
             }
-            cmbPodcast.SelectedIndex = 0;
+        } 
+
+        private bool checkifCatExists()  // måste flyttas till validation på något sätt
+        { bool proceed = true;
+            string inputName = txtInputCategory.Text;
+
+            foreach(var c in categories)
+            {
+                if(c.Name == inputName)
+                {
+                    proceed = false;
+                    MessageBox.Show("You cannot add the same category twice!");
+                    break;
+                }
+                else
+                {
+                    proceed = true;
+                }
+            }
+            return proceed;
         }
-
-
 
         private void btnAddCategory_Click(object sender, EventArgs e) // lägga till nya kategorier, behövs validering
         {
-            string inputName = txtInputCategory.Text;
+               string inputName = txtInputCategory.Text;
+                
 
-            if (Validation.OnlyLetters(inputName))
+                if (Validation.OnlyLetters(inputName) && checkifCatExists())
             {
                 category.AddCategory(inputName);
 
@@ -157,20 +181,21 @@ namespace Podcast
         private void lvFeed_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
             string selectedItem = lvFeed.SelectedItems[0].Text;
-            
-            var feedUrl = feed.GetRssLink(selectedItem);
 
-            XmlReader reader = XmlReader.Create(feedUrl);
-            SyndicationFeed sFeed = SyndicationFeed.Load(reader);
+            /*     var feedUrl = feed.GetRssLink(selectedItem);
 
-            foreach (SyndicationItem si in sFeed.Items)
-            {
-                lvEpisodes.Items.Add(si.Title.Text);
-                lvEpisodes.Items.Add(si.Summary.Text);
-                lvEpisodes.Items.Add("--------------");
-            }
+                  XmlReader reader = XmlReader.Create(feedUrl);
+                  SyndicationFeed sFeed = SyndicationFeed.Load(reader);
+
+                  foreach (SyndicationItem si in sFeed.Items)
+                  {
+                      lvEpisodes.Items.Add(si.Title.Text);
+                      lvEpisodes.Items.Add(si.Summary.Text);
+                      lvEpisodes.Items.Add("--------------");
+                  }
+              } */
+
+
         }
-
-
     }
 }

@@ -9,7 +9,7 @@ using System.Xml.Serialization;
 
 namespace Podcast.Data_Access_Layer
 {
-    public class Serializer
+    public class Serializer: ISerializeable
     {
 
         public void SerializeXml<T>(T obj, string fileName)
@@ -23,7 +23,7 @@ namespace Podcast.Data_Access_Layer
             }
         }
 
-        public T GetListFromXml<T>(string fileName)
+        public T GetListFromXml<T>(string fileName) //deserilaize ska döpas om
         {
             T deserializedList;    
                 var serializer = new XmlSerializer(typeof(T));

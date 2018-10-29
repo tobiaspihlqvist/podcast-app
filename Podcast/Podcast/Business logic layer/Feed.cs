@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Podcast.Business_logic_layer
 {
-    public class Feed
+    public class Feed: ISerializeable
     {
         Data_Access_Layer.Serializer serializer = new Data_Access_Layer.Serializer();
 
@@ -35,7 +35,7 @@ namespace Podcast.Business_logic_layer
 
         
 
-        public void LoadXml(string fileName)
+        public void LoadXml(string fileName) // ska flyttas till validation eller till serializer
         {
             if (File.Exists(fileName+".xml"))
             {
@@ -57,20 +57,13 @@ namespace Podcast.Business_logic_layer
                 string[] row =
                 {
                     feed.Title,
-                    feed.UpdateFrequency.ToString() + " Minutes",
+                    feed.UpdateFrequency.ToString() + "Minutes",
                     feed.Category
                 };
                 ListViewItem item = new ListViewItem(row);
                 lvList.Add(item);
             }
             return lvList;
-        }
-
-        public string GetRssLink(string title)
-        {
-            Feed selectedFeed = FeedList.Find((f) => f.Title == title);
-            string url = selectedFeed.FeedUrl;
-            return url;
         }
     }
 }

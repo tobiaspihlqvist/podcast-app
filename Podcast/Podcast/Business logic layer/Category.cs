@@ -9,27 +9,23 @@ using System.Windows.Forms;
 
 namespace Podcast.Business_logic_layer
 {
-    public class Category : IListable
+    public class Category : IListable, ISerializeable
     {
         public string Name { get; set; }
         public List<Category> categories = new List<Category>();
         Serializer serializer = new Serializer();
 
 
-
+        public void LoadXml(string fileName) // ska flyttas till validation eller till serializer
+        {
+            if (File.Exists(fileName + ".xml"))
+            {
+                categories = serializer.GetListFromXml<List<Category>>(fileName);
+            }
+        } 
 
         public void AddInitialCategories()
         {   
-            if (File.Exists("CList" + ".xml"))
-            {
-                categories = serializer.GetListFromXml<List<Feed>>();
-            }
-
-            else
-            {
-                serializer.SerializeXml(categories, "CList");
-
-            }
             categories.Add(new Category
             {
                 Name = "business"
@@ -38,16 +34,19 @@ namespace Podcast.Business_logic_layer
             {
                 Name = "Lifestyle"
             });
-            return;
+            serializer.SerializeXml(categories, "CList");
+
         }
 
         public void AddCategory(string input)
-        {
+        {   
             Category newCat = new Category
             {
                 Name = input
             };
             categories.Add(newCat);
+            serializer.SerializeXml(categories, "CList");
+
             return;
         }
 
@@ -62,9 +61,9 @@ namespace Podcast.Business_logic_layer
         public void UpdateCategory(string chosenCat, string inputName)
         {
             if (Validation.OnlyLetters(inputName))
-            {
-                categories.Where(p => p.Name == chosenCat)
-                .Select(p => { p.Name = p.Name.Replace(chosenCat, inputName); return p; })
+            {   
+                categories.Where(c => c.Name == chosenCat)
+                .Select(c => { c.Name = c.Name.Replace(chosenCat, inputName); return c; })
                 .ToList();
             }
         }
