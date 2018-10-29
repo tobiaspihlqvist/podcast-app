@@ -22,7 +22,7 @@ namespace Podcast
         private List<Category> categories { get; set; }
 
         Feed feed = new Feed();
-        FeedList fl = new FeedList();
+        
 
         Category category = new Category();
         private List<ListViewItem> LvList { get; set; }
@@ -35,11 +35,13 @@ namespace Podcast
 
         private void Form1_Load(object sender, EventArgs e)
         {
-             categories = category.categories;
+            categories = category.categories;
             category.AddInitialCategories();
             UpdateList();
             FillCategoryComboBox();
-            
+            feed.LoadXml("fList");
+            UpdateFeeds();
+            FillPodCombobox();
         }
 
 
@@ -56,15 +58,25 @@ namespace Podcast
             int minutes = int.Parse(words[0]);
 
             feed.AddFeed(podName, podUrl, minutes, podCat);
-            fl.LoadFromXml();
-            LvList = fl.GetListItems();
+            UpdateFeeds();
             
 
-                foreach (var lvItem in LvList)
-                {
-                    lvFeed.Items.Add(lvItem);
-                }
+                
         }
+
+        private void UpdateFeeds()
+        {
+
+            lvFeed.Items.Clear();
+            LvList = feed.PrepareListView();
+
+
+            foreach (var lvItem in LvList)
+            {
+                lvFeed.Items.Add(lvItem);
+            }
+        }
+
 
         private void FillCategoryComboBox() // för att fylla kategori comboboxarna
         {
@@ -93,6 +105,17 @@ namespace Podcast
                     item.ToListViewItem()
                 );
             }
+        }
+
+        private void FillPodCombobox()
+        {
+            cmbPodcast.Items.Clear();
+            var list = feed.GetList();
+            foreach (var feed in list)
+            {
+                cmbPodcast.Items.Add(feed.Title);
+            }
+            cmbPodcast.SelectedIndex = 0;
         }
 
 
