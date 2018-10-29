@@ -18,13 +18,14 @@ using Podcast.Data_Access_Layer;
 namespace Podcast
 {
     public partial class Form1 : Form
-    {
+    {   
         private List<Category> categories { get; set; }
 
-        private Feed feed = new Feed();
-        private List<Feed> feedList { get; set; }
+        Feed feed = new Feed();
+        FeedList fl = new FeedList();
 
-        private List<ListViewItem> LvList = new List<ListViewItem>();
+        Category category = new Category();
+        private List<ListViewItem> LvList { get; set; }
  
 
         public Form1()
@@ -34,55 +35,14 @@ namespace Podcast
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
-            categories = new List<Category> {
-                new Category{
-                    Name = "Comedy"
-                },
-                new Category{
-                    Name = "Lifestyle"
-                },
-                new Category
-                {
-                    Name = "Business"
-                }
-            };
-
+             categories = category.categories;
+            category.AddInitialCategories();
             UpdateList();
             FillCategoryComboBox();
-            feed.LoadXml("fList");
-            UpdateFeeds();
-            FillPodCombobox();
-    
+            
         }
 
 
-
-        
-
-        private void UpdateFeeds()
-        {
-            
-            lvFeed.Items.Clear();
-            LvList = feed.PrepareListView();
-            
-            
-            foreach (var lvItem in LvList)
-            {
-                lvFeed.Items.Add(lvItem);
-            }
-        }
-
-        private void FillPodCombobox ()
-        {
-            cmbPodcast.Items.Clear();
-            var list = feed.GetList();
-            foreach(var feed in list)
-            {
-                cmbPodcast.Items.Add(feed.Title);
-            }
-            cmbPodcast.SelectedIndex = 0;
-        }
 
         
 
@@ -96,7 +56,14 @@ namespace Podcast
             int minutes = int.Parse(words[0]);
 
             feed.AddFeed(podName, podUrl, minutes, podCat);
-            UpdateFeeds();
+            fl.LoadFromXml();
+            LvList = fl.GetListItems();
+            
+
+                foreach (var lvItem in LvList)
+                {
+                    lvFeed.Items.Add(lvItem);
+                }
         }
 
         private void FillCategoryComboBox() // för att fylla kategori comboboxarna
@@ -112,33 +79,23 @@ namespace Podcast
             cmbCategories.SelectedIndex = 0;
         } //finns det något sätt att göra den här mer generell??
 
-        private void UpdateCategory() //lambda och linq, ska egentligen vara i kategoriklassen??
-        {
-            string chosenCat = cmbCategories.SelectedItem.ToString();
-            string inputName = txtInputCategory.Text;
-
-            if (Validation.OnlyLetters(inputName))
-            {
-                categories.Where(p => p.Name == chosenCat)
-                .Select(p => { p.Name = p.Name.Replace(chosenCat, inputName); return p; })
-                .ToList();
-
-                UpdateList();
-                FillCategoryComboBox();
-            }
-        }
+       
+        
 
         private void UpdateList()
         {
+            var list = categories;
             lvCategory.Items.Clear();
 
-            foreach (var cat in categories)
+            foreach (var item in list)
             {
                 lvCategory.Items.Add(
-                    cat.ToListViewItem()
+                    item.ToListViewItem()
                 );
             }
         }
+
+
 
         private void btnAddCategory_Click(object sender, EventArgs e) // lägga till nya kategorier, behövs validering
         {
@@ -146,11 +103,7 @@ namespace Podcast
 
             if (Validation.OnlyLetters(inputName))
             {
-                Category newCat = new Category
-                {
-                    Name = inputName
-                };
-                categories.Add(newCat);
+                category.AddCategory(inputName);
 
                 txtInputCategory.Clear();
 
@@ -161,7 +114,22 @@ namespace Podcast
 
         private void btnChangeCategory_Click(object sender, EventArgs e)
         {
-            UpdateCategory();
+            string chosenCat = cmbCategories.SelectedItem.ToString();
+            string inputName = txtInputCategory.Text;
+
+            category.UpdateCategory(chosenCat, inputName);
+
+            txtInputCategory.Clear();
+            UpdateList();
+            FillCategoryComboBox();
+        }
+
+        private void btnDeleteCategory_Click(object sender, EventArgs e)
+        {
+            string chosenCat = cmbCategories.SelectedItem.ToString();
+            category.DeleteCategory(chosenCat);
+            UpdateList();
+            FillCategoryComboBox();
         }
     }
 }
