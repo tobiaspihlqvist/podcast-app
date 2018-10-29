@@ -11,8 +11,7 @@ namespace Podcast.Data_Access_Layer
 {
     public class Serializer
     {
-        
-        
+
         public void SerializeXml<T>(T obj, string fileName)
         {
             

@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Podcast.Data_Access_Layer;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,13 +13,23 @@ namespace Podcast.Business_logic_layer
     {
         public string Name { get; set; }
         public List<Category> categories = new List<Category>();
+        Serializer serializer = new Serializer();
 
-       
-            
-        
+
+
 
         public void AddInitialCategories()
-        {
+        {   
+            if (File.Exists("CList" + ".xml"))
+            {
+                categories = serializer.GetListFromXml<List<Feed>>();
+            }
+
+            else
+            {
+                serializer.SerializeXml(categories, "CList");
+
+            }
             categories.Add(new Category
             {
                 Name = "business"
