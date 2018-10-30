@@ -65,5 +65,12 @@ namespace Podcast.Business_logic_layer
             }
             return lvList;
         }
+
+        public string GetRssLink(string title)
+        {
+            Feed selectedFeed = FeedList.Find((f) => f.Title == title);
+            string url = selectedFeed.FeedUrl;
+            return url;
+        }
     }
 }

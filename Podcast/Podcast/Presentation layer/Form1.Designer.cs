@@ -35,6 +35,7 @@
             this.clCategory = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.lvCategory = new System.Windows.Forms.ListView();
             this.lvEpisodes = new System.Windows.Forms.ListView();
+            this.Episodes = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
             this.lblCategories = new System.Windows.Forms.Label();
             this.lblFeedUrl = new System.Windows.Forms.Label();
@@ -55,7 +56,8 @@
             this.btnChangeCategory = new System.Windows.Forms.Button();
             this.tbTitle = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
-            this.Episodes = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.lblDescription = new System.Windows.Forms.Label();
+            this.lvDescription = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
             // lblFeed
@@ -112,10 +114,15 @@
             this.Episodes});
             this.lvEpisodes.Location = new System.Drawing.Point(12, 337);
             this.lvEpisodes.Name = "lvEpisodes";
-            this.lvEpisodes.Size = new System.Drawing.Size(301, 101);
+            this.lvEpisodes.Size = new System.Drawing.Size(361, 101);
             this.lvEpisodes.TabIndex = 3;
             this.lvEpisodes.UseCompatibleStateImageBehavior = false;
-            this.lvEpisodes.View = System.Windows.Forms.View.Details;
+            this.lvEpisodes.View = System.Windows.Forms.View.List;
+            // 
+            // Episodes
+            // 
+            this.Episodes.Text = "Episodes";
+            this.Episodes.Width = 294;
             // 
             // label1
             // 
@@ -296,16 +303,30 @@
             this.lblName.TabIndex = 26;
             this.lblName.Text = "Name";
             // 
-            // Episodes
+            // lblDescription
             // 
-            this.Episodes.Text = "Episodes";
-            this.Episodes.Width = 294;
+            this.lblDescription.AutoSize = true;
+            this.lblDescription.Location = new System.Drawing.Point(533, 312);
+            this.lblDescription.Name = "lblDescription";
+            this.lblDescription.Size = new System.Drawing.Size(101, 13);
+            this.lblDescription.TabIndex = 28;
+            this.lblDescription.Text = "Episode Description";
+            // 
+            // lvDescription
+            // 
+            this.lvDescription.Location = new System.Drawing.Point(536, 337);
+            this.lvDescription.Name = "lvDescription";
+            this.lvDescription.Size = new System.Drawing.Size(220, 101);
+            this.lvDescription.TabIndex = 29;
+            this.lvDescription.UseCompatibleStateImageBehavior = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lvDescription);
+            this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.tbTitle);
             this.Controls.Add(this.btnChangeCategory);
@@ -368,6 +389,8 @@
         private System.Windows.Forms.TextBox tbTitle;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.ColumnHeader Episodes;
+        private System.Windows.Forms.Label lblDescription;
+        private System.Windows.Forms.ListView lvDescription;
     }
 }
 

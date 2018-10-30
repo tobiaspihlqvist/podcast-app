@@ -33,7 +33,8 @@ namespace Podcast
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            lvEpisodes.View = View.Details;
+            lvEpisodes.HeaderStyle = ColumnHeaderStyle.None;
             categories = category.categories;
             category.AddInitialCategories();
             UpdateList();
@@ -180,22 +181,26 @@ namespace Podcast
 
         private void lvFeed_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            string selectedItem = lvFeed.SelectedItems[0].Text;
 
-            /*     var feedUrl = feed.GetRssLink(selectedItem);
-
-                  XmlReader reader = XmlReader.Create(feedUrl);
-                  SyndicationFeed sFeed = SyndicationFeed.Load(reader);
-
-                  foreach (SyndicationItem si in sFeed.Items)
-                  {
-                      lvEpisodes.Items.Add(si.Title.Text);
-                      lvEpisodes.Items.Add(si.Summary.Text);
-                      lvEpisodes.Items.Add("--------------");
-                  }
-              } */
+            if (lvFeed.SelectedItems.Count > 0)
+            {
+                string selectedItem = lvFeed.SelectedItems[0].Text;
+                var feedUrl = feed.GetRssLink(selectedItem);
 
 
-        }
+
+                XmlReader reader = XmlReader.Create(feedUrl);
+                SyndicationFeed sFeed = SyndicationFeed.Load(reader);
+
+                foreach (SyndicationItem si in sFeed.Items)
+                {
+                    lvEpisodes.Items.Add(si.Title.Text);
+                    lvEpisodes.Items.Add("--------------");
+                }
+            }
+        } 
+
+
+        
     }
 }
