@@ -12,7 +12,7 @@ namespace Podcast.Business_logic_layer
     {
         Data_Access_Layer.Serializer serializer = new Data_Access_Layer.Serializer();
 
-        List<Feed> FeedList = new List<Feed>();
+         List<Feed> FeedList = new List<Feed>();
 
         List<ListViewItem> LvList = new List<ListViewItem>();
 
@@ -64,6 +64,14 @@ namespace Podcast.Business_logic_layer
                 lvList.Add(item);
             }
             return lvList;
+        }
+
+        public void FilterByCategory(ListView lv)
+        {
+            String chosenCat = lv.SelectedItems[0].Text;
+            var FilteredList = GetList().Where(x => x.Category == chosenCat).ToList();
+
+            
         }
 
         public string GetRssLink(string title)
