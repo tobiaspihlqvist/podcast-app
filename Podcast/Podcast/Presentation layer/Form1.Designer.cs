@@ -107,6 +107,7 @@
             this.lvCategory.TabIndex = 2;
             this.lvCategory.UseCompatibleStateImageBehavior = false;
             this.lvCategory.View = System.Windows.Forms.View.List;
+            this.lvCategory.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvCategory_ItemSelectionChanged);
             // 
             // lvEpisodes
             // 

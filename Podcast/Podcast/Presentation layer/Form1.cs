@@ -35,7 +35,7 @@ namespace Podcast
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+
             lvEpisodes.View = View.Details;
             //lvDescription.View = View.Details;
             lvEpisodes.HeaderStyle = ColumnHeaderStyle.None;
@@ -48,7 +48,7 @@ namespace Podcast
             UpdateFeeds();
             FillPodCombobox();
 
-        //    category.LoadXml("CList"); //hmmm
+            //    category.LoadXml("CList"); //hmmm
         }
 
 
@@ -59,7 +59,7 @@ namespace Podcast
         {
             string podName = tbTitle.Text;
             string podUrl = txtInputURL.Text;
-            string podCat = cmbCategories.SelectedItem.ToString();
+            string podCat = cmbFeedCategory.SelectedItem.ToString();
             string podUpdateFrequency = cmbUpdate.Text;
             string[] words = podUpdateFrequency.Split(' ');
             int minutes = int.Parse(words[0]);
@@ -114,27 +114,28 @@ namespace Podcast
             }
         }
 
-       private void FillPodCombobox()
+        private void FillPodCombobox()
         {
             cmbPodcast.Items.Clear();
             var list = feed.GetList();
             foreach (var feed in list)
             {
                 cmbPodcast.Items.Add(feed.Title);
-                    if( cmbPodcast.Items.Count >= 0)
-                    {
-                        cmbPodcast.SelectedIndex = 0;
-                    }
+                if (cmbPodcast.Items.Count >= 0)
+                {
+                    cmbPodcast.SelectedIndex = 0;
+                }
             }
-        } 
+        }
 
         private bool checkifCatExists()  // måste flyttas till validation på något sätt
-        { bool proceed = true;
+        {
+            bool proceed = true;
             string inputName = txtInputCategory.Text;
 
-            foreach(var c in categories)
+            foreach (var c in categories)
             {
-                if(c.Name == inputName)
+                if (c.Name == inputName)
                 {
                     proceed = false;
                     MessageBox.Show("You cannot add the same category twice!");
@@ -150,10 +151,10 @@ namespace Podcast
 
         private void btnAddCategory_Click(object sender, EventArgs e) // lägga till nya kategorier, behövs validering
         {
-               string inputName = txtInputCategory.Text;
-                
+            string inputName = txtInputCategory.Text;
 
-                if (Validation.OnlyLetters(inputName) && checkifCatExists())
+
+            if (Validation.OnlyLetters(inputName) && checkifCatExists())
             {
                 category.AddCategory(inputName);
 
@@ -169,11 +170,14 @@ namespace Podcast
             string chosenCat = cmbCategories.SelectedItem.ToString();
             string inputName = txtInputCategory.Text;
 
-            category.UpdateCategory(chosenCat, inputName);
+            if (Validation.CatIsSame(chosenCat, inputName))
+            {
+                category.UpdateCategory(chosenCat, inputName);
 
-            txtInputCategory.Clear();
-            UpdateList();
-            FillCategoryComboBox();
+                txtInputCategory.Clear();
+                UpdateList();
+                FillCategoryComboBox();
+            }
         }
 
         private void btnDeleteCategory_Click(object sender, EventArgs e)
@@ -207,8 +211,8 @@ namespace Podcast
 
         private void lvEpisodes_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
-            
-            if (lvEpisodes.SelectedItems.Count > 0)
+
+            if (lvEpisodes.SelectedItems.Count > 0) //exceptions
             {
                 string selectedEpisode = lvEpisodes.SelectedItems[0].Text;
 
@@ -227,5 +231,36 @@ namespace Podcast
                 }
             }
         }
+
+
+
+        private void lvCategory_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+
+            if (lvCategory.SelectedItems.Count > 0)
+            {
+                List<ListViewItem> LvList = new List<ListViewItem>();
+
+                String chosenCat = lvCategory.SelectedItems[0].Text;
+                var FilteredList = feed.GetList().Where(x => x.Category == chosenCat).ToList();
+
+                var lvFilteredFeed = new ListView();
+                foreach (var item in FilteredList)
+                {
+
+                    string[] row =
+                {
+                    feed.Title,
+                    feed.UpdateFrequency.ToString() + "Minutes",
+                    feed.Category
+                };
+                    ListViewItem item = new ListViewItem(row);
+                    
+                    lvFilteredFeed.Items.Add(item);
+                }
+            }
+        }
+        }
     }
-}
+    
+

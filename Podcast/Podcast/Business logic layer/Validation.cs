@@ -29,7 +29,7 @@ namespace Podcast.Business_logic_layer
         }
         
 
-        static public bool CatIsSame(string input, string comparison)
+        static public bool CatIsSame(string input, string comparison) // används i btnChangeCat
         {
             if (input.Equals(comparison))
             {
