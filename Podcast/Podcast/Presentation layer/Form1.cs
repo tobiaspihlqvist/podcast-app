@@ -13,6 +13,7 @@ using System.ServiceModel.Syndication;
 using System.ServiceModel.Description;
 using System.ServiceModel;
 using Podcast.Data_Access_Layer;
+using System.Text.RegularExpressions;
 
 namespace Podcast
 {
@@ -24,6 +25,7 @@ namespace Podcast
 
         Category category = new Category();
         private List<ListViewItem> LvList { get; set; }
+        private string SelectedFeed { get; set; }
 
 
         public Form1()
@@ -33,8 +35,11 @@ namespace Podcast
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            
             lvEpisodes.View = View.Details;
+            //lvDescription.View = View.Details;
             lvEpisodes.HeaderStyle = ColumnHeaderStyle.None;
+            //lvDescription.HeaderStyle = ColumnHeaderStyle.None;
             categories = category.categories;
             category.AddInitialCategories();
             UpdateList();
@@ -186,7 +191,7 @@ namespace Podcast
             {
                 string selectedItem = lvFeed.SelectedItems[0].Text;
                 var feedUrl = feed.GetRssLink(selectedItem);
-
+                SelectedFeed = feedUrl;
 
 
                 XmlReader reader = XmlReader.Create(feedUrl);
@@ -198,9 +203,29 @@ namespace Podcast
                     lvEpisodes.Items.Add("--------------");
                 }
             }
-        } 
+        }
 
+        private void lvEpisodes_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            
+            if (lvEpisodes.SelectedItems.Count > 0)
+            {
+                string selectedEpisode = lvEpisodes.SelectedItems[0].Text;
 
-        
+                XmlReader reader = XmlReader.Create(SelectedFeed);
+                SyndicationFeed sFeed = SyndicationFeed.Load(reader);
+
+                foreach (SyndicationItem si in sFeed.Items)
+                {
+                    if (selectedEpisode == si.Title.Text)
+                    {
+                        string description = si.Summary.Text;
+                        description = Regex.Replace(description, @"<.+?>", String.Empty);
+                        rtbDescription.Text = description;
+
+                    }
+                }
+            }
+        }
     }
 }

@@ -57,7 +57,7 @@
             this.tbTitle = new System.Windows.Forms.TextBox();
             this.lblName = new System.Windows.Forms.Label();
             this.lblDescription = new System.Windows.Forms.Label();
-            this.lvDescription = new System.Windows.Forms.ListView();
+            this.rtbDescription = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // lblFeed
@@ -118,6 +118,7 @@
             this.lvEpisodes.TabIndex = 3;
             this.lvEpisodes.UseCompatibleStateImageBehavior = false;
             this.lvEpisodes.View = System.Windows.Forms.View.List;
+            this.lvEpisodes.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvEpisodes_ItemSelectionChanged);
             // 
             // Episodes
             // 
@@ -312,20 +313,20 @@
             this.lblDescription.TabIndex = 28;
             this.lblDescription.Text = "Episode Description";
             // 
-            // lvDescription
+            // rtbDescription
             // 
-            this.lvDescription.Location = new System.Drawing.Point(536, 337);
-            this.lvDescription.Name = "lvDescription";
-            this.lvDescription.Size = new System.Drawing.Size(220, 101);
-            this.lvDescription.TabIndex = 29;
-            this.lvDescription.UseCompatibleStateImageBehavior = false;
+            this.rtbDescription.Location = new System.Drawing.Point(536, 337);
+            this.rtbDescription.Name = "rtbDescription";
+            this.rtbDescription.Size = new System.Drawing.Size(220, 96);
+            this.rtbDescription.TabIndex = 29;
+            this.rtbDescription.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.lvDescription);
+            this.Controls.Add(this.rtbDescription);
             this.Controls.Add(this.lblDescription);
             this.Controls.Add(this.lblName);
             this.Controls.Add(this.tbTitle);
@@ -390,7 +391,7 @@
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.ColumnHeader Episodes;
         private System.Windows.Forms.Label lblDescription;
-        private System.Windows.Forms.ListView lvDescription;
+        private System.Windows.Forms.RichTextBox rtbDescription;
     }
 }
 
