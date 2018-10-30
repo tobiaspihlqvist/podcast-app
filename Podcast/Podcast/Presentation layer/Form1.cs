@@ -53,7 +53,7 @@ namespace Podcast
 
 
 
-
+        
 
         private void btnAddNewFeed_Click(object sender, EventArgs e)
         {
@@ -220,9 +220,8 @@ namespace Podcast
                     if (selectedEpisode == si.Title.Text)
                     {
                         string description = si.Summary.Text;
-                        description = Regex.Replace(description, @"<.+?>", String.Empty);
+                        description = Regex.Replace(description, @"<.+?>", string.Empty);
                         rtbDescription.Text = description;
-
                     }
                 }
             }

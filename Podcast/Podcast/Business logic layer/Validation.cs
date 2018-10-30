@@ -42,5 +42,31 @@ namespace Podcast.Business_logic_layer
                 return true;
             }
         }
+
+        static public bool PodIsSame(string input, string comparison)
+        {
+            if (input.Equals(comparison))
+            {
+                MessageBox.Show("You are already subscribing to a podcast with this name");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        static public bool UrlIsSame(string input, string comparison)
+        {
+            if (input.Equals(comparison))
+            {
+                MessageBox.Show("You are already subscribing to a podcast with this url");
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }
