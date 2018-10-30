@@ -25,7 +25,7 @@ namespace Podcast
 
         Category category = new Category();
         private List<ListViewItem> LvList { get; set; }
-        private List<ListViewItem> FilteredLvList { get; set; }
+        private List<ListViewItem> FilteredLvList = new List<ListViewItem>();
         private string SelectedFeed { get; set; }
 
 
@@ -46,7 +46,8 @@ namespace Podcast
             UpdateList();
             FillCategoryComboBox();
             feed.LoadXml("fList");
-            UpdateFeeds();
+            LvList = feed.PrepareListView();
+            UpdateFeeds(LvList);
             FillPodCombobox();
 
             //    category.LoadXml("CList"); //hmmm
@@ -66,20 +67,20 @@ namespace Podcast
             int minutes = int.Parse(words[0]);
 
             feed.AddFeed(podName, podUrl, minutes, podCat);
-            UpdateFeeds();
+            UpdateFeeds(LvList);
 
 
 
         }
 
-        private void UpdateFeeds()
+        private void UpdateFeeds(List<ListViewItem> lizt)
         {
 
             lvFeed.Items.Clear();
-            LvList = feed.PrepareListView();
+            
 
 
-            foreach (var lvItem in LvList)
+            foreach (var lvItem in lizt)
             {
                 lvFeed.Items.Add(lvItem);
             }
@@ -240,16 +241,17 @@ namespace Podcast
             if (lvCategory.SelectedItems.Count > 0)
             {
                 // List<ListViewItem> LvList = new List<ListViewItem>();
-
+                FilteredLvList.Clear();
                 string chosenCat = lvCategory.SelectedItems[0].Text;
                 var list = LvList;
                 foreach(ListViewItem lvi in list)
                 {
-                    if(!chosenCat.Equals(lvi.SubItems[2].Text))
+                    if(chosenCat.Equals(lvi.SubItems[2].Text))
                     {
-                        
+                        FilteredLvList.Add(lvi);
                     }
                 }
+                UpdateFeeds(FilteredLvList);
                 
                 //var FilteredList = feed.GetList().FindAll(x => x.Category == chosenCat).ToList();
 
