@@ -25,6 +25,7 @@ namespace Podcast
 
         Category category = new Category();
         private List<ListViewItem> LvList { get; set; }
+        private List<ListViewItem> FilteredLvList { get; set; }
         private string SelectedFeed { get; set; }
 
 
@@ -238,25 +239,34 @@ namespace Podcast
 
             if (lvCategory.SelectedItems.Count > 0)
             {
-                List<ListViewItem> LvList = new List<ListViewItem>();
+                // List<ListViewItem> LvList = new List<ListViewItem>();
 
-                String chosenCat = lvCategory.SelectedItems[0].Text;
-                var FilteredList = feed.GetList().Where(x => x.Category == chosenCat).ToList();
-
-                var lvFilteredFeed = new ListView();
-                foreach (var item in FilteredList)
+                string chosenCat = lvCategory.SelectedItems[0].Text;
+                var list = LvList;
+                foreach(ListViewItem lvi in list)
                 {
-
-                    string[] row =
-                {
-                    feed.Title,
-                    feed.UpdateFrequency.ToString() + "Minutes",
-                    feed.Category
-                };
-                    ListViewItem item = new ListViewItem(row);
-                    
-                    lvFilteredFeed.Items.Add(item);
+                    if(!chosenCat.Equals(lvi.SubItems[2].Text))
+                    {
+                        
+                    }
                 }
+                
+                //var FilteredList = feed.GetList().FindAll(x => x.Category == chosenCat).ToList();
+
+                //  var lvFilteredFeed = new ListView();
+                //foreach (var item in FilteredList)
+                //{
+
+                //    string[] row =
+                //    {
+                //        feed.Title,
+                //        feed.UpdateFrequency.ToString() + "Minutes",
+                //        feed.Category
+                //    };
+                //    ListViewItem item = new ListViewItem(row);
+                    
+                //    lvFilteredFeed.Items.Add(item);
+                //}
             }
         }
         }
