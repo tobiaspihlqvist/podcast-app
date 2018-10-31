@@ -49,15 +49,13 @@ namespace Podcast.Business_logic_layer
             Feed f = new Feed();
             var list = f.GetList();
             bool proceed = list.Any((x) => x.Title == input);
-            if (proceed)
+            if (!proceed)
             {
                 MessageBox.Show("You are already subscribing to a podcast with this name");
                 return false;
             }
             else
             {
-                MessageBox.Show("sug kuk");
-
                 return true;
             }
         }
@@ -67,7 +65,7 @@ namespace Podcast.Business_logic_layer
             Feed f = new Feed();
             var list = f.GetList();
             bool proceed = list.Any((x) => x.FeedUrl == input);
-            if (proceed)
+            if (!proceed)
             {
                 MessageBox.Show("You are already subscribing to a podcast with this url");
                 return false;

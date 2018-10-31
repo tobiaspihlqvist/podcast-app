@@ -20,7 +20,7 @@ namespace Podcast
     public partial class Form1 : Form
     {
         private List<Category> categories { get; set; }
-        private List<Feed> feeds { get; set; }
+
         Feed feed = new Feed();
         Episode ep = new Episode();
 
@@ -37,7 +37,7 @@ namespace Podcast
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            feeds = feed.GetList();
+
             lvEpisodes.View = View.Details;
             //lvDescription.View = View.Details;
             lvEpisodes.HeaderStyle = ColumnHeaderStyle.None;
@@ -47,7 +47,8 @@ namespace Podcast
             UpdateList();
             FillCategoryComboBox();
             feed.LoadXml("fList");
-            UpdateFeeds();
+            LvList = feed.PrepareListView();
+            UpdateFeeds(LvList);
             FillPodCombobox();
 
             //    category.LoadXml("CList"); //hmmm
@@ -69,22 +70,22 @@ namespace Podcast
                 int minutes = int.Parse(words[0]);
 
                 feed.AddFeed(podName, podUrl, minutes, podCat);
-                UpdateFeeds();
+                UpdateFeeds(LvList);
             }
 
 
         }
 
-        private void UpdateFeeds()
+        private void UpdateFeeds(List<ListViewItem> lizt)
         {
 
             lvFeed.Items.Clear();
-            var list = feeds;
+            
 
 
-            foreach (var lvItem in list)
+            foreach (var lvItem in lizt)
             {
-                lvFeed.Items.Add(lvItem.ToListViewItem());
+                lvFeed.Items.Add(lvItem);
             }
         }
 
@@ -251,7 +252,7 @@ namespace Podcast
                         FilteredLvList.Add(lvi);
                     }
                 }
-           //     UpdateFeeds(FilteredLvList);
+                UpdateFeeds(FilteredLvList);
                 
                 //var FilteredList = feed.GetList().FindAll(x => x.Category == chosenCat).ToList();
 
