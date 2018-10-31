@@ -62,7 +62,7 @@ namespace Podcast
         {
             string podName = tbTitle.Text;
             string podUrl = txtInputURL.Text;
-            if (Validation.UrlIsSame(podUrl) && Validation.PodIsSame(podName)) 
+            if (Validation.UrlIsSame(podUrl, feed) && Validation.PodIsSame(podName, feed))
             {
                 string podCat = cmbFeedCategory.SelectedItem.ToString();
                 string podUpdateFrequency = cmbUpdate.Text;
@@ -70,6 +70,7 @@ namespace Podcast
                 int minutes = int.Parse(words[0]);
 
                 feed.AddFeed(podName, podUrl, minutes, podCat);
+                LvList = feed.PrepareListView();
                 UpdateFeeds(LvList);
             }
 
@@ -78,9 +79,10 @@ namespace Podcast
 
         private void UpdateFeeds(List<ListViewItem> lizt)
         {
-
+            
             lvFeed.Items.Clear();
             
+            LvList = feed.PrepareListView();
 
 
             foreach (var lvItem in lizt)
