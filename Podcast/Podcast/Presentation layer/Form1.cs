@@ -49,7 +49,7 @@ namespace Podcast
             LvList = feed.PrepareListView();
             UpdateFeeds(LvList);
             FillPodCombobox();
-
+            fillCmbUpdate();
             category.LoadXml("CList"); //hmmm
         }
 
@@ -79,10 +79,7 @@ namespace Podcast
 
         private void UpdateFeeds(List<ListViewItem> lizt)
         {
-
             lvFeed.Items.Clear();
-                     
-
 
             foreach (var lvItem in lizt)
             {
@@ -280,7 +277,19 @@ namespace Podcast
 
             feed.DeleteFeed(delete);
         }
+
+
+        // Allt för UpdateFrequency
+
+        private void fillCmbUpdate()
+        {
+            cmbUpdate.Items.Add("2min");
+            cmbUpdate.Items.Add("5min");
+            cmbUpdate.Items.Add("10min");
+            cmbUpdate.Items.Add("20min");
+        }
     }
-    }
+}
     
+
 

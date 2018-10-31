@@ -173,8 +173,7 @@
             // 
             // cmbUpdate
             // 
-            this.cmbUpdate.Items.AddRange(new object[] {
-            "60 min"});
+            this.cmbUpdate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbUpdate.Location = new System.Drawing.Point(281, 248);
             this.cmbUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.cmbUpdate.Name = "cmbUpdate";
