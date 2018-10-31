@@ -106,7 +106,8 @@ namespace Podcast
 
         private void UpdateList()
         {
-            var list = categories;
+            category.LoadXml("CList");
+            var list = category.GetList();
             lvCategory.Items.Clear();
 
             foreach (var item in list)
@@ -162,6 +163,7 @@ namespace Podcast
                 category.AddCategory(inputName);
 
                 txtInputCategory.Clear();
+                
 
                 UpdateList();
                 FillCategoryComboBox(); // för att lägga till nya värdet
@@ -288,36 +290,37 @@ namespace Podcast
             cmbUpdate.Items.Add("10");
             cmbUpdate.Items.Add("20");
         }
-        public async Task GenerateEpisodez(string url, double interval)
+        //    public async Task GenerateEpisodez(string url, double interval)
 
-        {
-            var intervalTime = cmbUpdate.SelectedItem.ToString();
+        //    {
+        //        var intervalTime = cmbUpdate.SelectedItem.ToString();
 
-            try {
-                double.TryParse(intervalTime, out double time);
+        //        try {
+        //            double.TryParse(intervalTime, out double time);
 
-                while (true)
-                {
-                    var taskA = Task.Run(() =>
-                    {
-                        XmlReader reader = XmlReader.Create(url);
-                        SyndicationFeed sFeed = SyndicationFeed.Load(reader);
-                        Episodes.Clear();
-                        foreach (SyndicationItem si in Episodes)
-                        {
-                            Episodes.Add(si);
-                        }
+        //            while (true)
+        //            {
+        //                var taskA = Task.Run(() =>
+        //                {
+        //                    XmlReader reader = XmlReader.Create(url);
+        //                    SyndicationFeed sFeed = SyndicationFeed.Load(reader);
+        //                    Episodes.Clear();
+        //                    foreach (SyndicationItem si in Episodes)
+        //                    {
+        //                        Episodes.Add(si);
+        //                    }
 
-                    });
-                    await Task.Delay(TimeSpan.FromMinutes(time));
-                }
-            }
-            catch(FormatException e)
-            {
-                MessageBox.Show(e.Message);
-            }
-        }
+        //                });
+        //                await Task.Delay(TimeSpan.FromMinutes(time));
+        //            }
+        //        }
+        //        catch(FormatException e)
+        //        {
+        //            MessageBox.Show(e.Message);
+        //        }
+        //    }
 
+        //}
     }
 }
     

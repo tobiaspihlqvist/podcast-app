@@ -5,12 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Podcast.Data_Access_Layer;
 
 namespace Podcast.Business_logic_layer
 {
     public class Feed
     {
-        Data_Access_Layer.Serializer serializer = new Data_Access_Layer.Serializer();
+        Serializer serializer = new Serializer();
 
          List<Feed> FeedList = new List<Feed>();
 
