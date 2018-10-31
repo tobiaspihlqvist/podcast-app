@@ -62,14 +62,16 @@ namespace Podcast
         {
             string podName = tbTitle.Text;
             string podUrl = txtInputURL.Text;
-            string podCat = cmbFeedCategory.SelectedItem.ToString();
-            string podUpdateFrequency = cmbUpdate.Text;
-            string[] words = podUpdateFrequency.Split(' ');
-            int minutes = int.Parse(words[0]);
+            if (Validation.UrlIsSame(podUrl) && Validation.PodIsSame(podName)) 
+            {
+                string podCat = cmbFeedCategory.SelectedItem.ToString();
+                string podUpdateFrequency = cmbUpdate.Text;
+                string[] words = podUpdateFrequency.Split(' ');
+                int minutes = int.Parse(words[0]);
 
-            feed.AddFeed(podName, podUrl, minutes, podCat);
-            UpdateFeeds(LvList);
-
+                feed.AddFeed(podName, podUrl, minutes, podCat);
+                UpdateFeeds(LvList);
+            }
 
 
         }
