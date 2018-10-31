@@ -8,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Podcast.Business_logic_layer
 {
-    public class Feed: ISerializeable
+    public class Feed
     {
         Data_Access_Layer.Serializer serializer = new Data_Access_Layer.Serializer();
 
@@ -33,6 +33,13 @@ namespace Podcast.Business_logic_layer
             
         }
 
+        public void DeleteFeed(string chosenFeed)
+        {
+            var feedToRemove = FeedList.Single(f => f.Title == chosenFeed);
+ 
+                FeedList.Remove(feedToRemove);
+
+        }
         
 
         public void LoadXml(string fileName) // ska flyttas till validation eller till serializer
@@ -66,13 +73,6 @@ namespace Podcast.Business_logic_layer
             return lvList;
         }
 
-        public void FilterByCategory(ListView lv)
-        {
-            String chosenCat = lv.SelectedItems[0].Text;
-            var FilteredList = GetList().Where(x => x.Category == chosenCat).ToList();
-
-            
-        }
 
         public string GetRssLink(string title)
         {

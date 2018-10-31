@@ -3,13 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Podcast.Business_logic_layer
-{
-    public class Category : IListable, ISerializeable
+{   
+    public class Category : IListable
     {
         public string Name { get; set; }
         public List<Category> categories = new List<Category>();
@@ -35,7 +36,6 @@ namespace Podcast.Business_logic_layer
                 Name = "Lifestyle"
             });
             serializer.SerializeXml(categories, "CList");
-
         }
 
         public void AddCategory(string input)
@@ -47,7 +47,10 @@ namespace Podcast.Business_logic_layer
             categories.Add(newCat);
             serializer.SerializeXml(categories, "CList");
 
-            return;
+        }
+        public List<Category> GetList()
+        {
+            return categories;
         }
 
         public void DeleteCategory(string input)
@@ -79,7 +82,7 @@ namespace Podcast.Business_logic_layer
             return new ListViewItem(PrepareListViewItem().ToArray());
         }
 
-     
+        
     }
 }
 
