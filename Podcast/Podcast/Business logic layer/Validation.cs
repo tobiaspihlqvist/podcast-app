@@ -8,9 +8,8 @@ using System.Windows.Forms;
 
 namespace Podcast.Business_logic_layer
 {
-   public class Validation
+   public static class Validation
     {
-       
 
         static public bool OnlyLetters(string input) // måste använda Validation.OnlyLetters samt textrutan man ska kontrollera för att metoden ska fungera
         {
@@ -44,12 +43,9 @@ namespace Podcast.Business_logic_layer
             }
         }
 
-        static public bool PodIsSame(string input)
+        static public bool PodIsSame(string input, string comparison)
         {
-            Feed f = new Feed();
-            var list = f.GetList();
-            bool proceed = list.Any((x) => x.Title == input);
-            if (!proceed)
+            if (input.Equals(comparison))
             {
                 MessageBox.Show("You are already subscribing to a podcast with this name");
                 return false;
@@ -60,12 +56,9 @@ namespace Podcast.Business_logic_layer
             }
         }
 
-        static public bool UrlIsSame(string input)
+        static public bool UrlIsSame(string input, string comparison)
         {
-            Feed f = new Feed();
-            var list = f.GetList();
-            bool proceed = list.Any((x) => x.FeedUrl == input);
-            if (!proceed)
+            if (input.Equals(comparison))
             {
                 MessageBox.Show("You are already subscribing to a podcast with this url");
                 return false;
