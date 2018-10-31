@@ -43,6 +43,7 @@ namespace Podcast
             //lvDescription.HeaderStyle = ColumnHeaderStyle.None;
             categories = category.GetList();
             category.AddInitialCategories();
+     //       category.LoadXml("CList"); //hmmm
             UpdateList();
             FillCategoryComboBox();
             feed.LoadXml("fList");
@@ -50,7 +51,6 @@ namespace Podcast
             UpdateFeeds(LvList);
             FillPodCombobox();
             fillCmbUpdate();
-            category.LoadXml("CList"); //hmmm
         }
 
 
@@ -95,10 +95,11 @@ namespace Podcast
             foreach (var item in categories)
             {
                 cmbCategories.Items.Add(item.Name);
-                cmbFeedCategory.Items.Add(item.Name);
+                cmbFeedCategory.Items.Add(item.Name);                
             }
-            cmbFeedCategory.SelectedIndex = 0;
-            cmbCategories.SelectedIndex = 0;
+
+
+
         } //finns det något sätt att göra den här mer generell??
 
 
@@ -126,7 +127,8 @@ namespace Podcast
                 cmbPodcast.Items.Add(feed.Title);
                 if (cmbPodcast.Items.Count >= 0)
                 {
-                    cmbPodcast.SelectedIndex = 0;
+                    cmbPodcast.SelectedIndex = 0; // ´kastar exception om man tar bort alla feeds, likadant med kategorier i och med att boxen
+                                                    //blir tom
                 }
             }
         }
@@ -172,7 +174,6 @@ namespace Podcast
         {
             string chosenCat = cmbCategories.SelectedItem.ToString();
             string inputName = txtInputCategory.Text;
-
             if (Validation.CatIsSame(chosenCat, inputName))
             {
                 category.UpdateCategory(chosenCat, inputName);
@@ -288,7 +289,7 @@ namespace Podcast
             cmbUpdate.Items.Add("10");
             cmbUpdate.Items.Add("20");
         }
-        public async Task GenerateEpisodez(string url, double interval)
+   /*     public async Task GenerateEpisodez(string url, double interval)
 
         {
             var intervalTime = cmbUpdate.SelectedItem.ToString();
@@ -316,7 +317,7 @@ namespace Podcast
             {
                 MessageBox.Show(e.Message);
             }
-        }
+        } */
 
     }
 }
