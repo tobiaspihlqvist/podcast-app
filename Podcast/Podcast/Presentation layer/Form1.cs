@@ -29,7 +29,6 @@ namespace Podcast
         private List<ListViewItem> FilteredLvList = new List<ListViewItem>();
         private string SelectedFeed { get; set; }
 
-
         public Form1()
         {
             InitializeComponent();
@@ -42,7 +41,7 @@ namespace Podcast
             //lvDescription.View = View.Details;
             lvEpisodes.HeaderStyle = ColumnHeaderStyle.None;
             //lvDescription.HeaderStyle = ColumnHeaderStyle.None;
-            categories = category.categories;
+            categories = category.GetList();
             category.AddInitialCategories();
             UpdateList();
             FillCategoryComboBox();
@@ -51,7 +50,7 @@ namespace Podcast
             UpdateFeeds(LvList);
             FillPodCombobox();
 
-            //    category.LoadXml("CList"); //hmmm
+            category.LoadXml("CList"); //hmmm
         }
 
 
@@ -62,27 +61,23 @@ namespace Podcast
         {
             string podName = tbTitle.Text;
             string podUrl = txtInputURL.Text;
-            if (Validation.UrlIsSame(podUrl, feed) && Validation.PodIsSame(podName, feed))
-            {
-                string podCat = cmbFeedCategory.SelectedItem.ToString();
-                string podUpdateFrequency = cmbUpdate.Text;
-                string[] words = podUpdateFrequency.Split(' ');
-                int minutes = int.Parse(words[0]);
+            string podCat = cmbFeedCategory.SelectedItem.ToString();
+            string podUpdateFrequency = cmbUpdate.Text;
+            string[] words = podUpdateFrequency.Split(' ');
+            int minutes = int.Parse(words[0]);
 
-                feed.AddFeed(podName, podUrl, minutes, podCat);
-                LvList = feed.PrepareListView();
-                UpdateFeeds(LvList);
-            }
+            feed.AddFeed(podName, podUrl, minutes, podCat);
+            UpdateFeeds(LvList);
+
 
 
         }
 
         private void UpdateFeeds(List<ListViewItem> lizt)
         {
-            
+
             lvFeed.Items.Clear();
             
-            LvList = feed.PrepareListView();
 
 
             foreach (var lvItem in lizt)
@@ -274,7 +269,14 @@ namespace Podcast
                 //}
             }
         }
+
+        private void btnDeleteFeed_Click(object sender, EventArgs e)
+        {
+            string delete = cmbPodcast.SelectedItem.ToString();
+
+            feed.DeleteFeed(delete);
         }
+    }
     }
     
 

@@ -242,6 +242,7 @@
             this.btnDeleteFeed.TabIndex = 17;
             this.btnDeleteFeed.Text = "Delete";
             this.btnDeleteFeed.UseVisualStyleBackColor = true;
+            this.btnDeleteFeed.Click += new System.EventHandler(this.btnDeleteFeed_Click);
             // 
             // txtInputCategory
             // 
