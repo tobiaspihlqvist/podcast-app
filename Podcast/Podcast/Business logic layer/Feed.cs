@@ -8,13 +8,12 @@ using System.Windows.Forms;
 
 namespace Podcast.Business_logic_layer
 {
-    public class Feed: ISerializeable
+    public class Feed: ISerializeable, IListable
     {
         Data_Access_Layer.Serializer serializer = new Data_Access_Layer.Serializer();
 
          List<Feed> FeedList = new List<Feed>();
 
-        List<ListViewItem> LvList = new List<ListViewItem>();
 
         
         
@@ -48,22 +47,20 @@ namespace Podcast.Business_logic_layer
             return FeedList;
         }
 
-        public List<ListViewItem> PrepareListView()
+        public List<string> PrepareListViewItem()
         {
-            var list = FeedList;
-            var lvList = new List<ListViewItem>();
-            foreach (var feed in list)
-            {
-                string[] row =
-                {
-                    feed.Title,
-                    feed.UpdateFrequency.ToString() + "Minutes",
-                    feed.Category
+            return new List<string> { 
+                
+                    Title,
+                    UpdateFrequency.ToString() + "Minutes",
+                    Category
                 };
-                ListViewItem item = new ListViewItem(row);
-                lvList.Add(item);
-            }
-            return lvList;
+        }
+
+
+        public virtual ListViewItem ToListViewItem()
+        {
+            return new ListViewItem(PrepareListViewItem().ToArray());
         }
 
         public void FilterByCategory(ListView lv)

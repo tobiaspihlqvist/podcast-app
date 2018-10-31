@@ -20,7 +20,7 @@ namespace Podcast
     public partial class Form1 : Form
     {
         private List<Category> categories { get; set; }
-
+        private List<Feed> feeds { get; set; }
         Feed feed = new Feed();
         Episode ep = new Episode();
 
@@ -37,7 +37,7 @@ namespace Podcast
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            feeds = feed.GetList();
             lvEpisodes.View = View.Details;
             //lvDescription.View = View.Details;
             lvEpisodes.HeaderStyle = ColumnHeaderStyle.None;
@@ -47,8 +47,7 @@ namespace Podcast
             UpdateList();
             FillCategoryComboBox();
             feed.LoadXml("fList");
-            LvList = feed.PrepareListView();
-            UpdateFeeds(LvList);
+            UpdateFeeds();
             FillPodCombobox();
 
             //    category.LoadXml("CList"); //hmmm
@@ -62,28 +61,30 @@ namespace Podcast
         {
             string podName = tbTitle.Text;
             string podUrl = txtInputURL.Text;
-            string podCat = cmbFeedCategory.SelectedItem.ToString();
-            string podUpdateFrequency = cmbUpdate.Text;
-            string[] words = podUpdateFrequency.Split(' ');
-            int minutes = int.Parse(words[0]);
+            if (Validation.UrlIsSame(podUrl) && Validation.PodIsSame(podName)) 
+            {
+                string podCat = cmbFeedCategory.SelectedItem.ToString();
+                string podUpdateFrequency = cmbUpdate.Text;
+                string[] words = podUpdateFrequency.Split(' ');
+                int minutes = int.Parse(words[0]);
 
-            feed.AddFeed(podName, podUrl, minutes, podCat);
-            UpdateFeeds(LvList);
-
+                feed.AddFeed(podName, podUrl, minutes, podCat);
+                UpdateFeeds();
+            }
 
 
         }
 
-        private void UpdateFeeds(List<ListViewItem> lizt)
+        private void UpdateFeeds()
         {
 
             lvFeed.Items.Clear();
-            
+            var list = feeds;
 
 
-            foreach (var lvItem in lizt)
+            foreach (var lvItem in list)
             {
-                lvFeed.Items.Add(lvItem);
+                lvFeed.Items.Add(lvItem.ToListViewItem());
             }
         }
 
@@ -250,7 +251,7 @@ namespace Podcast
                         FilteredLvList.Add(lvi);
                     }
                 }
-                UpdateFeeds(FilteredLvList);
+           //     UpdateFeeds(FilteredLvList);
                 
                 //var FilteredList = feed.GetList().FindAll(x => x.Category == chosenCat).ToList();
 
