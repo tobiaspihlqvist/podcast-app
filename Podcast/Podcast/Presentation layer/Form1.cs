@@ -22,6 +22,7 @@ namespace Podcast
         private List<Category> categories { get; set; }
 
         Feed feed = new Feed();
+        Episode ep = new Episode();
 
         Category category = new Category();
         private List<ListViewItem> LvList { get; set; }
@@ -196,14 +197,14 @@ namespace Podcast
             if (lvFeed.SelectedItems.Count > 0)
             {
                 string selectedItem = lvFeed.SelectedItems[0].Text;
-                var feedUrl = feed.GetRssLink(selectedItem);
-                SelectedFeed = feedUrl;
+                var matchingFeed = feed.GetList().Find((f) => f.Title == selectedItem);
+                SelectedFeed = matchingFeed.FeedUrl;
+                
 
+                ep.SetEpisodes(SelectedFeed);
+                var list = ep.GetEpisodes();
 
-                XmlReader reader = XmlReader.Create(feedUrl);
-                SyndicationFeed sFeed = SyndicationFeed.Load(reader);
-
-                foreach (SyndicationItem si in sFeed.Items)
+                foreach (SyndicationItem si in list)
                 {
                     lvEpisodes.Items.Add(si.Title.Text);
                     lvEpisodes.Items.Add("--------------");
@@ -217,11 +218,9 @@ namespace Podcast
             if (lvEpisodes.SelectedItems.Count > 0) //exceptions
             {
                 string selectedEpisode = lvEpisodes.SelectedItems[0].Text;
+                var list = ep.GetEpisodes();
 
-                XmlReader reader = XmlReader.Create(SelectedFeed);
-                SyndicationFeed sFeed = SyndicationFeed.Load(reader);
-
-                foreach (SyndicationItem si in sFeed.Items)
+                foreach (SyndicationItem si in list)
                 {
                     if (selectedEpisode == si.Title.Text)
                     {
