@@ -156,11 +156,11 @@
             // lblFeedFrequency
             // 
             this.lblFeedFrequency.AutoSize = true;
-            this.lblFeedFrequency.Location = new System.Drawing.Point(165, 251);
+            this.lblFeedFrequency.Location = new System.Drawing.Point(136, 251);
             this.lblFeedFrequency.Name = "lblFeedFrequency";
-            this.lblFeedFrequency.Size = new System.Drawing.Size(95, 13);
+            this.lblFeedFrequency.Size = new System.Drawing.Size(140, 13);
             this.lblFeedFrequency.TabIndex = 8;
-            this.lblFeedFrequency.Text = "Update Frequency";
+            this.lblFeedFrequency.Text = "Update Frequency (minutes)";
             // 
             // lblFeedCategory
             // 

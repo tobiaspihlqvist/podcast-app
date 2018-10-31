@@ -55,7 +55,7 @@ namespace Podcast
 
 
 
-        
+
 
         private void btnAddNewFeed_Click(object sender, EventArgs e)
         {
@@ -199,7 +199,7 @@ namespace Podcast
                 string selectedItem = lvFeed.SelectedItems[0].Text;
                 var matchingFeed = feed.GetList().Find((f) => f.Title == selectedItem);
                 SelectedFeed = matchingFeed.FeedUrl;
-                
+
 
                 ep.SetEpisodes(SelectedFeed);
                 var list = ep.GetEpisodes();
@@ -243,15 +243,15 @@ namespace Podcast
                 FilteredLvList.Clear();
                 string chosenCat = lvCategory.SelectedItems[0].Text;
                 var list = LvList;
-                foreach(ListViewItem lvi in list)
+                foreach (ListViewItem lvi in list)
                 {
-                    if(chosenCat.Equals(lvi.SubItems[2].Text))
+                    if (chosenCat.Equals(lvi.SubItems[2].Text))
                     {
                         FilteredLvList.Add(lvi);
                     }
                 }
                 UpdateFeeds(FilteredLvList);
-                
+
                 //var FilteredList = feed.GetList().FindAll(x => x.Category == chosenCat).ToList();
 
                 //  var lvFilteredFeed = new ListView();
@@ -265,7 +265,7 @@ namespace Podcast
                 //        feed.Category
                 //    };
                 //    ListViewItem item = new ListViewItem(row);
-                    
+
                 //    lvFilteredFeed.Items.Add(item);
                 //}
             }
@@ -283,11 +283,41 @@ namespace Podcast
 
         private void fillCmbUpdate()
         {
-            cmbUpdate.Items.Add("2min");
-            cmbUpdate.Items.Add("5min");
-            cmbUpdate.Items.Add("10min");
-            cmbUpdate.Items.Add("20min");
+            cmbUpdate.Items.Add("2");
+            cmbUpdate.Items.Add("5");
+            cmbUpdate.Items.Add("10");
+            cmbUpdate.Items.Add("20");
         }
+        public async Task GenerateEpisodez(string url, double interval)
+
+        {
+            var intervalTime = cmbUpdate.SelectedItem.ToString();
+
+            try {
+                double.TryParse(intervalTime, out double time);
+
+                while (true)
+                {
+                    var taskA = Task.Run(() =>
+                    {
+                        XmlReader reader = XmlReader.Create(url);
+                        SyndicationFeed sFeed = SyndicationFeed.Load(reader);
+                        Episodes.Clear();
+                        foreach (SyndicationItem si in Episodes)
+                        {
+                            Episodes.Add(si);
+                        }
+
+                    });
+                    await Task.Delay(TimeSpan.FromMinutes(time));
+                }
+            }
+            catch(FormatException e)
+            {
+                MessageBox.Show(e.Message);
+            }
+        }
+
     }
 }
     
