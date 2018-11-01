@@ -27,25 +27,22 @@ namespace Podcast.Business_logic_layer
         public string FeedUrl { get; set; }
         public string Category { get; set; }
         public int UpdateFrequency { get; set; }
+        
 
         public void AddFeed(string name, string url, int updateFreq, string category)
         {
             var newFeed = new Feed { Title = name, FeedUrl = url, UpdateFrequency = updateFreq,
-                Category = category};
-            FeedList.Add(newFeed);
-            serializer.SerializeXml(FeedList, "fList");
+                Category = category };
+                FeedList.Add(newFeed);
+                serializer.SerializeXml(FeedList, "fList");
             
         }
 
 
         public void DeleteFeed(string chosenFeed)
         {
-           // var feedToRemove = FeedList.Single(f => f.Title == chosenFeed);
-        //   var feedToRemove = FeedList.Where( a => a.Title == chosenFeed);
+            
             FeedList.Remove(FeedList.Find(P => P.Title == chosenFeed));
-
-         //   FeedList.Remove(feedToRemove);
-
         }
         
 
@@ -62,7 +59,7 @@ namespace Podcast.Business_logic_layer
             return FeedList;
         }
 
-      
+        
         protected virtual List<string> PrepareListViewItem()
         {       var list = FeedList;
 
@@ -79,26 +76,43 @@ namespace Podcast.Business_logic_layer
             return new ListViewItem(PrepareListViewItem().ToArray());
         }
 
-
-     /*   public async Task EpisodeUpdater(string url, int interval)
-        {
-            Episodes.Clear();
-            var intervalTime = Convert.ToDouble(interval);
-            while (true)
+        /*      public List<ListViewItem> ToListViewItem()
             {
-                await Task.Run(() =>
+            var list = FeedList;
+            var lvList = new List<ListViewItem>();
+            foreach (var feed in list)
+            {
+                string[] row =
                 {
-                    XmlReader reader = XmlReader.Create(url);
-                    SyndicationFeed sFeed = SyndicationFeed.Load(reader);
-                    foreach (SyndicationItem si in sFeed.Items)
-                    {
-                        Episodes.Add(si);
-                    }
-
-                });
-                await Task.Delay(TimeSpan.FromMinutes(intervalTime));
+                    feed.Title,
+                    feed.UpdateFrequency.ToString() + "Minutes",
+                    feed.Category
+                };
+                ListViewItem item = new ListViewItem(row);
+                lvList.Add(item);
             }
-        } */
+            return lvList;
+            } */
+
+        //public async Task EpisodeUpdater(string url, int interval)
+        //{
+        //    Episodes.Clear();
+        //    var intervalTime = Convert.ToDouble(interval);
+        //    while (true)
+        //    {
+        //        await Task.Run(() =>
+        //        {
+        //            XmlReader reader = XmlReader.Create(url);
+        //            SyndicationFeed sFeed = SyndicationFeed.Load(reader);
+        //            foreach (SyndicationItem si in sFeed.Items)
+        //            {
+        //                Episodes.Add(si);
+        //            }
+
+        //        });
+        //        await Task.Delay(TimeSpan.FromMinutes(intervalTime));
+        //    }
+        //}
         
 
 

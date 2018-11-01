@@ -42,13 +42,18 @@ namespace Podcast
             lvEpisodes.HeaderStyle = ColumnHeaderStyle.None;
             //lvDescription.HeaderStyle = ColumnHeaderStyle.None;
             categories = category.GetList();
-            category.LoadXml("CList"); //hmmm
+            //category.AddInitialCategories();
             UpdateList();
-            feed.LoadXml("fList");
+            //feed.LoadXml("fList");
+       //     LvList = feed.ToListViewItem();
             fillCmbUpdate();
             UpdateFeeds();
             FillCategoryComboBox();
             FillPodCombobox();
+
+
+
+            //category.LoadXml("CList"); //hmmm
         }
 
 
@@ -65,8 +70,11 @@ namespace Podcast
                 string podUpdateFrequency = cmbUpdate.Text;
                 string[] words = podUpdateFrequency.Split(' ');
                 int minutes = int.Parse(words[0]);
+                
+
                 feed.AddFeed(podName, podUrl, minutes, podCat);
-                feed.LoadXml("fList");
+         //       feed.LoadXml("fList");
+              //  LvList = feed.ToListViewItem();
                 UpdateFeeds();
             }
 
@@ -84,14 +92,14 @@ namespace Podcast
             }
         }
 
-    /*    private async Task EpisodeUpdater(string url, int interval)
-        {
-            var taskA = feed.EpisodeUpdater(url, interval).ContinueWith(() =>
-           {
+        //private async Task EpisodeUpdater(string url, int interval)
+        //{
+        //    var taskA = feed.EpisodeUpdater(url, interval).ContinueWith(() =>
+        //    {
 
-            });
+        //    });
             
-        } */
+        //}
 
         private void UpdateFeeds(List<ListViewItem> lizt)
         {
@@ -201,9 +209,8 @@ namespace Podcast
 
         private void btnDeleteCategory_Click(object sender, EventArgs e)
         {
-            string selectedCat = cmbCategories.SelectedItem.ToString();
 
-            if (selectedCat is null)
+            if (Validation.inputIsNotNull(cmbCategories.SelectedItem.ToString()))
             {
 
                 category.DeleteCategory(cmbCategories.SelectedItem.ToString());
@@ -260,7 +267,7 @@ namespace Podcast
 
             if (lvCategory.SelectedItems.Count > 0)
             {
-                // List<ListViewItem> LvList = new List<ListViewItem>();
+                List<ListViewItem> LvList = new List<ListViewItem>();
                 FilteredLvList.Clear();
                 string chosenCat = lvCategory.SelectedItems[0].Text;
                 var list = LvList;
