@@ -27,14 +27,13 @@ namespace Podcast.Business_logic_layer
         public string FeedUrl { get; set; }
         public string Category { get; set; }
         public int UpdateFrequency { get; set; }
-        public List<SyndicationItem> Episodes { get; set; }
 
-        public void AddFeed(string name, string url, int updateFreq, string category, List<SyndicationItem> feedEpisodes)
+        public void AddFeed(string name, string url, int updateFreq, string category)
         {
             var newFeed = new Feed { Title = name, FeedUrl = url, UpdateFrequency = updateFreq,
-                Category = category, Episodes = feedEpisodes  };
+                Category = category};
             FeedList.Add(newFeed);
-      //      serializer.SerializeXml(FeedList, "fList");
+            serializer.SerializeXml(FeedList, "fList");
             
         }
 
@@ -54,7 +53,7 @@ namespace Podcast.Business_logic_layer
         {
             if (Validation.XmlExists("fList"))
             {
-           //     FeedList = serializer.GetListFromXml<List<Feed>>(fileName);
+                FeedList = serializer.GetListFromXml<List<Feed>>(fileName);
             }
         }
 
@@ -63,10 +62,7 @@ namespace Podcast.Business_logic_layer
             return FeedList;
         }
 
-        public List<SyndicationItem> GetEpisodes()
-        {
-            return Episodes;
-        }
+      
         protected virtual List<string> PrepareListViewItem()
         {       var list = FeedList;
 
@@ -83,25 +79,8 @@ namespace Podcast.Business_logic_layer
             return new ListViewItem(PrepareListViewItem().ToArray());
         }
 
-    /*    public List<ListViewItem> ToListViewItem()
-        {
-            var list = FeedList;
-            var lvList = new List<ListViewItem>();
-            foreach (var feed in list)
-            {
-                string[] row =
-                {
-                    feed.Title,
-                    feed.UpdateFrequency.ToString() + "Minutes",
-                    feed.Category
-                };
-                ListViewItem item = new ListViewItem(row);
-                lvList.Add(item);
-            }
-            return lvList;
-        } */
 
-        public async Task EpisodeUpdater(string url, int interval)
+     /*   public async Task EpisodeUpdater(string url, int interval)
         {
             Episodes.Clear();
             var intervalTime = Convert.ToDouble(interval);
@@ -119,7 +98,7 @@ namespace Podcast.Business_logic_layer
                 });
                 await Task.Delay(TimeSpan.FromMinutes(intervalTime));
             }
-        }
+        } */
         
 
 

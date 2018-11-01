@@ -19,7 +19,7 @@ namespace Podcast.Business_logic_layer
             if (!Regex.IsMatch(input, @"^[a-zA-Z]+$"))
 
             {
-                MessageBox.Show("Felaktig inmatning \n" + "Var vänlig använd endast bokstäver ");
+                MessageBox.Show("Illegal input \n" + "Please type in letters between a-z");
 
                 return false;
             }
