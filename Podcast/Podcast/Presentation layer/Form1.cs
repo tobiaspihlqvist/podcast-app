@@ -41,16 +41,16 @@ namespace Podcast
             //lvDescription.View = View.Details;
             lvEpisodes.HeaderStyle = ColumnHeaderStyle.None;
             //lvDescription.HeaderStyle = ColumnHeaderStyle.None;
-            categories = category.GetList();
-            category.AddInitialCategories();
+            //categories = category.GetList();
+            //category.AddInitialCategories();
             UpdateList();
             FillCategoryComboBox();
-            feed.LoadXml("fList");
+            //feed.LoadXml("fList");
             LvList = feed.PrepareListView();
-            UpdateFeeds(LvList);
+            UpdateFeeds();
             FillPodCombobox();
             fillCmbUpdate();
-            category.LoadXml("CList"); //hmmm
+            //category.LoadXml("CList"); //hmmm
         }
 
 
@@ -71,14 +71,27 @@ namespace Podcast
                 feed.AddFeed(podName, podUrl, minutes, podCat);
                 feed.LoadXml("fList");
                 LvList = feed.PrepareListView();
-                UpdateFeeds(LvList);
+                UpdateFeeds();
             }
 
 
         }
 
+        private void UpdateFeeds()
+        {
+            feed.LoadXml("fList");
+            LvList = feed.PrepareListView();
+            lvFeed.Items.Clear();
+
+            foreach (var lvItem in LvList)
+            {
+                lvFeed.Items.Add(lvItem);
+            }
+        }
+
         private void UpdateFeeds(List<ListViewItem> lizt)
         {
+            
             lvFeed.Items.Clear();
 
             foreach (var lvItem in lizt)
@@ -107,10 +120,10 @@ namespace Podcast
         private void UpdateList()
         {
             category.LoadXml("CList");
-            var list = category.GetList();
+            categories = category.GetList();
             lvCategory.Items.Clear();
 
-            foreach (var item in list)
+            foreach (var item in categories)
             {
                 lvCategory.Items.Add(
                     item.ToListViewItem()
