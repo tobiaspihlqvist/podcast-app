@@ -45,7 +45,7 @@ namespace Podcast.Business_logic_layer
 
         public void LoadXml(string fileName) // ska flyttas till validation eller till serializer
         {
-            if (File.Exists(fileName+".xml"))
+            if (Validation.XmlExists("fList"))
             {
                 FeedList = serializer.GetListFromXml<List<Feed>>(fileName);
             }

@@ -23,6 +23,10 @@ namespace Podcast.Business_logic_layer
             {
                 categories = serializer.GetListFromXml<List<Category>>(fileName);
             }
+            else
+            {
+                AddInitialCategories();
+            }
         } 
 
         public void AddInitialCategories()

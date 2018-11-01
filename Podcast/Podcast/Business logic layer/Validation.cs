@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -71,6 +72,18 @@ namespace Podcast.Business_logic_layer
             else
             {
                 return true;
+            }
+        }
+
+        static public bool XmlExists(string input)
+        {
+            if(File.Exists(input + ".xml"))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

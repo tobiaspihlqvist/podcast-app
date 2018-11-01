@@ -41,16 +41,16 @@ namespace Podcast
             //lvDescription.View = View.Details;
             lvEpisodes.HeaderStyle = ColumnHeaderStyle.None;
             //lvDescription.HeaderStyle = ColumnHeaderStyle.None;
-            categories = category.GetList();
-            category.AddInitialCategories();
-            feed.LoadXml("fList");
-            category.LoadXml("CList");
+            //categories = category.GetList();
+            //category.AddInitialCategories();
             UpdateList();
             FillCategoryComboBox();
+            //feed.LoadXml("fList");
             LvList = feed.PrepareListView();
-            UpdateFeeds(LvList);
+            UpdateFeeds();
             FillPodCombobox();
             fillCmbUpdate();
+            //category.LoadXml("CList"); //hmmm
         }
 
 
@@ -71,14 +71,27 @@ namespace Podcast
                 feed.AddFeed(podName, podUrl, minutes, podCat);
                 feed.LoadXml("fList");
                 LvList = feed.PrepareListView();
-                UpdateFeeds(LvList);
+                UpdateFeeds();
             }
 
 
         }
 
+        private void UpdateFeeds()
+        {
+            feed.LoadXml("fList");
+            LvList = feed.PrepareListView();
+            lvFeed.Items.Clear();
+
+            foreach (var lvItem in LvList)
+            {
+                lvFeed.Items.Add(lvItem);
+            }
+        }
+
         private void UpdateFeeds(List<ListViewItem> lizt)
         {
+            
             lvFeed.Items.Clear();
 
             foreach (var lvItem in lizt)
@@ -95,11 +108,10 @@ namespace Podcast
             foreach (var item in categories)
             {
                 cmbCategories.Items.Add(item.Name);
-                cmbFeedCategory.Items.Add(item.Name);                
+                cmbFeedCategory.Items.Add(item.Name);
             }
-
-
-
+            cmbFeedCategory.SelectedIndex = 0;
+            cmbCategories.SelectedIndex = 0;
         } //finns det något sätt att göra den här mer generell??
 
 
@@ -108,10 +120,10 @@ namespace Podcast
         private void UpdateList()
         {
             category.LoadXml("CList");
-            var list = category.GetList();
+            categories = category.GetList();
             lvCategory.Items.Clear();
 
-            foreach (var item in list)
+            foreach (var item in categories)
             {
                 lvCategory.Items.Add(
                     item.ToListViewItem()
@@ -128,8 +140,7 @@ namespace Podcast
                 cmbPodcast.Items.Add(feed.Title);
                 if (cmbPodcast.Items.Count >= 0)
                 {
-                    cmbPodcast.SelectedIndex = 0; // ´kastar exception om man tar bort alla feeds, likadant med kategorier i och med att boxen
-                                                    //blir tom
+                    cmbPodcast.SelectedIndex = 0;
                 }
             }
         }
@@ -165,6 +176,7 @@ namespace Podcast
                 category.AddCategory(inputName);
 
                 txtInputCategory.Clear();
+                
 
                 UpdateList();
                 FillCategoryComboBox(); // för att lägga till nya värdet
@@ -175,6 +187,7 @@ namespace Podcast
         {
             string chosenCat = cmbCategories.SelectedItem.ToString();
             string inputName = txtInputCategory.Text;
+
             if (Validation.CatIsSame(chosenCat, inputName))
             {
                 category.UpdateCategory(chosenCat, inputName);
@@ -310,15 +323,15 @@ namespace Podcast
                                 Episodes.Add(si);
                             }
 
-                    });
-                    await Task.Delay(TimeSpan.FromMinutes(time));
-                }
-            }
-            catch(FormatException e)
-            {
-                MessageBox.Show(e.Message);
-            }
-        } */
+        //                });
+        //                await Task.Delay(TimeSpan.FromMinutes(time));
+        //            }
+        //        }
+        //        catch(FormatException e)
+        //        {
+        //            MessageBox.Show(e.Message);
+        //        }
+        //    }
 
         }
     }
