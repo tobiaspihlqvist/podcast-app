@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.ServiceModel.Syndication;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
 using Podcast.Data_Access_Layer;
 
 namespace Podcast.Business_logic_layer
@@ -13,9 +15,10 @@ namespace Podcast.Business_logic_layer
     {
         Serializer serializer = new Serializer();
 
-         List<Feed> FeedList = new List<Feed>();
+        List<Feed> FeedList = new List<Feed>();
 
         List<ListViewItem> LvList = new List<ListViewItem>();
+        
 
         
         
@@ -24,11 +27,12 @@ namespace Podcast.Business_logic_layer
         public string FeedUrl { get; set; }
         public string Category { get; set; }
         public int UpdateFrequency { get; set; }
+        public List<SyndicationItem> Episodes { get; set; }
 
-
-        public void AddFeed(string name, string url, int updateFreq, string category)
+        public void AddFeed(string name, string url, int updateFreq, string category, List<SyndicationItem> feedEpisodes)
         {
-            var newFeed = new Feed { Title = name, FeedUrl = url, UpdateFrequency = updateFreq, Category = category };
+            var newFeed = new Feed { Title = name, FeedUrl = url, UpdateFrequency = updateFreq,
+                Category = category, Episodes = feedEpisodes  };
             FeedList.Add(newFeed);
             serializer.SerializeXml(FeedList, "fList");
             
@@ -56,6 +60,11 @@ namespace Podcast.Business_logic_layer
             return FeedList;
         }
 
+        public List<SyndicationItem> GetEpisodes()
+        {
+            return Episodes;
+        }
+
         public List<ListViewItem> PrepareListView()
         {
             var list = FeedList;
@@ -74,12 +83,27 @@ namespace Podcast.Business_logic_layer
             return lvList;
         }
 
-
-        public string GetRssLink(string title)
+        public async Task EpisodeUpdater(string url, int interval)
         {
-            Feed selectedFeed = FeedList.Find((f) => f.Title == title);
-            string url = selectedFeed.FeedUrl;
-            return url;
+            Episodes.Clear();
+            var intervalTime = Convert.ToDouble(interval);
+            while (true)
+            {
+                await Task.Run(() =>
+                {
+                    XmlReader reader = XmlReader.Create(url);
+                    SyndicationFeed sFeed = SyndicationFeed.Load(reader);
+                    foreach (SyndicationItem si in sFeed.Items)
+                    {
+                        Episodes.Add(si);
+                    }
+
+                });
+                await Task.Delay(TimeSpan.FromMinutes(intervalTime));
+            }
         }
+        
+
+
     }
 }

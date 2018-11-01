@@ -67,8 +67,9 @@ namespace Podcast
                 string podUpdateFrequency = cmbUpdate.Text;
                 string[] words = podUpdateFrequency.Split(' ');
                 int minutes = int.Parse(words[0]);
+                List<SyndicationItem> podEpisodes = new List<SyndicationItem>();
 
-                feed.AddFeed(podName, podUrl, minutes, podCat);
+                feed.AddFeed(podName, podUrl, minutes, podCat, podEpisodes);
                 feed.LoadXml("fList");
                 LvList = feed.PrepareListView();
                 UpdateFeeds();
@@ -88,6 +89,15 @@ namespace Podcast
                 lvFeed.Items.Add(lvItem);
             }
         }
+
+        //private async Task EpisodeUpdater(string url, int interval)
+        //{
+        //    var taskA = feed.EpisodeUpdater(url, interval).ContinueWith(() =>
+        //    {
+
+        //    });
+            
+        //}
 
         private void UpdateFeeds(List<ListViewItem> lizt)
         {
