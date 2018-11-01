@@ -43,10 +43,10 @@ namespace Podcast
             //lvDescription.HeaderStyle = ColumnHeaderStyle.None;
             categories = category.GetList();
             category.AddInitialCategories();
-     //       category.LoadXml("CList"); //hmmm
+            feed.LoadXml("fList");
+            category.LoadXml("CList");
             UpdateList();
             FillCategoryComboBox();
-            feed.LoadXml("fList");
             LvList = feed.PrepareListView();
             UpdateFeeds(LvList);
             FillPodCombobox();
@@ -290,25 +290,25 @@ namespace Podcast
             cmbUpdate.Items.Add("10");
             cmbUpdate.Items.Add("20");
         }
-        //    public async Task GenerateEpisodez(string url, double interval)
+        /*    public async Task GenerateEpisodez(string url, double interval)
 
-        //    {
-        //        var intervalTime = cmbUpdate.SelectedItem.ToString();
+            {
+                var intervalTime = cmbUpdate.SelectedItem.ToString();
 
-        //        try {
-        //            double.TryParse(intervalTime, out double time);
+                try {
+                    double.TryParse(intervalTime, out double time);
 
-        //            while (true)
-        //            {
-        //                var taskA = Task.Run(() =>
-        //                {
-        //                    XmlReader reader = XmlReader.Create(url);
-        //                    SyndicationFeed sFeed = SyndicationFeed.Load(reader);
-        //                    Episodes.Clear();
-        //                    foreach (SyndicationItem si in Episodes)
-        //                    {
-        //                        Episodes.Add(si);
-        //                    }
+                    while (true)
+                    {
+                        var taskA = Task.Run(() =>
+                        {
+        
+        
+                            Episodes.Clear();
+                            foreach (SyndicationItem si in Episodes)
+                            {
+                                Episodes.Add(si);
+                            }
 
                     });
                     await Task.Delay(TimeSpan.FromMinutes(time));
@@ -320,9 +320,9 @@ namespace Podcast
             }
         } */
 
-        //}
+        }
     }
-}
+
     
 
 
