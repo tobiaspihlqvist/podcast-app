@@ -11,7 +11,7 @@ using Podcast.Data_Access_Layer;
 
 namespace Podcast.Business_logic_layer
 {
-    public class Feed
+    public class Feed: IListable
     {
         Serializer serializer = new Serializer();
 
@@ -38,11 +38,14 @@ namespace Podcast.Business_logic_layer
             
         }
 
+
         public void DeleteFeed(string chosenFeed)
         {
-            var feedToRemove = FeedList.Single(f => f.Title == chosenFeed);
- 
-                FeedList.Remove(feedToRemove);
+           // var feedToRemove = FeedList.Single(f => f.Title == chosenFeed);
+        //   var feedToRemove = FeedList.Where( a => a.Title == chosenFeed);
+            FeedList.Remove(FeedList.Find(P => P.Title == chosenFeed));
+
+         //   FeedList.Remove(feedToRemove);
 
         }
         
@@ -51,7 +54,7 @@ namespace Podcast.Business_logic_layer
         {
             if (Validation.XmlExists("fList"))
             {
-                FeedList = serializer.GetListFromXml<List<Feed>>(fileName);
+           //     FeedList = serializer.GetListFromXml<List<Feed>>(fileName);
             }
         }
 
@@ -65,7 +68,7 @@ namespace Podcast.Business_logic_layer
             return Episodes;
         }
 
-        public List<ListViewItem> PrepareListView()
+        public List<ListViewItem> ToListViewItem()
         {
             var list = FeedList;
             var lvList = new List<ListViewItem>();

@@ -44,12 +44,15 @@ namespace Podcast
             //categories = category.GetList();
             //category.AddInitialCategories();
             UpdateList();
-            FillCategoryComboBox();
             //feed.LoadXml("fList");
-            LvList = feed.PrepareListView();
-            UpdateFeeds();
-            FillPodCombobox();
+            LvList = feed.ToListViewItem();
             fillCmbUpdate();
+            UpdateFeeds();
+            FillCategoryComboBox();
+            FillPodCombobox();
+
+
+
             //category.LoadXml("CList"); //hmmm
         }
 
@@ -71,7 +74,7 @@ namespace Podcast
 
                 feed.AddFeed(podName, podUrl, minutes, podCat, podEpisodes);
                 feed.LoadXml("fList");
-                LvList = feed.PrepareListView();
+                LvList = feed.ToListViewItem();
                 UpdateFeeds();
             }
 
@@ -81,7 +84,7 @@ namespace Podcast
         private void UpdateFeeds()
         {
             feed.LoadXml("fList");
-            LvList = feed.PrepareListView();
+            LvList = feed.ToListViewItem();
             lvFeed.Items.Clear();
 
             foreach (var lvItem in LvList)
@@ -298,7 +301,10 @@ namespace Podcast
             string delete = cmbPodcast.SelectedItem.ToString();
 
             feed.DeleteFeed(delete);
+            UpdateFeeds();
         }
+
+        
 
 
         // Allt för UpdateFrequency

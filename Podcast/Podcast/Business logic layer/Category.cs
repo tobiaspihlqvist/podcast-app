@@ -21,7 +21,7 @@ namespace Podcast.Business_logic_layer
         {
             if (File.Exists(fileName + ".xml"))
             {
-                categories = serializer.GetListFromXml<List<Category>>(fileName);
+         //       categories = serializer.GetListFromXml<List<Category>>(fileName);
             }
             else
             {
