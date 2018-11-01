@@ -9,7 +9,7 @@ namespace Podcast.Business_logic_layer
 {
    public interface IListable
     {
-         List <ListViewItem> ToListViewItem();
+        ListViewItem ToListViewItem();
 
     }
 }

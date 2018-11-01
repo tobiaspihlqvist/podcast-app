@@ -34,7 +34,7 @@ namespace Podcast.Business_logic_layer
             var newFeed = new Feed { Title = name, FeedUrl = url, UpdateFrequency = updateFreq,
                 Category = category, Episodes = feedEpisodes  };
             FeedList.Add(newFeed);
-            serializer.SerializeXml(FeedList, "fList");
+      //      serializer.SerializeXml(FeedList, "fList");
             
         }
 
@@ -67,8 +67,23 @@ namespace Podcast.Business_logic_layer
         {
             return Episodes;
         }
+        protected virtual List<string> PrepareListViewItem()
+        {       var list = FeedList;
 
-        public List<ListViewItem> ToListViewItem()
+            return new List<string>
+                {
+                    Title,
+                    UpdateFrequency.ToString() + "Minutes",
+                    Category
+                };
+            }
+
+        public virtual ListViewItem ToListViewItem()
+        {
+            return new ListViewItem(PrepareListViewItem().ToArray());
+        }
+
+    /*    public List<ListViewItem> ToListViewItem()
         {
             var list = FeedList;
             var lvList = new List<ListViewItem>();
@@ -84,7 +99,7 @@ namespace Podcast.Business_logic_layer
                 lvList.Add(item);
             }
             return lvList;
-        }
+        } */
 
         public async Task EpisodeUpdater(string url, int interval)
         {

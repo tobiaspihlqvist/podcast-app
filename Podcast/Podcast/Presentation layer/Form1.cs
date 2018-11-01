@@ -45,7 +45,7 @@ namespace Podcast
             //category.AddInitialCategories();
             UpdateList();
             //feed.LoadXml("fList");
-            LvList = feed.ToListViewItem();
+       //     LvList = feed.ToListViewItem();
             fillCmbUpdate();
             UpdateFeeds();
             FillCategoryComboBox();
@@ -73,8 +73,8 @@ namespace Podcast
                 List<SyndicationItem> podEpisodes = new List<SyndicationItem>();
 
                 feed.AddFeed(podName, podUrl, minutes, podCat, podEpisodes);
-                feed.LoadXml("fList");
-                LvList = feed.ToListViewItem();
+         //       feed.LoadXml("fList");
+              //  LvList = feed.ToListViewItem();
                 UpdateFeeds();
             }
 
@@ -84,12 +84,11 @@ namespace Podcast
         private void UpdateFeeds()
         {
             feed.LoadXml("fList");
-            LvList = feed.ToListViewItem();
             lvFeed.Items.Clear();
 
-            foreach (var lvItem in LvList)
+            foreach (var item in feed.GetList())
             {
-                lvFeed.Items.Add(lvItem);
+                lvFeed.Items.Add(item.ToListViewItem());
             }
         }
 
