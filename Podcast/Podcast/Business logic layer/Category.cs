@@ -27,7 +27,7 @@ namespace Podcast.Business_logic_layer
             {
                 AddInitialCategories();
             }
-        } 
+        }
 
         public void AddInitialCategories()
         {

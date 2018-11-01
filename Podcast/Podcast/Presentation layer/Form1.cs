@@ -110,8 +110,7 @@ namespace Podcast
                 cmbCategories.Items.Add(item.Name);
                 cmbFeedCategory.Items.Add(item.Name);
             }
-            cmbFeedCategory.SelectedIndex = 0;
-            cmbCategories.SelectedIndex = 0;
+           
         } //finns det något sätt att göra den här mer generell??
 
 
@@ -176,8 +175,6 @@ namespace Podcast
                 category.AddCategory(inputName);
 
                 txtInputCategory.Clear();
-                
-
                 UpdateList();
                 FillCategoryComboBox(); // för att lägga till nya värdet
             }
@@ -323,15 +320,15 @@ namespace Podcast
                                 Episodes.Add(si);
                             }
 
-        //                });
-        //                await Task.Delay(TimeSpan.FromMinutes(time));
-        //            }
-        //        }
-        //        catch(FormatException e)
-        //        {
-        //            MessageBox.Show(e.Message);
-        //        }
-        //    }
+                        });
+                        await Task.Delay(TimeSpan.FromMinutes(time));
+                    }
+                }
+                catch(FormatException e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+            } */
 
         }
     }
