@@ -43,6 +43,8 @@ namespace Podcast.Business_logic_layer
         {
             
             FeedList.Remove(FeedList.Find(P => P.Title == chosenFeed));
+            serializer.SerializeXml(FeedList, "fList");
+
         }
         
 
