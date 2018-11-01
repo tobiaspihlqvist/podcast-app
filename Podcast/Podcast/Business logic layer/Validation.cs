@@ -29,7 +29,18 @@ namespace Podcast.Business_logic_layer
                 return true;
             }
         }
-        
+        static public bool inputIsNotNull(string input)
+        {
+            try {
+                var inputToCompare = "";
+                inputToCompare = input;
+                return true;
+            }
+            catch (NullReferenceException) {
+                MessageBox.Show("kuk");
+                return false;
+        }
+        }
 
         static public bool CatIsSame(string input, string comparison) // används i btnChangeCat
         {

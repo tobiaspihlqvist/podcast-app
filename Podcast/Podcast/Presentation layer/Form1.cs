@@ -209,10 +209,14 @@ namespace Podcast
 
         private void btnDeleteCategory_Click(object sender, EventArgs e)
         {
-            string chosenCat = cmbCategories.SelectedItem.ToString();
-            category.DeleteCategory(chosenCat);
-            UpdateList();
-            FillCategoryComboBox();
+
+            if (Validation.inputIsNotNull(cmbCategories.SelectedItem.ToString()))
+            {
+
+                category.DeleteCategory(cmbCategories.SelectedItem.ToString());
+                UpdateList();
+                FillCategoryComboBox();
+            };
         }
 
         private void lvFeed_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -299,16 +303,18 @@ namespace Podcast
         {
             string delete = cmbPodcast.SelectedItem.ToString();
 
-            feed.DeleteFeed(delete);
-            UpdateFeeds();
+            if (Validation.inputIsNotNull(delete)){
+                feed.DeleteFeed(delete);
+                UpdateFeeds();
+            }
         }
 
-        
 
 
-        // Allt för UpdateFrequency
 
-        private void fillCmbUpdate()
+            // Allt för UpdateFrequency
+
+            private void fillCmbUpdate()
         {
             cmbUpdate.Items.Add("2");
             cmbUpdate.Items.Add("5");
