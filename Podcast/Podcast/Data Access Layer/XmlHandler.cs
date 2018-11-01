@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.ServiceModel.Syndication;
+using System.Windows.Forms;
 
 namespace Podcast.Data_Access_Layer
 {
@@ -14,12 +15,19 @@ namespace Podcast.Data_Access_Layer
 
         public void GenerateEpisodes (string url)
         {
-            XmlReader reader = XmlReader.Create(url);
-            SyndicationFeed sFeed = SyndicationFeed.Load(reader);
-            Episodes.Clear();
-            foreach(SyndicationItem si in sFeed.Items)
+            try
             {
-                Episodes.Add(si);
+                XmlReader reader = XmlReader.Create(url);
+                SyndicationFeed sFeed = SyndicationFeed.Load(reader);
+                Episodes.Clear();
+                foreach (SyndicationItem si in sFeed.Items)
+                {
+                    Episodes.Add(si);
+                }
+            }
+            catch(Exception e)
+            {
+                MessageBox.Show(e.ToString());
             }
         }
         

@@ -30,7 +30,9 @@ namespace Podcast.Business_logic_layer
         } 
 
         public void AddInitialCategories()
-        {   
+        {
+            serializer.SerializeXml(categories, "CList");
+
             categories.Add(new Category
             {
                 Name = "business"
@@ -39,17 +41,17 @@ namespace Podcast.Business_logic_layer
             {
                 Name = "Lifestyle"
             });
-            serializer.SerializeXml(categories, "CList");
         }
 
         public void AddCategory(string input)
-        {   
+        {
+            serializer.SerializeXml(categories, "CList");
+
             Category newCat = new Category
             {
                 Name = input
             };
             categories.Add(newCat);
-            serializer.SerializeXml(categories, "CList");
 
         }
         public List<Category> GetList()
