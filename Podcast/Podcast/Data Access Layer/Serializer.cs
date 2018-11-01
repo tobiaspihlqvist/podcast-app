@@ -12,7 +12,7 @@ namespace Podcast.Data_Access_Layer
     public class Serializer
     {
 
-    /*    public void SerializeXml<T>(T obj, string fileName)
+        public void SerializeXml<T>(T obj, string fileName)
         {
             
 
@@ -23,7 +23,7 @@ namespace Podcast.Data_Access_Layer
             }
         }
 
-     /*   public T GetListFromXml<T>(string fileName) //deserilaize ska döpas om
+        public T GetListFromXml<T>(string fileName) //deserilaize ska döpas om
         {
             T deserializedList;    
                 var serializer = new XmlSerializer(typeof(T));
@@ -35,7 +35,7 @@ namespace Podcast.Data_Access_Layer
             
                 return deserializedList;
             
-        } */ 
+        }  
 
         
         

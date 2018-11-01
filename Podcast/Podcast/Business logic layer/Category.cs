@@ -21,7 +21,7 @@ namespace Podcast.Business_logic_layer
         {
             if (File.Exists(fileName + ".xml"))
             {
-         //       categories = serializer.GetListFromXml<List<Category>>(fileName);
+                categories = serializer.GetListFromXml<List<Category>>(fileName);
             }
             else
             {
@@ -31,11 +31,11 @@ namespace Podcast.Business_logic_layer
 
         public void AddInitialCategories()
         {
-      //      serializer.SerializeXml(categories, "CList");
+      
 
             categories.Add(new Category
             {
-                Name = "business"
+                Name = "Business"
             });
             categories.Add(new Category
             {
@@ -45,13 +45,14 @@ namespace Podcast.Business_logic_layer
 
         public void AddCategory(string input)
         {
-     //       serializer.SerializeXml(categories, "CList");
+            
 
             Category newCat = new Category
             {
                 Name = input
             };
             categories.Add(newCat);
+            serializer.SerializeXml(categories, "CList");
 
         }
         public List<Category> GetList()

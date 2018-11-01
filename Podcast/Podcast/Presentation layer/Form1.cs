@@ -41,7 +41,7 @@ namespace Podcast
             //lvDescription.View = View.Details;
             lvEpisodes.HeaderStyle = ColumnHeaderStyle.None;
             //lvDescription.HeaderStyle = ColumnHeaderStyle.None;
-            //categories = category.GetList();
+            categories = category.GetList();
             //category.AddInitialCategories();
             UpdateList();
             //feed.LoadXml("fList");
@@ -70,9 +70,9 @@ namespace Podcast
                 string podUpdateFrequency = cmbUpdate.Text;
                 string[] words = podUpdateFrequency.Split(' ');
                 int minutes = int.Parse(words[0]);
-                List<SyndicationItem> podEpisodes = new List<SyndicationItem>();
+                
 
-                feed.AddFeed(podName, podUrl, minutes, podCat, podEpisodes);
+                feed.AddFeed(podName, podUrl, minutes, podCat);
          //       feed.LoadXml("fList");
               //  LvList = feed.ToListViewItem();
                 UpdateFeeds();
@@ -267,7 +267,7 @@ namespace Podcast
 
             if (lvCategory.SelectedItems.Count > 0)
             {
-                // List<ListViewItem> LvList = new List<ListViewItem>();
+                List<ListViewItem> LvList = new List<ListViewItem>();
                 FilteredLvList.Clear();
                 string chosenCat = lvCategory.SelectedItems[0].Text;
                 var list = LvList;
