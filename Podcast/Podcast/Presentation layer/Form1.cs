@@ -37,12 +37,10 @@ namespace Podcast
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            lvEpisodes.View = View.Details;
-            //lvDescription.View = View.Details;
-            lvEpisodes.HeaderStyle = ColumnHeaderStyle.None;
-            //lvDescription.HeaderStyle = ColumnHeaderStyle.None;
+            
+            
             categories = category.GetList();
-            //category.AddInitialCategories();
+           category.AddInitialCategories();
             UpdateList();
             //feed.LoadXml("fList");
        //     LvList = feed.ToListViewItem();
@@ -73,14 +71,14 @@ namespace Podcast
                 
 
                 feed.AddFeed(podName, podUrl, minutes, podCat);
-         //       feed.LoadXml("fList");
+                feed.LoadXml("fList");
               //  LvList = feed.ToListViewItem();
                 UpdateFeeds();
             }
 
 
         }
-
+        
         private void UpdateFeeds()
         {
             feed.LoadXml("fList");
@@ -222,20 +220,29 @@ namespace Podcast
 
             if (lvFeed.SelectedItems.Count > 0)
             {
+                
                 string selectedItem = lvFeed.SelectedItems[0].Text;
                 var matchingFeed = feed.GetList().Find((f) => f.Title == selectedItem);
                 SelectedFeed = matchingFeed.FeedUrl;
-
-
-                ep.SetEpisodes(SelectedFeed);
-                var list = ep.GetEpisodes();
-
-                foreach (SyndicationItem si in list)
-                {
-                    lvEpisodes.Items.Add(si.Title.Text);
-                    lvEpisodes.Items.Add("--------------");
-                }
+                int tid = matchingFeed.UpdateFrequency;
+                
+                
+                GenerateEpisodes(SelectedFeed, tid);
             }
+        }
+
+        private void GenerateEpisodes(string url, int inteTid)
+        {
+            lvEpisodes.Items.Clear();
+            ep.hora(SelectedFeed, inteTid);
+            var list = ep.GetEpisodes();
+
+            foreach (SyndicationItem si in list)
+            {
+                lvEpisodes.Items.Add(si.Title.Text);
+                lvEpisodes.Items.Add("\n");
+            }
+
         }
 
         private void lvEpisodes_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -301,10 +308,10 @@ namespace Podcast
         {
             string delete = cmbPodcast.SelectedItem.ToString();
 
-            if (Validation.inputIsNotNull(delete)){
+            
                 feed.DeleteFeed(delete);
                 UpdateFeeds();
-            }
+            
         }
 
 
@@ -349,8 +356,8 @@ namespace Podcast
                 }
             } */
 
-        }
     }
+}
 
     
 

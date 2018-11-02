@@ -10,7 +10,7 @@ using Podcast.Data_Access_Layer;
 
 namespace Podcast.Business_logic_layer
 {
-    
+
     public class Episode
     {
         XmlHandler handler = new XmlHandler();
@@ -21,11 +21,30 @@ namespace Podcast.Business_logic_layer
             return PodEpisodes;
         }
 
-        public void SetEpisodes(string feedUrl)
+        public async Task hora(string url, int tid)
         {
-            handler.GenerateEpisodes(feedUrl);
-            PodEpisodes = handler.GetEpisodes();
+            string kuk = url;
+            double intervalTime = Convert.ToDouble(tid);
+            while (true)
+            {
+                await Task.Run(() =>
+                {
+
+                    SetEpisodes(kuk);
+
+                });
+                await Task.Delay(TimeSpan.FromMinutes(intervalTime));
+            }
+
         }
 
+        
+
+        public void SetEpisodes(string feedUrl)
+        {
+              handler.GenerateEpisodes(feedUrl);
+              PodEpisodes = handler.GetEpisodes();
+                 
+        }
     }
 }

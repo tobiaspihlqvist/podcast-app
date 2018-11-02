@@ -118,7 +118,7 @@
             this.lvEpisodes.Size = new System.Drawing.Size(361, 101);
             this.lvEpisodes.TabIndex = 3;
             this.lvEpisodes.UseCompatibleStateImageBehavior = false;
-            this.lvEpisodes.View = System.Windows.Forms.View.List;
+            this.lvEpisodes.View = System.Windows.Forms.View.Details;
             this.lvEpisodes.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvEpisodes_ItemSelectionChanged);
             // 
             // Episodes
