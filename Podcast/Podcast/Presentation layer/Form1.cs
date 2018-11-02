@@ -62,7 +62,7 @@ namespace Podcast
         {
             string podName = tbTitle.Text;
             string podUrl = txtInputURL.Text;
-            if (Validation.PodIsSame(podName, feed) && Validation.UrlIsSame(podUrl, feed))
+            if (Validation.inputIsNotNull(podName) && Validation.inputIsNotNull(podUrl) &&Validation.PodIsSame(podName, feed) && Validation.UrlIsSame(podUrl, feed))
             {
                 string podCat = cmbFeedCategory.SelectedItem.ToString();
                 string podUpdateFrequency = cmbUpdate.Text;
@@ -311,6 +311,8 @@ namespace Podcast
             
                 feed.DeleteFeed(delete);
                 UpdateFeeds();
+                lvEpisodes.Items.Clear();
+            FillPodCombobox();
             
         }
 

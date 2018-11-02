@@ -33,6 +33,7 @@ namespace Podcast.Business_logic_layer
         {
             var newFeed = new Feed { Title = name, FeedUrl = url, UpdateFrequency = updateFreq,
                 Category = category };
+
                 FeedList.Add(newFeed);
                 serializer.SerializeXml(FeedList, "fList");
             

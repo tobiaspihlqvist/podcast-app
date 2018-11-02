@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Podcast.Business_logic_layer
 {
-   public class Validation
+   public static class Validation
     {
        
 
@@ -31,15 +31,15 @@ namespace Podcast.Business_logic_layer
         }
         static public bool inputIsNotNull(string input)
         {
-            try {
-                var inputToCompare = "";
-                inputToCompare = input;
+            if (!String.IsNullOrEmpty(input))
+            {
                 return true;
             }
-            catch (NullReferenceException) {
-                MessageBox.Show("kuk");
+            else
+            {
+                MessageBox.Show("Please insert some text...");
                 return false;
-        }
+            }
         }
 
         static public bool CatIsSame(string input, string comparison) // används i btnChangeCat
