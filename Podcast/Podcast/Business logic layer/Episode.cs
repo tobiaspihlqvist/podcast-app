@@ -11,40 +11,27 @@ using Podcast.Data_Access_Layer;
 namespace Podcast.Business_logic_layer
 {
 
-    public class Episode : Feed
+    public class Episode
     {
         XmlHandler handler = new XmlHandler();
-        
-        private List<Episode> Episodes = new List<Episode>();
-        private string Title { get; set; }
-        private string FeedUrl { get; set; }
-        private int UpdateFrequency { get; set; }
-        private List<SyndicationItem> PodEpisodes { get; set; }
+        public List<SyndicationItem> PodEpisodes = new List<SyndicationItem>();
 
-        public void AddEpisode(string title, string url, int upFreq)
-        {
-            var newEp = new Episode { Title = title, FeedUrl = url, UpdateFrequency = upFreq, PodEpisodes = new List<SyndicationItem>() };
-            Episodes.Add(newEp);
-
-        }
         public List<SyndicationItem> GetEpisodes()
         {
             return PodEpisodes;
         }
 
-        public async Task CheckForEpisodes(string feedUrl, int tid)
+        public async Task hora(string url, int tid)
         {
-            string url = feedUrl;
+            string kuk = url;
             double intervalTime = Convert.ToDouble(tid);
             while (true)
             {
                 Task.Run(() =>
                 {
 
-                    XmlReader reader = XmlReader.Create(url);
-                    SyndicationFeed sFeed = SyndicationFeed.Load(reader);
-
-
+                    SetEpisodes(kuk);
+                    MessageBox.Show("kukjävel");
                 });
                 await Task.Delay(TimeSpan.FromMinutes(intervalTime));
             }

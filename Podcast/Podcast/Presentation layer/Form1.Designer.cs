@@ -82,7 +82,9 @@
             this.lvFeed.TabIndex = 1;
             this.lvFeed.UseCompatibleStateImageBehavior = false;
             this.lvFeed.View = System.Windows.Forms.View.Details;
+            this.lvFeed.ItemActivate += new System.EventHandler(this.lvFeed_ItemActivate);
             this.lvFeed.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvFeed_ItemSelectionChanged);
+            this.lvFeed.Enter += new System.EventHandler(this.lvFeed_Enter);
             // 
             // clName
             // 

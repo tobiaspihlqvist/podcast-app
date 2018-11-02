@@ -218,17 +218,17 @@ namespace Podcast
         private void lvFeed_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
 
-            if (lvFeed.SelectedItems.Count > 0)
-            {
+            //if (lvfeed.selecteditems.count > 0)
+            //{
                 
-                string selectedItem = lvFeed.SelectedItems[0].Text;
-                var matchingFeed = feed.GetList().Find((f) => f.Title == selectedItem);
-                SelectedFeed = matchingFeed.FeedUrl;
-                int tid = matchingFeed.UpdateFrequency;
+            //    string selecteditem = lvfeed.selecteditems[0].text;
+            //    var matchingfeed = feed.getlist().find((f) => f.title == selecteditem);
+            //    selectedfeed = matchingfeed.feedurl;
+            //    int tid = matchingfeed.updatefrequency;
                 
-                
-                GenerateEpisodes(SelectedFeed, tid);
-            }
+             
+            //    generateepisodes(selectedfeed, tid);
+            //}
         }
 
         private void GenerateEpisodes(string url, int inteTid)
@@ -312,7 +312,7 @@ namespace Podcast
                 feed.DeleteFeed(delete);
                 UpdateFeeds();
                 lvEpisodes.Items.Clear();
-            FillPodCombobox();
+                FillPodCombobox();
             
         }
 
@@ -328,35 +328,67 @@ namespace Podcast
             cmbUpdate.Items.Add("10");
             cmbUpdate.Items.Add("20");
         }
+
+        private void lvFeed_Enter(object sender, EventArgs e)
+        {
+            if (lvFeed.SelectedItems.Count > 0)
+            {
+
+                string selectedItem = lvFeed.SelectedItems[0].Text;
+                var matchingFeed = feed.GetList().Find((f) => f.Title == selectedItem);
+                SelectedFeed = matchingFeed.FeedUrl;
+                int tid = matchingFeed.UpdateFrequency;
+
+
+                GenerateEpisodes(SelectedFeed, tid);
+            }
+        }
+
+        private void lvFeed_ItemActivate(object sender, EventArgs e)
+        {
+            if (lvFeed.SelectedItems.Count > 0)
+            {
+
+                string selectedItem = lvFeed.SelectedItems[0].Text;
+                var matchingFeed = feed.GetList().Find((f) => f.Title == selectedItem);
+                SelectedFeed = matchingFeed.FeedUrl;
+                int tid = matchingFeed.UpdateFrequency;
+
+
+                GenerateEpisodes(SelectedFeed, tid);
+            }
+        }
+
+
         /*    public async Task GenerateEpisodez(string url, double interval)
 
-            {
-                var intervalTime = cmbUpdate.SelectedItem.ToString();
+   {
+       var intervalTime = cmbUpdate.SelectedItem.ToString();
 
-                try {
-                    double.TryParse(intervalTime, out double time);
+       try {
+           double.TryParse(intervalTime, out double time);
 
-                    while (true)
-                    {
-                        var taskA = Task.Run(() =>
-                        {
-        
-        
-                            Episodes.Clear();
-                            foreach (SyndicationItem si in Episodes)
-                            {
-                                Episodes.Add(si);
-                            }
+           while (true)
+           {
+               var taskA = Task.Run(() =>
+               {
 
-                        });
-                        await Task.Delay(TimeSpan.FromMinutes(time));
-                    }
-                }
-                catch(FormatException e)
-                {
-                    MessageBox.Show(e.Message);
-                }
-            } */
+
+                   Episodes.Clear();
+                   foreach (SyndicationItem si in Episodes)
+                   {
+                       Episodes.Add(si);
+                   }
+
+               });
+               await Task.Delay(TimeSpan.FromMinutes(time));
+           }
+       }
+       catch(FormatException e)
+       {
+           MessageBox.Show(e.Message);
+       }
+   } */
 
     }
 }

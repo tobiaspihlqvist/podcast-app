@@ -63,7 +63,8 @@ namespace Podcast.Business_logic_layer
         {
             var catToRemove = categories.Single(p => p.Name == input);
                 categories.Remove(catToRemove);
-            serializer.SerializeXml(categories, "CList");
+            serializer.SerializeXml(categories,
+                "CList");
 
         }
 
