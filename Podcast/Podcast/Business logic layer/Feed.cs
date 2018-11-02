@@ -18,8 +18,8 @@ namespace Podcast.Business_logic_layer
         List<Feed> FeedList = new List<Feed>();
 
         List<ListViewItem> LvList = new List<ListViewItem>();
-        
 
+        Episode ep = new Episode();
         
         
          
@@ -53,6 +53,12 @@ namespace Podcast.Business_logic_layer
             if (Validation.XmlExists("fList"))
             {
                 FeedList = serializer.GetListFromXml<List<Feed>>(fileName);
+
+                foreach(Feed f in FeedList)
+                {
+                    ep.AddEpisode(f.Title, f.FeedUrl, f.UpdateFrequency);
+                    ep
+                }
             }
         }
 
