@@ -234,7 +234,7 @@ namespace Podcast
         private void GenerateEpisodes(string url, int inteTid)
         {
             lvEpisodes.Items.Clear();
-            ep.hora(SelectedFeed, inteTid);
+      //      ep.hora(SelectedFeed, inteTid);
             var list = ep.GetEpisodes();
 
             foreach (SyndicationItem si in list)

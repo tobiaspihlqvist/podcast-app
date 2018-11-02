@@ -40,11 +40,11 @@ namespace Podcast.Business_logic_layer
 
         
 
-        public void SetEpisodes(string feedUrl)
-        {
-              handler.GenerateEpisodes(feedUrl);
-              PodEpisodes = handler.GetEpisodes();
+        //public void SetEpisodes(string feedUrl)
+        //{
+        //      handler.GenerateEpisodes(feedUrl);
+        //      PodEpisodes = handler.GetEpisodes();
                  
-        }
-    }
+        //}
+  //  }
 }
