@@ -209,14 +209,12 @@ namespace Podcast
 
         private void btnDeleteCategory_Click(object sender, EventArgs e)
         {
-
-            if (Validation.inputIsNotNull(cmbCategories.SelectedItem.ToString()))
-            {
-
-                category.DeleteCategory(cmbCategories.SelectedItem.ToString());
+            var delete = cmbCategories.SelectedItem.ToString();
+                
+                category.DeleteCategory(delete);
                 UpdateList();
                 FillCategoryComboBox();
-            };
+       
         }
 
         private void lvFeed_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)

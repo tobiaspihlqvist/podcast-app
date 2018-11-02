@@ -37,14 +37,15 @@ namespace Podcast.Business_logic_layer
                 serializer.SerializeXml(FeedList, "fList");
             
         }
-
-
+        
         public void DeleteFeed(string chosenFeed)
         {
             
             FeedList.Remove(FeedList.Find(P => P.Title == chosenFeed));
+            serializer.SerializeXml(FeedList, "fList");
+
         }
-        
+
 
         public void LoadXml(string fileName) // ska flyttas till validation eller till serializer
         {
