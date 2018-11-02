@@ -38,7 +38,22 @@ namespace Podcast.Business_logic_layer
                 serializer.SerializeXml(FeedList, "fList");
             
         }
-        
+        public void UpdateFeed(string name, string url, int updateFreq, string category)
+        {
+            if (Validation.OnlyLetters(name))
+            {
+                FeedList.Where(f => f.Title == name)
+                .Select(f => { f.Title = f.Title.Replace(f.Title, name); return f; })
+                .Select(f => { f.FeedUrl = f.Title.Replace(f.FeedUrl, url); return f; })
+                .Select(f => { f.UpdateFrequency = f.Title.Replace(f.UpdateFrequency, updateFreq); return f; })
+                .Select(f => { f.Title = f.Title.Replace(f.Category, category); return f; })
+
+                .ToList();
+                serializer.SerializeXml(FeedList, "FList");
+
+            }
+        }
+
         public void DeleteFeed(string chosenFeed)
         {
             
@@ -57,7 +72,7 @@ namespace Podcast.Business_logic_layer
                 foreach(Feed f in FeedList)
                 {
                     ep.AddEpisode(f.Title, f.FeedUrl, f.UpdateFrequency);
-                    ep
+    //                ep
                 }
             }
         }

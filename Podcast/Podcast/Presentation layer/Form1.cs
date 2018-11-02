@@ -234,7 +234,7 @@ namespace Podcast
         private void GenerateEpisodes(string url, int inteTid)
         {
             lvEpisodes.Items.Clear();
-            ep.hora(SelectedFeed, inteTid);
+      //      ep.hora(SelectedFeed, inteTid);
             var list = ep.GetEpisodes();
 
             foreach (SyndicationItem si in list)
@@ -328,35 +328,40 @@ namespace Podcast
             cmbUpdate.Items.Add("10");
             cmbUpdate.Items.Add("20");
         }
+
+        private void cmbPodcast_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          var  chosenPod = cmbPodcast.SelectedItem.ToString();
+        }
         /*    public async Task GenerateEpisodez(string url, double interval)
 
-            {
-                var intervalTime = cmbUpdate.SelectedItem.ToString();
+   {
+       var intervalTime = cmbUpdate.SelectedItem.ToString();
 
-                try {
-                    double.TryParse(intervalTime, out double time);
+       try {
+           double.TryParse(intervalTime, out double time);
 
-                    while (true)
-                    {
-                        var taskA = Task.Run(() =>
-                        {
-        
-        
-                            Episodes.Clear();
-                            foreach (SyndicationItem si in Episodes)
-                            {
-                                Episodes.Add(si);
-                            }
+           while (true)
+           {
+               var taskA = Task.Run(() =>
+               {
 
-                        });
-                        await Task.Delay(TimeSpan.FromMinutes(time));
-                    }
-                }
-                catch(FormatException e)
-                {
-                    MessageBox.Show(e.Message);
-                }
-            } */
+
+                   Episodes.Clear();
+                   foreach (SyndicationItem si in Episodes)
+                   {
+                       Episodes.Add(si);
+                   }
+
+               });
+               await Task.Delay(TimeSpan.FromMinutes(time));
+           }
+       }
+       catch(FormatException e)
+       {
+           MessageBox.Show(e.Message);
+       }
+   } */
 
     }
 }

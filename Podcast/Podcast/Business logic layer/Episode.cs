@@ -32,32 +32,32 @@ namespace Podcast.Business_logic_layer
             return PodEpisodes;
         }
 
-        public async Task CheckForEpisodes(string feedUrl, int tid)
-        {
-            string url = feedUrl;
-            double intervalTime = Convert.ToDouble(tid);
-            while (true)
-            {
-                Task.Run(() =>
-                {
+        ////public async Task CheckForEpisodes(string feedUrl, int tid)
+        //{
+        //    string url = feedUrl;
+        //    double intervalTime = Convert.ToDouble(tid);
+        //    while (true)
+        //    {
+        //        Task.Run(() =>
+        //        {
 
-                    XmlReader reader = XmlReader.Create(url);
-                    SyndicationFeed sFeed = SyndicationFeed.Load(reader);
+        //            XmlReader reader = XmlReader.Create(url);
+        //            SyndicationFeed sFeed = SyndicationFeed.Load(reader);
 
 
-                });
-                await Task.Delay(TimeSpan.FromMinutes(intervalTime));
-            }
+        //        });
+        //        await Task.Delay(TimeSpan.FromMinutes(intervalTime));
+        //    }
 
         }
 
         
 
-        public void SetEpisodes(string feedUrl)
-        {
-              handler.GenerateEpisodes(feedUrl);
-              PodEpisodes = handler.GetEpisodes();
+        //public void SetEpisodes(string feedUrl)
+        //{
+        //      handler.GenerateEpisodes(feedUrl);
+        //      PodEpisodes = handler.GetEpisodes();
                  
-        }
-    }
+        //}
+  //  }
 }

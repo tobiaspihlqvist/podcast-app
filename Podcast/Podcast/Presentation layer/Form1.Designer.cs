@@ -1,4 +1,5 @@
-﻿namespace Podcast
+﻿
+namespace Podcast
 {
     partial class Form1
     {
@@ -204,6 +205,7 @@
             this.cmbPodcast.Name = "cmbPodcast";
             this.cmbPodcast.Size = new System.Drawing.Size(101, 21);
             this.cmbPodcast.TabIndex = 13;
+            this.cmbPodcast.SelectedIndexChanged += new System.EventHandler(this.cmbPodcast_SelectedIndexChanged);
             // 
             // lblChangeFeed
             // 
