@@ -62,7 +62,7 @@ namespace Podcast
         {
             string podName = tbTitle.Text;
             string podUrl = txtInputURL.Text;
-            if (Validation.PodIsSame(podName, feed) && Validation.UrlIsSame(podUrl, feed))
+            if (Validation.inputIsNotNull(podName) && Validation.inputIsNotNull(podUrl) &&Validation.PodIsSame(podName, feed) && Validation.UrlIsSame(podUrl, feed))
             {
                 string podCat = cmbFeedCategory.SelectedItem.ToString();
                 string podUpdateFrequency = cmbUpdate.Text;
@@ -207,14 +207,12 @@ namespace Podcast
 
         private void btnDeleteCategory_Click(object sender, EventArgs e)
         {
-
-            if (Validation.inputIsNotNull(cmbCategories.SelectedItem.ToString()))
-            {
-
-                category.DeleteCategory(cmbCategories.SelectedItem.ToString());
+            var delete = cmbCategories.SelectedItem.ToString();
+                
+                category.DeleteCategory(delete);
                 UpdateList();
                 FillCategoryComboBox();
-            };
+       
         }
 
         private void lvFeed_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
@@ -313,6 +311,8 @@ namespace Podcast
             
                 feed.DeleteFeed(delete);
                 UpdateFeeds();
+                lvEpisodes.Items.Clear();
+            FillPodCombobox();
             
         }
 

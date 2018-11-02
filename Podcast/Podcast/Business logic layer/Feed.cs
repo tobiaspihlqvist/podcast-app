@@ -33,12 +33,12 @@ namespace Podcast.Business_logic_layer
         {
             var newFeed = new Feed { Title = name, FeedUrl = url, UpdateFrequency = updateFreq,
                 Category = category };
+
                 FeedList.Add(newFeed);
                 serializer.SerializeXml(FeedList, "fList");
             
         }
-
-
+        
         public void DeleteFeed(string chosenFeed)
         {
             
@@ -46,7 +46,7 @@ namespace Podcast.Business_logic_layer
             serializer.SerializeXml(FeedList, "fList");
 
         }
-        
+
 
         public void LoadXml(string fileName) // ska flyttas till validation eller till serializer
         {

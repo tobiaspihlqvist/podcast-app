@@ -31,7 +31,6 @@ namespace Podcast.Business_logic_layer
 
         public void AddInitialCategories()
         {
-      
 
             categories.Add(new Category
             {
@@ -64,6 +63,8 @@ namespace Podcast.Business_logic_layer
         {
             var catToRemove = categories.Single(p => p.Name == input);
                 categories.Remove(catToRemove);
+            serializer.SerializeXml(categories, "CList");
+
         }
 
 
@@ -75,6 +76,8 @@ namespace Podcast.Business_logic_layer
                 categories.Where(c => c.Name == chosenCat)
                 .Select(c => { c.Name = c.Name.Replace(chosenCat, inputName); return c; })
                 .ToList();
+                serializer.SerializeXml(categories, "CList");
+
             }
         }
          
