@@ -69,7 +69,6 @@ namespace Podcast
                 string[] words = podUpdateFrequency.Split(' ');
                 int minutes = int.Parse(words[0]);
                 
-
                 feed.AddFeed(podName, podUrl, minutes, podCat);
                 feed.LoadXml("fList");
               //  LvList = feed.ToListViewItem();
@@ -358,6 +357,29 @@ namespace Podcast
                 GenerateEpisodes(SelectedFeed, tid);
             }
         }
+
+        private void cmbPodcast_SelectedIndexChanged(object sender, EventArgs e)
+        {
+          var name =  cmbPodcast.SelectedItem.ToString();
+                foreach(var f in feed.GetList())
+            {
+                if(f.Title == name)
+                {
+                    tbTitle.Text = f.Title;
+                    txtInputURL.Text = f.FeedUrl;
+                    
+
+
+                      
+                    UpdateFeeds();
+                    FillPodCombobox();
+                    break;
+                }
+            }
+
+        }
+
+
 
 
         /*    public async Task GenerateEpisodez(string url, double interval)

@@ -36,18 +36,18 @@ namespace Podcast.Business_logic_layer
                 serializer.SerializeXml(FeedList, "fList");
             
         }
-        public void UpdateFeed(string name, string url, int updateFreq, string category)
-        {
+        public void UpdateFeed(string name, string url, string updateFreq, string category)
+        {   
             if (Validation.OnlyLetters(name))
-            {
+            {   
                 FeedList.Where(f => f.Title == name)
                 .Select(f => { f.Title = f.Title.Replace(f.Title, name); return f; })
-                .Select(f => { f.FeedUrl = f.Title.Replace(f.FeedUrl, url); return f; })
-                .Select(f => { f.UpdateFrequency = f.Title.Replace(f.UpdateFrequency, updateFreq); return f; })
-                .Select(f => { f.Title = f.Title.Replace(f.Category, category); return f; })
-
+                .Select(f => { f.FeedUrl = f.FeedUrl.Replace(f.FeedUrl, url); return f; })
+          //      .Select(f => { f.UpdateFrequency = f.UpdateFrequency.Replace(f.UpdateFrequency, updateFreq); return f; })
+                .Select(f => { f.Category = f.Category.Replace(f.Category, category); return f; })
                 .ToList();
                 serializer.SerializeXml(FeedList, "FList");
+                
 
             }
         }
@@ -91,7 +91,7 @@ namespace Podcast.Business_logic_layer
             return new ListViewItem(PrepareListViewItem().ToArray());
         }
 
-        /*      public List<ListViewItem> ToListViewItem()
+       /*      public List<ListViewItem> ToListViewItem()
             {
             var list = FeedList;
             var lvList = new List<ListViewItem>();
@@ -107,7 +107,7 @@ namespace Podcast.Business_logic_layer
                 lvList.Add(item);
             }
             return lvList;
-            } */
+            }  */
 
         //public async Task EpisodeUpdater(string url, int interval)
         //{

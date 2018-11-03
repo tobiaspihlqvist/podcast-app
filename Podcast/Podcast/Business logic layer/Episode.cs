@@ -27,24 +27,24 @@ namespace Podcast.Business_logic_layer
             double intervalTime = Convert.ToDouble(tid);
             while (true)
             {
-                Task.Run(() =>
-                {
-
-                    SetEpisodes(kuk);
-                    MessageBox.Show("kukjävel");
-                });
+                await Task.Run(() =>
+                 {
+                     SetEpisodes(kuk);
+                     MessageBox.Show("kukjävel");
+                 });
                 await Task.Delay(TimeSpan.FromMinutes(intervalTime));
+
             }
 
         }
 
-        
 
-        //public void SetEpisodes(string feedUrl)
-        //{
-        //      handler.GenerateEpisodes(feedUrl);
-        //      PodEpisodes = handler.GetEpisodes();
-                 
-        //}
-  //  }
+
+        public void SetEpisodes(string feedUrl)
+        {
+            handler.GenerateEpisodes(feedUrl);
+            PodEpisodes = handler.GetEpisodes();
+
+        }
+    }
 }
