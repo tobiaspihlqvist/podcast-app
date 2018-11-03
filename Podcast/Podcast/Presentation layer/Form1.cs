@@ -214,26 +214,12 @@ namespace Podcast
        
         }
 
-        private void lvFeed_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
-        {
-
-            //if (lvfeed.selecteditems.count > 0)
-            //{
-                
-            //    string selecteditem = lvfeed.selecteditems[0].text;
-            //    var matchingfeed = feed.getlist().find((f) => f.title == selecteditem);
-            //    selectedfeed = matchingfeed.feedurl;
-            //    int tid = matchingfeed.updatefrequency;
-                
-             
-            //    generateepisodes(selectedfeed, tid);
-            //}
-        }
+        
 
         private void GenerateEpisodes(string url, int inteTid)
         {
             lvEpisodes.Items.Clear();
-      //      ep.hora(SelectedFeed, inteTid);
+            ep.hora(SelectedFeed, inteTid);
             var list = ep.GetEpisodes();
 
             foreach (SyndicationItem si in list)
@@ -271,18 +257,16 @@ namespace Podcast
 
             if (lvCategory.SelectedItems.Count > 0)
             {
-                List<ListViewItem> LvList = new List<ListViewItem>();
-                FilteredLvList.Clear();
+
+                
                 string chosenCat = lvCategory.SelectedItems[0].Text;
-                var list = LvList;
-                foreach (ListViewItem lvi in list)
+                List<Feed> fList = feed.GetList().FindAll(x => x.Category == chosenCat).ToList();
+                var lvList = new List<ListViewItem>();
+                foreach (Feed f in fList)
                 {
-                    if (chosenCat.Equals(lvi.SubItems[2].Text))
-                    {
-                        FilteredLvList.Add(lvi);
-                    }
+                    lvList.Add(f.ToListViewItem());
                 }
-                UpdateFeeds(FilteredLvList);
+                UpdateFeeds(lvList);
 
                 //var FilteredList = feed.GetList().FindAll(x => x.Category == chosenCat).ToList();
 
@@ -330,17 +314,7 @@ namespace Podcast
 
         private void lvFeed_Enter(object sender, EventArgs e)
         {
-            if (lvFeed.SelectedItems.Count > 0)
-            {
 
-                string selectedItem = lvFeed.SelectedItems[0].Text;
-                var matchingFeed = feed.GetList().Find((f) => f.Title == selectedItem);
-                SelectedFeed = matchingFeed.FeedUrl;
-                int tid = matchingFeed.UpdateFrequency;
-
-
-                GenerateEpisodes(SelectedFeed, tid);
-            }
         }
 
         private void lvFeed_ItemActivate(object sender, EventArgs e)

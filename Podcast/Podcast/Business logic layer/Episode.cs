@@ -21,9 +21,9 @@ namespace Podcast.Business_logic_layer
             return PodEpisodes;
         }
 
-        public async Task hora(string url, int tid)
+        public async Task hora(string feedUrl, int tid)
         {
-            string kuk = url;
+            string url = feedUrl;
             double intervalTime = Convert.ToDouble(tid);
             while (true)
             {
