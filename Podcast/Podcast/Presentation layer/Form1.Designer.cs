@@ -84,8 +84,6 @@ namespace Podcast
             this.lvFeed.UseCompatibleStateImageBehavior = false;
             this.lvFeed.View = System.Windows.Forms.View.Details;
             this.lvFeed.ItemActivate += new System.EventHandler(this.lvFeed_ItemActivate);
-            this.lvFeed.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lvFeed_ItemSelectionChanged);
-            this.lvFeed.Enter += new System.EventHandler(this.lvFeed_Enter);
             // 
             // clName
             // 
@@ -207,7 +205,6 @@ namespace Podcast
             this.cmbPodcast.Name = "cmbPodcast";
             this.cmbPodcast.Size = new System.Drawing.Size(101, 21);
             this.cmbPodcast.TabIndex = 13;
-            this.cmbPodcast.SelectedIndexChanged += new System.EventHandler(this.cmbPodcast_SelectedIndexChanged);
             // 
             // lblChangeFeed
             // 
