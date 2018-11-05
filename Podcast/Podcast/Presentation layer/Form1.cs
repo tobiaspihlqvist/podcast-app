@@ -126,6 +126,12 @@ namespace Podcast
                 cmbCategories.Items.Add(item.Name);
                 cmbFeedCategory.Items.Add(item.Name);
             }
+            if (cmbCategories.Items.Count >= 0 && cmbFeedCategory.Items.Count >= 0)
+            {
+                cmbCategories.SelectedIndex = 0;
+                cmbFeedCategory.SelectedIndex = 0;
+
+            }
 
         } //finns det något sätt att göra den här mer generell??
 
