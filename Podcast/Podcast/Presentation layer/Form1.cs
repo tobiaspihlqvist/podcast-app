@@ -70,9 +70,8 @@ namespace Podcast
                 string podUpdateFrequency = cmbUpdate.Text;
                 string[] words = podUpdateFrequency.Split(' ');
                 int minutes = int.Parse(words[0]);
-                Feed newFeed = new Feed { Title = podName, FeedUrl = podUrl, Category = podCat, UpdateFrequency = minutes };
 
-                feed.AddToList(newFeed);
+                feed.AddFeed(podName, podUrl, minutes, podCat);
                 feed.LoadXml("fList");
                 //  LvList = feed.ToListViewItem();
                 UpdateFeeds();
@@ -212,18 +211,23 @@ namespace Podcast
                 string chosenCat = cmbCategories.SelectedItem.ToString();
                 string inputName = txtInputCategory.Text;
 
-                Validation.ChangeCat(inputName, categories) ;
-                
+                Validation.ChangeCat(inputName, categories);
+                {
                     category.UpdateCategory(chosenCat, inputName);
 
                     txtInputCategory.Clear();
                     UpdateList();
                     FillCategoryComboBox();
-                
+                }
             }
-            catch (ArgumentException ex) { MessageBox.Show(ex.Message); }
-            catch (NullReferenceException ex) { MessageBox.Show("You have to choose a category to change, young padawan.");  };
-            
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show("You have to choose a category to change, young padawan.");
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void btnDeleteCategory_Click(object sender, EventArgs e)
@@ -251,7 +255,7 @@ namespace Podcast
         private void GenerateEpisodes(string url, int frequency)
         {
             lvEpisodes.Items.Clear();
-            
+            // ep.SetEpisodes(url);
             ep.intervalTimer(SelectedFeed, frequency);
             FeedEpisodes = ep.GetEpisodes();
 
