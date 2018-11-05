@@ -7,6 +7,7 @@ using System.Windows.Forms;
 using System.Xml;
 using System.ServiceModel.Syndication;
 using Podcast.Data_Access_Layer;
+using System.Threading;
 
 namespace Podcast.Business_logic_layer
 {
@@ -21,36 +22,23 @@ namespace Podcast.Business_logic_layer
             return PodEpisodes;
         }
 
-        public async Task Hora(string feedUrl, int tid)
+        public async Task intervalTimer(string feedUrl, int time)
         {
             string url = feedUrl;
-            double intervalTime = Convert.ToDouble(tid);
+            double intervalTime = Convert.ToDouble(time);
             while (true)
             {
                 //  Task taskB = Task.Delay(TimeSpan.FromMinutes(1));
-
-                var taskA = Task.Run(async () =>
-                 {
-                     SetEpisodes(feedUrl);
-                     
-                     MessageBox.Show("kukjävel");
-                 });
-                   await Task.Delay(TimeSpan.FromMinutes(1));
-
-
-
-
+                SetEpisodes(url);
+                await Task.Delay(TimeSpan.FromMinutes(intervalTime));
+                 
             }
-
         }
-
-
 
         public void SetEpisodes(string feedUrl)
         {
             handler.GenerateEpisodes(feedUrl);
             PodEpisodes = handler.GetEpisodes();
-
         }
     }
 }

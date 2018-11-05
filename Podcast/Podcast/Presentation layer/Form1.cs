@@ -217,10 +217,11 @@ namespace Podcast
 
         
 
-        private void GenerateEpisodes(string url, int inteTid)
+        private void GenerateEpisodes(string url, int frequency)
         {
             lvEpisodes.Items.Clear();
-            ep.Hora(SelectedFeed, inteTid);
+           // ep.SetEpisodes(url);
+            ep.intervalTimer(SelectedFeed, frequency);
             FeedEpisodes = ep.GetEpisodes();
 
             foreach (SyndicationItem si in FeedEpisodes)
