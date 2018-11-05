@@ -27,13 +27,18 @@ namespace Podcast.Business_logic_layer
             double intervalTime = Convert.ToDouble(tid);
             while (true)
             {
-                await Task.Run(() =>
+                //  Task taskB = Task.Delay(TimeSpan.FromMinutes(1));
+
+                var taskA = Task.Run(async () =>
                  {
                      SetEpisodes(feedUrl);
                      
                      MessageBox.Show("kukjävel");
                  });
-                await Task.Delay(TimeSpan.FromMinutes(intervalTime));
+                   await Task.Delay(TimeSpan.FromMinutes(1));
+
+
+
 
             }
 
