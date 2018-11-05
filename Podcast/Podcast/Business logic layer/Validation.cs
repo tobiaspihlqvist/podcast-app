@@ -42,9 +42,9 @@ namespace Podcast.Business_logic_layer
             }
         }
 
-        static public void ChangeCat(string input, List<Category> f) // används i btnChangeCat
+        static public void ChangeCat(string input, List<Category> c)
         {
-            bool catExists = f.Any((x) => x.Name == input);
+            bool catExists = c.Any((x) => x.Name == input);
             if (catExists)
             {
                 throw new ArgumentException("You haven't changed the name, please enter a new name.");

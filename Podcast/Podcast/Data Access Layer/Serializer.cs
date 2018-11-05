@@ -14,8 +14,6 @@ namespace Podcast.Data_Access_Layer
 
         public void SerializeXml<T>(T obj, string fileName)
         {
-            
-
             var serializer = new XmlSerializer(typeof(T));
             using (var writer = new StreamWriter(fileName+".xml"))
             {
@@ -36,10 +34,5 @@ namespace Podcast.Data_Access_Layer
                 return deserializedList;
             
         }  
-
-        
-        
-
-
     }
 }

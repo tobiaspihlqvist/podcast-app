@@ -238,7 +238,7 @@ namespace Podcast
         private void lvEpisodes_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
 
-            if (lvEpisodes.SelectedItems.Count > 0) //exceptions
+            if (lvEpisodes.SelectedItems.Count > 0) 
             {
                 string selectedEpisode = lvEpisodes.SelectedItems[0].Text;
                 var list = ep.GetEpisodes();
@@ -334,9 +334,6 @@ namespace Podcast
                     cmbFeedCategory.SelectedIndex = cmbFeedCategory.Items.IndexOf(f.Category);
                     cmbUpdate.SelectedIndex = cmbUpdate.Items.IndexOf(frequency);
 
-                    //   feed.UpdateFeed(tbTitle.Text, txtInputURL.Text,"",  "");
-                    //   UpdateFeeds();
-                    //   FillPodCombobox();
                     break;
                 }
             }

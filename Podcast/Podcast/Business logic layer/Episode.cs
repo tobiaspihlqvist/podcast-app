@@ -28,10 +28,8 @@ namespace Podcast.Business_logic_layer
             double intervalTime = Convert.ToDouble(time);
             while (true)
             {
-                //  Task taskB = Task.Delay(TimeSpan.FromMinutes(1));
                 SetEpisodes(url);
                 await Task.Delay(TimeSpan.FromMinutes(intervalTime));
-                 
             }
         }
 
