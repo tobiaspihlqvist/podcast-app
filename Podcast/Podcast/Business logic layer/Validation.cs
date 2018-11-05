@@ -42,17 +42,12 @@ namespace Podcast.Business_logic_layer
             }
         }
 
-        static public bool CatIsSame(string input, string comparison) // används i btnChangeCat
+        static public void ChangeCat(string input, List<Category> f) // används i btnChangeCat
         {
-            if (input.Equals(comparison))
+            bool catExists = f.Any((x) => x.Name == input);
+            if (catExists)
             {
-                MessageBox.Show("You cannot add the same category twice!");
-
-                return false;
-            }
-            else
-            {
-                return true;
+                throw new ArgumentException("You haven't changed the name, please enter a new name.");
             }
         }
 
@@ -81,7 +76,7 @@ namespace Podcast.Business_logic_layer
                 throw new ArgumentException("You have not chosen a category to remove, young padawan.");
             }
         }
-        static public void ValidateNewCategory(string newCategory, List<Feed> lF)
+        static public void ValidateNewCategory(string newCategory, List<Category> c)
         {
             if (string.IsNullOrEmpty(newCategory))
             {
@@ -91,7 +86,7 @@ namespace Podcast.Business_logic_layer
             {
                 throw new ArgumentException("Illegal characters. \n Title please use A-Z or a-z.");
             }
-            bool proceed = lF.Any((x) => x.Category == newCategory);
+            bool proceed = c.Any((x) => x.Name == newCategory);
             if (proceed)
             {
                 throw new ArgumentException("You cannot add the same category twice");

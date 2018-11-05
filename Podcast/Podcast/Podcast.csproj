@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Business logic layer\Category.cs" />
     <Compile Include="Business logic layer\CustomList.cs" />
+    <Compile Include="Business logic layer\Entities.cs" />
     <Compile Include="Business logic layer\Episode.cs" />
     <Compile Include="Business logic layer\Exception.cs" />
     <Compile Include="Business logic layer\Feed.cs" />

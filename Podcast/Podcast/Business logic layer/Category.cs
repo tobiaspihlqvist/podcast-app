@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace Podcast.Business_logic_layer
 {   
-    public class Category : IListable
+    public class Category : Entities<Category> , IListable
     {
         public string Name { get; set; }
         public List<Category> categories = new List<Category>();
@@ -54,7 +54,7 @@ namespace Podcast.Business_logic_layer
             serializer.SerializeXml(categories, "CList");
 
         }
-        public List<Category> GetList()
+        public override List<Category> GetList()
         {
             return categories;
         }

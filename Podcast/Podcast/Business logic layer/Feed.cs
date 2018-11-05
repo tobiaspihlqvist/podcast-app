@@ -11,11 +11,11 @@ using Podcast.Data_Access_Layer;
 
 namespace Podcast.Business_logic_layer
 {
-    public class Feed: IListable
+    public class Feed : Entities<Feed>, IListable
     {
         Serializer serializer = new Serializer();
 
-        List<Feed> FeedList = new List<Feed>();
+        private List<Feed> FeedList = new List<Feed>();
 
         
         
@@ -27,12 +27,12 @@ namespace Podcast.Business_logic_layer
         public int UpdateFrequency { get; set; }
         
 
-        public void AddFeed(string name, string url, int updateFreq, string category)
+        public override void AddToList(Feed f)
         {
-            var newFeed = new Feed { Title = name, FeedUrl = url, UpdateFrequency = updateFreq,
-                Category = category };
+            //var newFeed = new Feed { Title = name, FeedUrl = url, UpdateFrequency = updateFreq,
+            //    Category = category };
 
-                FeedList.Add(newFeed);
+                FeedList.Add(f);
                 serializer.SerializeXml(FeedList, "fList");
             
         }
@@ -78,7 +78,7 @@ namespace Podcast.Business_logic_layer
             }
         }
 
-        public List<Feed> GetList()
+        public override List<Feed> GetList()
         {
             return FeedList;
         }
