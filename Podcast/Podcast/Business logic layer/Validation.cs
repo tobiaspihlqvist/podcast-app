@@ -9,13 +9,13 @@ using System.Windows.Forms;
 
 namespace Podcast.Business_logic_layer
 {
-   public static class Validation
+    public class Validation
     {
-       
+
 
         static public bool OnlyLetters(string input) // måste använda Validation.OnlyLetters samt textrutan man ska kontrollera för att metoden ska fungera
         {
-            
+
             if (!Regex.IsMatch(input, @"^[a-zA-Z]+$"))
 
             {
@@ -56,13 +56,9 @@ namespace Podcast.Business_logic_layer
             }
         }
 
-      
-
-        
-
         static public bool XmlExists(string input)
         {
-            if(File.Exists(input + ".xml"))
+            if (File.Exists(input + ".xml"))
             {
                 return true;
             }
@@ -72,11 +68,9 @@ namespace Podcast.Business_logic_layer
             }
         }
 
-        
-
         static public void NoChosenCat(string input)
         {
-            if(string.IsNullOrEmpty(input))
+            if (string.IsNullOrEmpty(input))
             {
                 throw new ArgumentException("You have not chosen a category to remove, young padawan.");
             }
@@ -98,8 +92,10 @@ namespace Podcast.Business_logic_layer
             }
         }
 
-        static public void ValidateFeed(string title, string url, List<Feed> f)
+        public virtual void CatchExceptions(string title, string url, List<Feed> f)
         {
+
+            bool isUrl = Uri.IsWellFormedUriString(url, UriKind.Absolute);
             if (string.IsNullOrEmpty(url))
             {
                 throw new ArgumentException("URL cannot be empty.");
@@ -111,8 +107,8 @@ namespace Podcast.Business_logic_layer
             if (!Regex.IsMatch(title, @"^[a-zA-Z]+$"))
             {
                 throw new ArgumentException("Illegal characters. \n Title please use A-Z or a-z.");
+
             }
-            bool isUrl = Uri.IsWellFormedUriString(url, UriKind.Absolute);
             if (!isUrl)
             {
                 throw new ArgumentException("The URL is not a valid one.");
@@ -123,10 +119,11 @@ namespace Podcast.Business_logic_layer
                 throw new ArgumentException("You are already subscribing to a podcast with this url.");
             }
             bool titleExists = f.Any((x) => x.Title == title);
-            if(titleExists)
+            if (titleExists)
             {
                 throw new ArgumentException("You are already subscribing to a podcast with this name.");
             }
         }
     }
 }
+    

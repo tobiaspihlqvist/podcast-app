@@ -65,7 +65,7 @@ namespace Podcast
             {
                 string podName = tbTitle.Text;
                 string podUrl = txtInputURL.Text;
-                Validation.ValidateFeed(podName, podUrl, feed.GetList());
+            //    Validation.CatchExceptions(podName, podUrl, feed.GetList());
                 string podCat = cmbFeedCategory.SelectedItem.ToString();
                 string podUpdateFrequency = cmbUpdate.Text;
                 string[] words = podUpdateFrequency.Split(' ');
@@ -125,7 +125,7 @@ namespace Podcast
                 cmbCategories.Items.Add(item.Name);
                 cmbFeedCategory.Items.Add(item.Name);
             }
-            if (cmbCategories.Items.Count >= 0 && cmbFeedCategory.Items.Count >= 0)
+            if (cmbCategories.Items.Count > 0 && cmbFeedCategory.Items.Count > 0)
             {
                 cmbCategories.SelectedIndex = 0;
                 cmbFeedCategory.SelectedIndex = 0;
@@ -191,7 +191,7 @@ namespace Podcast
             try
             {
                 string inputName = txtInputCategory.Text;
-                Validation.ValidateNewCategory(inputName, feed.GetList());
+                Validation.ValidateNewCategory(inputName, categories);
                 category.AddCategory(inputName);
 
                 txtInputCategory.Clear();
@@ -372,20 +372,30 @@ namespace Podcast
 
         private void btnUpdateFeed_Click(object sender, EventArgs e)
         {
-            string podName = cmbPodcast.SelectedItem.ToString();
-            string podUrl = txtInputURL.Text;
-            if (Validation.inputIsNotNull(podName) && Validation.inputIsNotNull(podUrl))
-           {
-                string podCat = cmbFeedCategory.SelectedItem.ToString();
-                string podUpdateFrequency = cmbUpdate.Text;
-                string[] words = podUpdateFrequency.Split(' ');
-                int minutes = int.Parse(words[0]);
-                string changeName = tbTitle.Text; ;
 
-                feed.UpdateFeed(podName, podUrl, minutes, podCat, changeName);
-                feed.LoadXml("fList");
-                UpdateFeeds();
+            try
+            {
+                string podName = cmbPodcast.SelectedItem.ToString();
+
+                string podUrl = txtInputURL.Text;
+                if (Validation.inputIsNotNull(podName) && Validation.inputIsNotNull(podUrl))
+                {
+                    string podCat = cmbFeedCategory.SelectedItem.ToString();
+                    string podUpdateFrequency = cmbUpdate.Text;
+                    string[] words = podUpdateFrequency.Split(' ');
+                    int minutes = int.Parse(words[0]);
+                    string changeName = tbTitle.Text; ;
+
+                    feed.UpdateFeed(podName, podUrl, minutes, podCat, changeName);
+                    feed.LoadXml("fList");
+                    UpdateFeeds();
+                }
             }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("kuk");
+            }
+        }
 
 
 
@@ -422,7 +432,7 @@ namespace Podcast
 
         }
     }
-}
+
 
 
     

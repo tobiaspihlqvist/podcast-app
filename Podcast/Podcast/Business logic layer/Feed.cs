@@ -15,7 +15,7 @@ namespace Podcast.Business_logic_layer
     {
         Serializer serializer = new Serializer();
 
-        List<Feed> FeedList = new List<Feed>();
+        private List<Feed> FeedList = new List<Feed>();
 
         
         
@@ -69,7 +69,6 @@ namespace Podcast.Business_logic_layer
 
         }
 
-
         public void LoadXml(string fileName) // ska flyttas till validation eller till serializer
         {
             if (Validation.XmlExists("fList"))
@@ -99,25 +98,6 @@ namespace Podcast.Business_logic_layer
         {
             return new ListViewItem(PrepareListViewItem().ToArray());
         }
-
-       /*      public List<ListViewItem> ToListViewItem()
-            {
-            var list = FeedList;
-            var lvList = new List<ListViewItem>();
-            foreach (var feed in list)
-            {
-                string[] row =
-                {
-                    feed.Title,
-                    feed.UpdateFrequency.ToString() + "Minutes",
-                    feed.Category
-                };
-                ListViewItem item = new ListViewItem(row);
-                lvList.Add(item);
-            }
-            return lvList;
-            }  */
-
-        
+  
     }
 }
