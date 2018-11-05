@@ -65,7 +65,7 @@ namespace Podcast
             {
                 string podName = tbTitle.Text;
                 string podUrl = txtInputURL.Text;
-            //    Validation.CatchExceptions(podName, podUrl, feed.GetList());
+                Validation.ValidateNewFeed(podName, podUrl, feed.GetList());
                 string podCat = cmbFeedCategory.SelectedItem.ToString();
                 string podUpdateFrequency = cmbUpdate.Text;
                 string[] words = podUpdateFrequency.Split(' ');
@@ -214,7 +214,7 @@ namespace Podcast
 
                 Validation.ChangeCat(inputName, categories) ;
                 
-                    category.UpdateCategory(chosenCat, inputName);
+                category.UpdateCategory(chosenCat, inputName);
 
                     txtInputCategory.Clear();
                     UpdateList();
@@ -238,7 +238,7 @@ namespace Podcast
                 UpdateList();
                 FillCategoryComboBox();
             }
-            catch(NullReferenceException ex)
+            catch(NullReferenceException)
             {
                 MessageBox.Show("You have to choose a category to remove, young padawan.");
             }

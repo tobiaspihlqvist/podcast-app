@@ -87,10 +87,10 @@ namespace Podcast.Business_logic_layer
             }
         }
 
-        public virtual void CatchExceptions(string title, string url, List<Feed> f)
+        static public void ValidateNewFeed(string title, string url, List<Feed> f)
         {
 
-            bool isUrl = Uri.IsWellFormedUriString(url, UriKind.Absolute);
+            
             if (string.IsNullOrEmpty(url))
             {
                 throw new ArgumentException("URL cannot be empty.");
@@ -104,9 +104,14 @@ namespace Podcast.Business_logic_layer
                 throw new ArgumentException("Illegal characters. \n Title please use A-Z or a-z.");
 
             }
+            bool isUrl = Uri.IsWellFormedUriString(url, UriKind.Absolute);
             if (!isUrl)
             {
                 throw new ArgumentException("The URL is not a valid one.");
+            }
+            if (!url.Contains("feed") || url.Contains("xml") || url.Contains("rss"))
+            {
+                throw new ArgumentException("It seems that the URL that has been provided is not a URL for a podcast.");
             }
             bool urlExists = f.Any((x) => x.FeedUrl == url);
             if (urlExists)
