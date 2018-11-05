@@ -21,7 +21,7 @@ namespace Podcast.Business_logic_layer
             return PodEpisodes;
         }
 
-        public async Task hora(string feedUrl, int tid)
+        public async Task Hora(string feedUrl, int tid)
         {
             string url = feedUrl;
             double intervalTime = Convert.ToDouble(tid);
@@ -29,7 +29,8 @@ namespace Podcast.Business_logic_layer
             {
                 await Task.Run(() =>
                  {
-                     SetEpisodes(kuk);
+                     SetEpisodes(feedUrl);
+                     
                      MessageBox.Show("kukjävel");
                  });
                 await Task.Delay(TimeSpan.FromMinutes(intervalTime));
