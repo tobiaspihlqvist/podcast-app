@@ -205,6 +205,7 @@ namespace Podcast
             this.cmbPodcast.Name = "cmbPodcast";
             this.cmbPodcast.Size = new System.Drawing.Size(101, 21);
             this.cmbPodcast.TabIndex = 13;
+            this.cmbPodcast.SelectedIndexChanged += new System.EventHandler(this.cmbPodcast_SelectedIndexChanged);
             // 
             // lblChangeFeed
             // 
@@ -223,6 +224,7 @@ namespace Podcast
             this.btnUpdateFeed.TabIndex = 15;
             this.btnUpdateFeed.Text = "Update";
             this.btnUpdateFeed.UseVisualStyleBackColor = true;
+            this.btnUpdateFeed.Click += new System.EventHandler(this.btnUpdateFeed_Click);
             // 
             // btnAddNewFeed
             // 

@@ -36,17 +36,26 @@ namespace Podcast.Business_logic_layer
                 serializer.SerializeXml(FeedList, "fList");
             
         }
-        public void UpdateFeed(string name, string url, string updateFreq, string category)
+        public void UpdateFeed(string name, string url, int updateFreq, string category, string changeName)
         {   
             if (Validation.OnlyLetters(name))
-            {   
-                FeedList.Where(f => f.Title == name)
-                .Select(f => { f.Title = f.Title.Replace(f.Title, name); return f; })
-                .Select(f => { f.FeedUrl = f.FeedUrl.Replace(f.FeedUrl, url); return f; })
-          //      .Select(f => { f.UpdateFrequency = f.UpdateFrequency.Replace(f.UpdateFrequency, updateFreq); return f; })
-                .Select(f => { f.Category = f.Category.Replace(f.Category, category); return f; })
-                .ToList();
-                serializer.SerializeXml(FeedList, "FList");
+            {
+                var obj = FeedList.FirstOrDefault(f => f.Title == name);
+                if (obj != null)
+                {
+                    obj.Title = changeName;
+                    obj.FeedUrl = url;
+                    obj.UpdateFrequency = updateFreq;
+                    obj.Category = category;
+                    serializer.SerializeXml(FeedList, "FList");
+                }
+                //FeedList.Where(f => f.Title == name)
+                //.Select(f => { f.Title = f.Title.Replace(f.Title, name); return f; })
+                //.Select(f => { f.FeedUrl = f.FeedUrl.Replace(f.FeedUrl, url); return f; })
+                //.Select(f => { f.UpdateFrequency = f.UpdateFrequency.Replace(f.UpdateFrequency, updateFreq); return f; })
+                //.Select(f => { f.Category = f.Category.Replace(f.Category, category); return f; })
+                //.ToList();
+                //serializer.SerializeXml(FeedList, "FList");
                 
 
             }
