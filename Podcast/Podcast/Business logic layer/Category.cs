@@ -61,6 +61,7 @@ namespace Podcast.Business_logic_layer
 
         public void DeleteCategory(string input)
         {
+
             var catToRemove = categories.Single(p => p.Name == input);
                 categories.Remove(catToRemove);
             serializer.SerializeXml(categories,

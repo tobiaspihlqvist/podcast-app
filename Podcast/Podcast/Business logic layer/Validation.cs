@@ -56,35 +56,9 @@ namespace Podcast.Business_logic_layer
             }
         }
 
-        static public bool PodIsSame(string input, Feed f)
-        {
-            bool proceed = f.GetList().Any((x) => x.Title == input);
-            if (proceed)
-            {
-                MessageBox.Show("You are already subscribing to a podcast with this name");
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
+      
 
-        static public bool UrlIsSame(string input, Feed f)
-        {
-            
-            
-            bool proceed = f.GetList().Any((x) => x.FeedUrl == input);
-            if (proceed)
-            {
-                MessageBox.Show("You are already subscribing to a podcast with this url");
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
+        
 
         static public bool XmlExists(string input)
         {
@@ -95,6 +69,63 @@ namespace Podcast.Business_logic_layer
             else
             {
                 return false;
+            }
+        }
+
+        
+
+        static public void NoChosenCat(string input)
+        {
+            if(string.IsNullOrEmpty(input))
+            {
+                throw new ArgumentException("You have not chosen a category to remove, young padawan.");
+            }
+        }
+        static public void ValidateNewCategory(string newCategory, List<Feed> lF)
+        {
+            if (string.IsNullOrEmpty(newCategory))
+            {
+                throw new ArgumentException("Input cannot be empty.");
+            }
+            if (!Regex.IsMatch(newCategory, @"^[a-zA-Z]+$"))
+            {
+                throw new ArgumentException("Illegal characters. \n Title please use A-Z or a-z.");
+            }
+            bool proceed = lF.Any((x) => x.Category == newCategory);
+            if (proceed)
+            {
+                throw new ArgumentException("You cannot add the same category twice");
+            }
+        }
+
+        static public void ValidateFeed(string title, string url, List<Feed> f)
+        {
+            if (string.IsNullOrEmpty(url))
+            {
+                throw new ArgumentException("URL cannot be empty.");
+            }
+            if (string.IsNullOrEmpty(title))
+            {
+                throw new ArgumentException("Title cannot be empty.");
+            }
+            if (!Regex.IsMatch(title, @"^[a-zA-Z]+$"))
+            {
+                throw new ArgumentException("Illegal characters. \n Title please use A-Z or a-z.");
+            }
+            bool isUrl = Uri.IsWellFormedUriString(url, UriKind.Absolute);
+            if (!isUrl)
+            {
+                throw new ArgumentException("The URL is not a valid one.");
+            }
+            bool urlExists = f.Any((x) => x.FeedUrl == url);
+            if (urlExists)
+            {
+                throw new ArgumentException("You are already subscribing to a podcast with this url.");
+            }
+            bool titleExists = f.Any((x) => x.Title == title);
+            if(titleExists)
+            {
+                throw new ArgumentException("You are already subscribing to a podcast with this name.");
             }
         }
     }
