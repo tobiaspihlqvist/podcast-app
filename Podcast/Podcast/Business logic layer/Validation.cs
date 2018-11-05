@@ -16,7 +16,7 @@ namespace Podcast.Business_logic_layer
         static public bool OnlyLetters(string input) // måste använda Validation.OnlyLetters samt textrutan man ska kontrollera för att metoden ska fungera
         {
 
-            if (!Regex.IsMatch(input, @"^[a-zA-Z]+$"))
+            if (!Regex.IsMatch(input, @"^[a-zA-Z_ ]*$"))
 
             {
                 MessageBox.Show("Illegal input \n" + "Please type in letters between a-z");
@@ -63,11 +63,11 @@ namespace Podcast.Business_logic_layer
             }
         }
 
-        static public void NoChosenCat(string input)
+        static public void nothingChosenInCombobox(string input)
         {
             if (string.IsNullOrEmpty(input))
             {
-                throw new ArgumentException("You have not chosen a category to remove, young padawan.");
+                throw new NullReferenceException("You have not chosen anything to remove, young padawan.");
             }
         }
         static public void ValidateNewCategory(string newCategory, List<Category> c)
@@ -76,7 +76,7 @@ namespace Podcast.Business_logic_layer
             {
                 throw new ArgumentException("Input cannot be empty.");
             }
-            if (!Regex.IsMatch(newCategory, @"^[a-zA-Z]+$"))
+            if (!Regex.IsMatch(newCategory, @"^[a-zA-Z_ ]*$"))
             {
                 throw new ArgumentException("Illegal characters. \n Title please use A-Z or a-z.");
             }
@@ -87,7 +87,7 @@ namespace Podcast.Business_logic_layer
             }
         }
 
-        public virtual void CatchExceptions(string title, string url, List<Feed> f)
+        static public void ValidateNewFeed(string title, string url, List<Feed> f, string category)
         {
 
             bool isUrl = Uri.IsWellFormedUriString(url, UriKind.Absolute);
@@ -99,7 +99,7 @@ namespace Podcast.Business_logic_layer
             {
                 throw new ArgumentException("Title cannot be empty.");
             }
-            if (!Regex.IsMatch(title, @"^[a-zA-Z]+$"))
+            if (!Regex.IsMatch(title, @"^[a-zA-Z_ ]*$"))
             {
                 throw new ArgumentException("Illegal characters. \n Title please use A-Z or a-z.");
 
@@ -118,7 +118,11 @@ namespace Podcast.Business_logic_layer
             {
                 throw new ArgumentException("You are already subscribing to a podcast with this name.");
             }
+            if (string.IsNullOrEmpty(category)){
+                throw new NullReferenceException("You have to choose a category to add to the feed");
+            }
         }
     }
 }
+
     
