@@ -312,10 +312,7 @@ namespace Podcast
             cmbUpdate.Items.Add("20");
         }
 
-        private void lvFeed_Enter(object sender, EventArgs e)
-        {
-
-        }
+ 
 
         private void lvFeed_ItemActivate(object sender, EventArgs e)
         {
