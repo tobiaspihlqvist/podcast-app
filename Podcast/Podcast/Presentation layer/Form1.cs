@@ -61,10 +61,11 @@ namespace Podcast
 
         private void btnAddNewFeed_Click(object sender, EventArgs e)
         {
-            string podName = tbTitle.Text;
-            string podUrl = txtInputURL.Text;
-            if (Validation.inputIsNotNull(podName) && Validation.inputIsNotNull(podUrl) && Validation.PodIsSame(podName, feed) && Validation.UrlIsSame(podUrl, feed))
+            try
             {
+                string podName = tbTitle.Text;
+                string podUrl = txtInputURL.Text;
+                Validation.ValidateFeed(podName, podUrl, feed.GetList());
                 string podCat = cmbFeedCategory.SelectedItem.ToString();
                 string podUpdateFrequency = cmbUpdate.Text;
                 string[] words = podUpdateFrequency.Split(' ');
@@ -74,6 +75,10 @@ namespace Podcast
                 feed.LoadXml("fList");
                 //  LvList = feed.ToListViewItem();
                 UpdateFeeds();
+            }
+            catch(ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
 
@@ -177,16 +182,19 @@ namespace Podcast
 
         private void btnAddCategory_Click(object sender, EventArgs e) // lägga till nya kategorier, behövs validering
         {
-            string inputName = txtInputCategory.Text;
-
-
-            if (Validation.OnlyLetters(inputName) && checkifCatExists())
+            try
             {
+                string inputName = txtInputCategory.Text;
+                Validation.ValidateNewCategory(inputName, feed.GetList());
                 category.AddCategory(inputName);
 
                 txtInputCategory.Clear();
                 UpdateList();
                 FillCategoryComboBox(); // för att lägga till nya värdet
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
