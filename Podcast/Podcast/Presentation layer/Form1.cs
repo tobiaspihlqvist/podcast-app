@@ -221,7 +221,7 @@ namespace Podcast
             lvEpisodes.Items.Clear();
             ep.hora(SelectedFeed, inteTid);
             var list = ep.GetEpisodes();
-
+            
             foreach (SyndicationItem si in list)
             {
                 lvEpisodes.Items.Add(si.Title.Text);
