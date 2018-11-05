@@ -27,7 +27,7 @@ namespace Podcast.Data_Access_Layer
             }
             catch(Exception e)
             {
-                MessageBox.Show(e.ToString());
+                MessageBox.Show("Couldnt retrieve any podcasts.");
             }
         }
         

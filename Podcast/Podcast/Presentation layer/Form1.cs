@@ -192,27 +192,44 @@ namespace Podcast
 
         private void btnChangeCategory_Click(object sender, EventArgs e)
         {
-            string chosenCat = cmbCategories.SelectedItem.ToString();
-            string inputName = txtInputCategory.Text;
-
-            if (Validation.CatIsSame(chosenCat, inputName))
+            try
             {
-                category.UpdateCategory(chosenCat, inputName);
+                string chosenCat = cmbCategories.SelectedItem.ToString();
+                string inputName = txtInputCategory.Text;
 
-                txtInputCategory.Clear();
-                UpdateList();
-                FillCategoryComboBox();
+                if (Validation.CatIsSame(chosenCat, inputName))
+                {
+                    category.UpdateCategory(chosenCat, inputName);
+
+                    txtInputCategory.Clear();
+                    UpdateList();
+                    FillCategoryComboBox();
+                }
+            }
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show("You have to choose a category to change, young padawan.");
             }
         }
 
         private void btnDeleteCategory_Click(object sender, EventArgs e)
         {
-            var delete = cmbCategories.SelectedItem.ToString();
-                
+
+            try
+            {
+                Validation.NoChosenCat(cmbCategories.SelectedItem.ToString());
+                var delete = cmbCategories.SelectedItem.ToString();
+
                 category.DeleteCategory(delete);
                 UpdateList();
                 FillCategoryComboBox();
-       
+            }
+            catch(NullReferenceException ex)
+            {
+                MessageBox.Show("You have to choose a category to remove, young padawan.");
+            }
+            
+
         }
 
         
@@ -271,6 +288,10 @@ namespace Podcast
                 UpdateFeeds(lvList);
                 
             }
+            else
+            {
+                UpdateFeeds();
+            }
         }
 
         private void btnDeleteFeed_Click(object sender, EventArgs e)
@@ -319,7 +340,7 @@ namespace Podcast
         {
           var name =  cmbPodcast.SelectedItem.ToString();
                 foreach(var f in feed.GetList())
-            {
+                {
                 if(f.Title == name)
                 {
                     tbTitle.Text = f.Title;

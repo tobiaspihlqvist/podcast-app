@@ -97,5 +97,27 @@ namespace Podcast.Business_logic_layer
                 return false;
             }
         }
+
+        static public bool CategoryIsUsed(string input, List<Feed> lF)
+        {
+            bool proceed = lF.Any((x) => x.Category == input);
+            if (proceed)
+            {
+                return false;
+            }
+            else
+            {
+                MessageBox.Show("You are subscribing to podcasts with this category,\n to remove this category you have to unsubscribe to these podcasts first");
+                return true;
+            }
+        }
+
+        static public void NoChosenCat(string input)
+        {
+            if(string.IsNullOrEmpty(input))
+            {
+                throw new ArgumentException("You have not chosen a category to remove, young padawan.");
+            }
+        }
     }
 }
