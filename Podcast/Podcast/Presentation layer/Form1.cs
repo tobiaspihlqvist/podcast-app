@@ -43,8 +43,6 @@ namespace Podcast
             categories = category.GetList();
             category.AddInitialCategories();
             UpdateList();
-            //feed.LoadXml("fList");
-            //     LvList = feed.ToListViewItem();
             fillCmbUpdate();
             UpdateFeeds();
             FillCategoryComboBox();
@@ -52,12 +50,7 @@ namespace Podcast
 
 
 
-            //category.LoadXml("CList"); //hmmm
         }
-
-
-
-
 
         private void btnAddNewFeed_Click(object sender, EventArgs e)
         {
@@ -74,12 +67,16 @@ namespace Podcast
 
                 feed.AddToList(newFeed);
                 feed.LoadXml("fList");
-                //  LvList = feed.ToListViewItem();
                 UpdateFeeds();
+                FillPodCombobox();
             }
             catch(ArgumentException ex)
             {
                 MessageBox.Show(ex.Message);
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("You have to choose a category to the new feed");
             }
 
 
@@ -96,14 +93,6 @@ namespace Podcast
             }
         }
 
-        //private async Task EpisodeUpdater(string url, int interval)
-        //{
-        //    var taskA = feed.EpisodeUpdater(url, interval).ContinueWith(() =>
-        //    {
-
-        //    });
-
-        //}
 
         private void UpdateFeeds(List<ListViewItem> lizt)
         {
@@ -115,7 +104,6 @@ namespace Podcast
                 lvFeed.Items.Add(lvItem);
             }
         }
-
 
         private void FillCategoryComboBox() // för att fylla kategori comboboxarna
         {
@@ -134,8 +122,6 @@ namespace Podcast
             }
 
         } //finns det något sätt att göra den här mer generell??
-
-
 
 
         private void UpdateList()
@@ -166,26 +152,6 @@ namespace Podcast
             }
         }
 
-        private bool checkifCatExists()  // måste flyttas till validation på något sätt
-        {
-            bool proceed = true;
-            string inputName = txtInputCategory.Text;
-
-            foreach (var c in categories)
-            {
-                if (c.Name == inputName)
-                {
-                    proceed = false;
-                    MessageBox.Show("You cannot add the same category twice!");
-                    break;
-                }
-                else
-                {
-                    proceed = true;
-                }
-            }
-            return proceed;
-        }
 
         private void btnAddCategory_Click(object sender, EventArgs e) // lägga till nya kategorier, behövs validering
         {
@@ -221,8 +187,14 @@ namespace Podcast
                     FillCategoryComboBox();
                 
             }
-            catch (ArgumentException ex) { MessageBox.Show(ex.Message); }
-            catch (NullReferenceException) { MessageBox.Show("You have to choose a category to change, young padawan.");  };
+            catch (ArgumentException)
+            {
+                MessageBox.Show("You cannot add the same category twice!");
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("You have to choose a category to change, young padawan.");
+            };
             
         }
 
@@ -231,7 +203,7 @@ namespace Podcast
 
             try
             {
-                Validation.NoChosenCat(cmbCategories.SelectedItem.ToString());
+                Validation.nothingChosenInCombobox(cmbCategories.SelectedItem.ToString());
                 var delete = cmbCategories.SelectedItem.ToString();
 
                 category.DeleteCategory(delete);
@@ -240,7 +212,7 @@ namespace Podcast
             }
             catch(NullReferenceException)
             {
-                MessageBox.Show("You have to choose a category to remove, young padawan.");
+                MessageBox.Show("You haven't chosen a category to delete");
             }
             
 
@@ -309,20 +281,22 @@ namespace Podcast
 
         private void btnDeleteFeed_Click(object sender, EventArgs e)
         {
-            string delete = cmbPodcast.SelectedItem.ToString();
+            try
+            { Validation.nothingChosenInCombobox(cmbPodcast.SelectedItem.ToString());
 
+                string delete = cmbPodcast.SelectedItem.ToString();
 
-            feed.DeleteFeed(delete);
-            UpdateFeeds();
-            lvEpisodes.Items.Clear();
-            FillPodCombobox();
-
+                feed.DeleteFeed(delete);
+                UpdateFeeds();
+                lvEpisodes.Items.Clear();
+                FillPodCombobox();
+            }
+            catch(NullReferenceException)
+            {
+                MessageBox.Show("You haven't chosen feed to delete!");
+            }
         }
 
-
-
-
-        // Allt för UpdateFrequency
 
         private void fillCmbUpdate()
         {
@@ -343,8 +317,6 @@ namespace Podcast
                 var matchingFeed = feed.GetList().Find((f) => f.Title == selectedItem);
                 SelectedFeed = matchingFeed.FeedUrl;
                 int tid = matchingFeed.UpdateFrequency;
-
-
                 GenerateEpisodes(SelectedFeed, tid);
             }
         }
@@ -388,47 +360,16 @@ namespace Podcast
 
                     feed.UpdateFeed(podName, podUrl, minutes, podCat, changeName);
                     feed.LoadXml("fList");
+                    FillPodCombobox();
                     UpdateFeeds();
                 }
             }
             catch (NullReferenceException)
             {
-                MessageBox.Show("kuk");
+                MessageBox.Show("You haven't chosen a feed to Update!");
             }
         }
 
-
-
-
-            /*    public async Task GenerateEpisodez(string url, double interval)
-
-       {
-           var intervalTime = cmbUpdate.SelectedItem.ToString();
-
-           try {
-               double.TryParse(intervalTime, out double time);
-
-               while (true)
-               {
-                   var taskA = Task.Run(() =>
-                   {
-
-
-                       Episodes.Clear();
-                       foreach (SyndicationItem si in Episodes)
-                       {
-                           Episodes.Add(si);
-                       }
-
-                   });
-                   await Task.Delay(TimeSpan.FromMinutes(time));
-               }
-           }
-           catch(FormatException e)
-           {
-               MessageBox.Show(e.Message);
-           }
-       } */
 
         }
     }
