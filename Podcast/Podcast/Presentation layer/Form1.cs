@@ -58,8 +58,7 @@ namespace Podcast
             {
                 string podName = tbTitle.Text;
                 string podUrl = txtInputURL.Text;
-                string chosencat = cmbFeedCategory.SelectedItem.ToString();
-                Validation.ValidateNewFeed(podName, podUrl, feed.GetList(), chosencat);
+                Validation.ValidateNewFeed(podName, podUrl, feed.GetList());
                 string podCat = cmbFeedCategory.SelectedItem.ToString();
                 string podUpdateFrequency = cmbUpdate.Text;
                 string[] words = podUpdateFrequency.Split(' ');
@@ -181,7 +180,7 @@ namespace Podcast
 
                 Validation.ChangeCat(inputName, categories) ;
                 
-                    category.UpdateCategory(chosenCat, inputName);
+                category.UpdateCategory(chosenCat, inputName);
 
                     txtInputCategory.Clear();
                     UpdateList();
