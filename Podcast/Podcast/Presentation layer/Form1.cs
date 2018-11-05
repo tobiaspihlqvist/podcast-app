@@ -222,7 +222,7 @@ namespace Podcast
                 
             }
             catch (ArgumentException ex) { MessageBox.Show(ex.Message); }
-            catch (NullReferenceException ex) { MessageBox.Show("You have to choose a category to change, young padawan.");  };
+            catch (NullReferenceException) { MessageBox.Show("You have to choose a category to change, young padawan.");  };
             
         }
 
