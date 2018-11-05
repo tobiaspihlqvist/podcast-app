@@ -25,7 +25,7 @@ namespace Podcast.Data_Access_Layer
                     Episodes.Add(si);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 MessageBox.Show("Couldnt retrieve any podcasts.");
             }
