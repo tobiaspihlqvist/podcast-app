@@ -334,10 +334,6 @@ namespace Podcast
                     string frequency = f.UpdateFrequency.ToString();
                     cmbFeedCategory.SelectedIndex = cmbFeedCategory.Items.IndexOf(f.Category);
                     cmbUpdate.SelectedIndex = cmbUpdate.Items.IndexOf(frequency);
-
-                    //   feed.UpdateFeed(tbTitle.Text, txtInputURL.Text,"",  "");
-                    //   UpdateFeeds();
-                    //   FillPodCombobox();
                     break;
                 }
             }
