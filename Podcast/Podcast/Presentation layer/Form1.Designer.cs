@@ -72,7 +72,7 @@ namespace Podcast
             // 
             // lvFeed
             // 
-            this.lvFeed.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.lvFeed.Activation = System.Windows.Forms.ItemActivation.TwoClick;
             this.lvFeed.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.clName,
             this.clFrequency,

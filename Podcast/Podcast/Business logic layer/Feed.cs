@@ -109,27 +109,6 @@ namespace Podcast.Business_logic_layer
             return lvList;
             }  */
 
-        //public async Task EpisodeUpdater(string url, int interval)
-        //{
-        //    Episodes.Clear();
-        //    var intervalTime = Convert.ToDouble(interval);
-        //    while (true)
-        //    {
-        //        await Task.Run(() =>
-        //        {
-        //            XmlReader reader = XmlReader.Create(url);
-        //            SyndicationFeed sFeed = SyndicationFeed.Load(reader);
-        //            foreach (SyndicationItem si in sFeed.Items)
-        //            {
-        //                Episodes.Add(si);
-        //            }
-
-        //        });
-        //        await Task.Delay(TimeSpan.FromMinutes(intervalTime));
-        //    }
-        //}
         
-
-
     }
 }

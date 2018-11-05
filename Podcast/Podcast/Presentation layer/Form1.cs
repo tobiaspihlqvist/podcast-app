@@ -27,6 +27,7 @@ namespace Podcast
         Category category = new Category();
         private List<ListViewItem> LvList { get; set; }
         private List<ListViewItem> FilteredLvList = new List<ListViewItem>();
+        private List<SyndicationItem> FeedEpisodes = new List<SyndicationItem>();
         private string SelectedFeed { get; set; }
 
         public Form1()
@@ -219,10 +220,10 @@ namespace Podcast
         private void GenerateEpisodes(string url, int inteTid)
         {
             lvEpisodes.Items.Clear();
-            ep.hora(SelectedFeed, inteTid);
-            var list = ep.GetEpisodes();
-            
-            foreach (SyndicationItem si in list)
+            ep.Hora(SelectedFeed, inteTid);
+            FeedEpisodes = ep.GetEpisodes();
+
+            foreach (SyndicationItem si in FeedEpisodes)
             {
                 lvEpisodes.Items.Add(si.Title.Text);
                 lvEpisodes.Items.Add("\n");
@@ -267,23 +268,7 @@ namespace Podcast
                     lvList.Add(f.ToListViewItem());
                 }
                 UpdateFeeds(lvList);
-
-                //var FilteredList = feed.GetList().FindAll(x => x.Category == chosenCat).ToList();
-
-                //  var lvFilteredFeed = new ListView();
-                //foreach (var item in FilteredList)
-                //{
-
-                //    string[] row =
-                //    {
-                //        feed.Title,
-                //        feed.UpdateFrequency.ToString() + "Minutes",
-                //        feed.Category
-                //    };
-                //    ListViewItem item = new ListViewItem(row);
-
-                //    lvFilteredFeed.Items.Add(item);
-                //}
+                
             }
         }
 
@@ -305,14 +290,14 @@ namespace Podcast
             // Allt för UpdateFrequency
 
             private void fillCmbUpdate()
-        {
+            {
             cmbUpdate.Items.Add("2");
             cmbUpdate.Items.Add("5");
             cmbUpdate.Items.Add("10");
             cmbUpdate.Items.Add("20");
-        }
+            }
 
- 
+        
 
         private void lvFeed_ItemActivate(object sender, EventArgs e)
         {
