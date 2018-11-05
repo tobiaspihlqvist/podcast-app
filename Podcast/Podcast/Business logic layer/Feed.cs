@@ -13,7 +13,7 @@ namespace Podcast.Business_logic_layer
 {
     public class Feed : Entities<Feed>, IListable
     {
-        Serializer serializer = new Serializer();
+        private Serializer serializer = new Serializer();
 
         private List<Feed> FeedList = new List<Feed>();
 

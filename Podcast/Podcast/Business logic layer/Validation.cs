@@ -13,7 +13,7 @@ namespace Podcast.Business_logic_layer
     {
 
 
-        static public bool OnlyLetters(string input) // måste använda Validation.OnlyLetters samt textrutan man ska kontrollera för att metoden ska fungera
+        static public bool OnlyLetters(string input) 
         {
 
             if (!Regex.IsMatch(input, @"^[a-zA-Z_ ]*$"))
@@ -87,7 +87,7 @@ namespace Podcast.Business_logic_layer
             }
         }
 
-        static public void ValidateNewFeed(string title, string url, List<Feed> f)
+        static public void ValidateNewFeed(string title, string url, List<Feed> f, string category)
         {
 
             

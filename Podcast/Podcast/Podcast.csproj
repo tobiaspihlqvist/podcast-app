@@ -48,10 +48,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Business logic layer\Category.cs" />
-    <Compile Include="Business logic layer\CustomList.cs" />
     <Compile Include="Business logic layer\Entities.cs" />
     <Compile Include="Business logic layer\Episode.cs" />
-    <Compile Include="Business logic layer\Exceptions.cs" />
     <Compile Include="Business logic layer\Feed.cs" />
     <Compile Include="Business logic layer\IListable.cs" />
     <Compile Include="Business logic layer\Validation.cs" />
