@@ -38,13 +38,13 @@ namespace Podcast
         private void Form1_Load(object sender, EventArgs e)
         {
 
-            
-            
+
+
             categories = category.GetList();
-           category.AddInitialCategories();
+            category.AddInitialCategories();
             UpdateList();
             //feed.LoadXml("fList");
-       //     LvList = feed.ToListViewItem();
+            //     LvList = feed.ToListViewItem();
             fillCmbUpdate();
             UpdateFeeds();
             FillCategoryComboBox();
@@ -63,22 +63,22 @@ namespace Podcast
         {
             string podName = tbTitle.Text;
             string podUrl = txtInputURL.Text;
-            if (Validation.inputIsNotNull(podName) && Validation.inputIsNotNull(podUrl) &&Validation.PodIsSame(podName, feed) && Validation.UrlIsSame(podUrl, feed))
+            if (Validation.inputIsNotNull(podName) && Validation.inputIsNotNull(podUrl) && Validation.PodIsSame(podName, feed) && Validation.UrlIsSame(podUrl, feed))
             {
                 string podCat = cmbFeedCategory.SelectedItem.ToString();
                 string podUpdateFrequency = cmbUpdate.Text;
                 string[] words = podUpdateFrequency.Split(' ');
                 int minutes = int.Parse(words[0]);
-                
+
                 feed.AddFeed(podName, podUrl, minutes, podCat);
                 feed.LoadXml("fList");
-              //  LvList = feed.ToListViewItem();
+                //  LvList = feed.ToListViewItem();
                 UpdateFeeds();
             }
 
 
         }
-        
+
         private void UpdateFeeds()
         {
             feed.LoadXml("fList");
@@ -96,12 +96,12 @@ namespace Podcast
         //    {
 
         //    });
-            
+
         //}
 
         private void UpdateFeeds(List<ListViewItem> lizt)
         {
-            
+
             lvFeed.Items.Clear();
 
             foreach (var lvItem in lizt)
@@ -120,7 +120,7 @@ namespace Podcast
                 cmbCategories.Items.Add(item.Name);
                 cmbFeedCategory.Items.Add(item.Name);
             }
-           
+
         } //finns det något sätt att göra den här mer generell??
 
 
@@ -232,12 +232,12 @@ namespace Podcast
 
         }
 
-        
+
 
         private void GenerateEpisodes(string url, int frequency)
         {
             lvEpisodes.Items.Clear();
-           // ep.SetEpisodes(url);
+            // ep.SetEpisodes(url);
             ep.intervalTimer(SelectedFeed, frequency);
             FeedEpisodes = ep.GetEpisodes();
 
@@ -277,7 +277,7 @@ namespace Podcast
             if (lvCategory.SelectedItems.Count > 0)
             {
 
-                
+
                 string chosenCat = lvCategory.SelectedItems[0].Text;
                 List<Feed> fList = feed.GetList().FindAll(x => x.Category == chosenCat).ToList();
                 var lvList = new List<ListViewItem>();
@@ -286,7 +286,6 @@ namespace Podcast
                     lvList.Add(f.ToListViewItem());
                 }
                 UpdateFeeds(lvList);
-                
             }
             else
             {
@@ -298,28 +297,28 @@ namespace Podcast
         {
             string delete = cmbPodcast.SelectedItem.ToString();
 
-            
-                feed.DeleteFeed(delete);
-                UpdateFeeds();
-                lvEpisodes.Items.Clear();
-                FillPodCombobox();
-            
+
+            feed.DeleteFeed(delete);
+            UpdateFeeds();
+            lvEpisodes.Items.Clear();
+            FillPodCombobox();
+
         }
 
 
 
 
-            // Allt för UpdateFrequency
+        // Allt för UpdateFrequency
 
-            private void fillCmbUpdate()
-            {
+        private void fillCmbUpdate()
+        {
             cmbUpdate.Items.Add("2");
             cmbUpdate.Items.Add("5");
             cmbUpdate.Items.Add("10");
             cmbUpdate.Items.Add("20");
-            }
+        }
 
-        
+
 
         private void lvFeed_ItemActivate(object sender, EventArgs e)
         {
@@ -338,60 +337,79 @@ namespace Podcast
 
         private void cmbPodcast_SelectedIndexChanged(object sender, EventArgs e)
         {
-          var name =  cmbPodcast.SelectedItem.ToString();
-                foreach(var f in feed.GetList())
-                {
-                if(f.Title == name)
+            var name = cmbPodcast.SelectedItem.ToString();
+            foreach (var f in feed.GetList())
+            {
+                if (f.Title == name)
                 {
                     tbTitle.Text = f.Title;
                     txtInputURL.Text = f.FeedUrl;
-                    
+                    string frequency = f.UpdateFrequency.ToString();
+                    cmbFeedCategory.SelectedIndex = cmbFeedCategory.Items.IndexOf(f.Category);
+                    cmbUpdate.SelectedIndex = cmbUpdate.Items.IndexOf(frequency);
 
-
-                      
-                    UpdateFeeds();
-                    FillPodCombobox();
+                    //   feed.UpdateFeed(tbTitle.Text, txtInputURL.Text,"",  "");
+                    //   UpdateFeeds();
+                    //   FillPodCombobox();
                     break;
                 }
             }
-
         }
 
-
-
-
-        /*    public async Task GenerateEpisodez(string url, double interval)
-
-   {
-       var intervalTime = cmbUpdate.SelectedItem.ToString();
-
-       try {
-           double.TryParse(intervalTime, out double time);
-
-           while (true)
+        private void btnUpdateFeed_Click(object sender, EventArgs e)
+        {
+            string podName = cmbPodcast.SelectedItem.ToString();
+            string podUrl = txtInputURL.Text;
+            if (Validation.inputIsNotNull(podName) && Validation.inputIsNotNull(podUrl))
            {
-               var taskA = Task.Run(() =>
-               {
+                string podCat = cmbFeedCategory.SelectedItem.ToString();
+                string podUpdateFrequency = cmbUpdate.Text;
+                string[] words = podUpdateFrequency.Split(' ');
+                int minutes = int.Parse(words[0]);
+                string changeName = tbTitle.Text; ;
+
+                feed.UpdateFeed(podName, podUrl, minutes, podCat, changeName);
+                feed.LoadXml("fList");
+                UpdateFeeds();
+            }
 
 
-                   Episodes.Clear();
-                   foreach (SyndicationItem si in Episodes)
-                   {
-                       Episodes.Add(si);
-                   }
 
-               });
-               await Task.Delay(TimeSpan.FromMinutes(time));
-           }
-       }
-       catch(FormatException e)
+
+            /*    public async Task GenerateEpisodez(string url, double interval)
+
        {
-           MessageBox.Show(e.Message);
-       }
-   } */
+           var intervalTime = cmbUpdate.SelectedItem.ToString();
 
+           try {
+               double.TryParse(intervalTime, out double time);
+
+               while (true)
+               {
+                   var taskA = Task.Run(() =>
+                   {
+
+
+                       Episodes.Clear();
+                       foreach (SyndicationItem si in Episodes)
+                       {
+                           Episodes.Add(si);
+                       }
+
+                   });
+                   await Task.Delay(TimeSpan.FromMinutes(time));
+               }
+           }
+           catch(FormatException e)
+           {
+               MessageBox.Show(e.Message);
+           }
+       } */
+
+        }
     }
 }
+
 
     
 
