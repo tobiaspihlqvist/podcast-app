@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Podcast.Business_logic_layer
@@ -13,20 +11,12 @@ namespace Podcast.Business_logic_layer
     {
 
 
-        static public bool OnlyLetters(string input) 
+        static public void OnlyLetters(string input) 
         {
 
             if (!Regex.IsMatch(input, @"^[a-zA-Z_ ]*$"))
-
             {
-                MessageBox.Show("Illegal input \n" + "Please type in letters between a-z");
-
-                return false;
-            }
-            else
-            {
-
-                return true;
+                throw new ArgumentException("Illegal characters. \n Title please use A-Z or a-z.");
             }
         }
         static public bool inputIsNotNull(string input)
@@ -109,7 +99,7 @@ namespace Podcast.Business_logic_layer
             {
                 throw new ArgumentException("The URL is not a valid one.");
             }
-            if (!url.Contains("feed") || url.Contains("xml") || url.Contains("rss"))
+            if (!url.Contains("rss"))
             {
                 throw new ArgumentException("It seems that the URL that has been provided is not a URL for a podcast.");
             }

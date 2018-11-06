@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.ServiceModel.Syndication;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml;
 using Podcast.Data_Access_Layer;
 
 namespace Podcast.Business_logic_layer
@@ -34,8 +29,9 @@ namespace Podcast.Business_logic_layer
         }
         public void UpdateFeed(string name, string url, int updateFreq, string category, string changeName)
         {   
-            if (Validation.OnlyLetters(name))
+            try 
             {
+                Validation.OnlyLetters(name);
                 var obj = FeedList.FirstOrDefault(f => f.Title == name);
                 if (obj != null)
                 {
@@ -45,6 +41,10 @@ namespace Podcast.Business_logic_layer
                     obj.Category = category;
                     serializer.SerializeXml(FeedList, "FList");
                 }
+            }
+            catch (ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 

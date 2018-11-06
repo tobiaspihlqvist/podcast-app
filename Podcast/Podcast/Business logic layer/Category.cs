@@ -1,15 +1,11 @@
 ﻿using Podcast.Data_Access_Layer;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Podcast.Business_logic_layer
-{   
+{
     public class Category : Entities<Category> , IListable
     {
         public string Name { get; set; }
@@ -17,9 +13,9 @@ namespace Podcast.Business_logic_layer
         Serializer serializer = new Serializer();
 
 
-        public void LoadXml(string fileName) // ska flyttas till validation eller till serializer
+        public void LoadXml(string fileName) 
         {
-            if (File.Exists(fileName + ".xml"))
+            if (Validation.XmlExists("CList"))
             {
                 categories = serializer.GetListFromXml<List<Category>>(fileName);
             }
@@ -73,13 +69,18 @@ namespace Podcast.Business_logic_layer
 
         public void UpdateCategory(string chosenCat, string inputName)
         {
-            if (Validation.OnlyLetters(inputName))
-            {   
+            try
+            {
+                Validation.OnlyLetters(inputName);
                 categories.Where(c => c.Name == chosenCat)
                 .Select(c => { c.Name = c.Name.Replace(chosenCat, inputName); return c; })
                 .ToList();
                 serializer.SerializeXml(categories, "CList");
 
+            }
+            catch(ArgumentException ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
          
