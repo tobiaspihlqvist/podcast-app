@@ -1,10 +1,4 @@
-﻿using Podcast.Business_logic_layer;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 using System.Xml.Serialization;
 
 namespace Podcast.Data_Access_Layer
@@ -21,7 +15,7 @@ namespace Podcast.Data_Access_Layer
             }
         }
 
-        public T GetListFromXml<T>(string fileName) //deserilaize ska döpas om
+        public T GetListFromXml<T>(string fileName) 
         {
             T deserializedList;    
                 var serializer = new XmlSerializer(typeof(T));
