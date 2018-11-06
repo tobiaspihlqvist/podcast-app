@@ -111,6 +111,7 @@ namespace Podcast.Business_logic_layer
             }
             if (url.Contains("feed") || url.EndsWith("xml") || url.Contains("rss"))
             {
+
             }
             else
             {
