@@ -87,10 +87,10 @@ namespace Podcast.Business_logic_layer
             }
         }
 
-        static public void ValidateNewFeed(string title, string url, List<Feed> f)
+        static public void ValidateNewFeed(string title, string url, List<Feed> f, string category)
         {
 
-            
+
             if (string.IsNullOrEmpty(url))
             {
                 throw new ArgumentException("URL cannot be empty.");
@@ -109,9 +109,13 @@ namespace Podcast.Business_logic_layer
             {
                 throw new ArgumentException("The URL is not a valid one.");
             }
-            if (!url.Contains("feed") || url.Contains("xml") || url.Contains("rss"))
+            if (url.Contains("feed") || url.EndsWith("xml") || url.Contains("rss"))
+            {
+            }
+            else
             {
                 throw new ArgumentException("It seems that the URL that has been provided is not a URL for a podcast.");
+
             }
             bool urlExists = f.Any((x) => x.FeedUrl == url);
             if (urlExists)

@@ -56,9 +56,10 @@ namespace Podcast
         {
             try
             {
+                string category = cmbFeedCategory.SelectedItem.ToString();
                 string podName = tbTitle.Text;
                 string podUrl = txtInputURL.Text;
-                Validation.ValidateNewFeed(podName, podUrl, feed.GetList());
+                Validation.ValidateNewFeed(podName, podUrl, feed.GetList(), category);
                 string podCat = cmbFeedCategory.SelectedItem.ToString();
                 string podUpdateFrequency = cmbUpdate.Text;
                 string[] words = podUpdateFrequency.Split(' ');
